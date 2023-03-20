@@ -1,21 +1,15 @@
-import { useState } from "react";
-import Alert from "./components/Alert";
-import Button from "./components/Button";
+import { useState } from "react"
+import LoginForm from "./components/LoginForm";
+import Navbar from "./components/Navbar";
 
 function App() {
-  const [showAlert, setShowAlert] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(false);
+  const [showLogin, setShowLogin] = useState(true);
 
   return (
     <div>
-      {showAlert && <Alert onClose={() => setShowAlert(false)}>Some Alert</Alert>}
-      <Button
-        onClick={() => {
-          console.log("Clicked");
-          setShowAlert(true)
-        }}
-      >
-        Show Alert
-      </Button>
+      {showNavbar && <Navbar />}
+      {showLogin && <LoginForm onClick={() => { setShowNavbar(true); setShowLogin(false) }}/>}
     </div>
   );
 }
