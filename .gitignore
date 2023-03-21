@@ -12,7 +12,7 @@ dist
 dist-ssr
 *.local
 
-package-lock.json
+*package-lock.json
 .idea
 
 # Editor directories and files
