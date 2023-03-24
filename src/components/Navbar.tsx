@@ -1,14 +1,26 @@
 import { Image } from "@chakra-ui/image";
-import { VStack, Text, Box, StackDivider } from "@chakra-ui/layout";
+import { VStack, Text, Box, StackDivider, LinkBox } from "@chakra-ui/layout";
+import { Link } from "react-router-dom";
 import logo from '../assets/react.svg'
 
 function Navbar() {
     return (
-      <VStack divider={<StackDivider borderColor='black' />}>
-        <Box>Vehicles</Box>
-        <Box>Drivers</Box>
-        <Box>Maintenance</Box>
-        <Box>Trips</Box>
+      <VStack divider={<StackDivider borderColor="black" />}>
+        <LinkBox>
+          <Link to="/home">Home</Link>
+        </LinkBox>
+        <LinkBox>
+          <Link to="/vehicles">Vehicles</Link>
+        </LinkBox>
+        <LinkBox>
+          <Link to="/drivers">Drivers</Link>
+        </LinkBox>
+        <LinkBox>
+          <Link to="/maintenance">Maintenance</Link>
+        </LinkBox>
+        <LinkBox>
+          <Link to="/trips">Trips</Link>
+        </LinkBox>
       </VStack>
     );
 }

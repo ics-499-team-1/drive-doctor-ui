@@ -5,11 +5,18 @@ import { ChakraProvider } from "@chakra-ui/react";
 import App from './App'
 import 'bootstrap/dist/css/bootstrap.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from './components/home/Home';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    children: [
+      {
+        path: "home",
+        element: <Home />
+      }
+    ]
   },
 ]);
 

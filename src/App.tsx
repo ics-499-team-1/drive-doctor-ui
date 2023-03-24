@@ -1,13 +1,10 @@
 import { Grid, GridItem } from "@chakra-ui/layout";
 import { Show } from "@chakra-ui/media-query";
-import { useState } from "react";
-import LoginForm from "./components/LoginForm";
-import MainPageGrid from "./components/MainPageGrid";
+import { Outlet } from "react-router";
+import MainPageGrid from "./components/home/MainPageGrid";
 import Navbar from "./components/Navbar";
 
 function App() {
-  const [showNavbar, setShowNavbar] = useState(false);
-  const [showLogin, setShowLogin] = useState(true);
 
   return (
     <Grid
@@ -27,7 +24,7 @@ function App() {
         <Navbar />
       </GridItem>
       <GridItem pl="2" bg="green.300" area={"main"}>
-        <MainPageGrid />
+        <Outlet />
       </GridItem>
       <GridItem pl="2" bg="blue.300" area={"footer"}>
         Footer
