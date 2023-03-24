@@ -1,28 +1,13 @@
+import { Image } from "@chakra-ui/image";
+import { HStack, Text } from "@chakra-ui/layout";
+import logo from '../assets/react.svg'
 
 function Navbar() {
     return (
-      <ul className="nav flex-column">
-        <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#">
-            Vehicles
-          </a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">
-            Drivers
-          </a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">
-            Maintenance
-          </a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">
-            Trips
-          </a>
-        </li>
-      </ul>
+      <HStack>
+        <Image src={logo} boxSize='60px' />
+        <Text>NavBar</Text>
+      </HStack>
     );
 }
 
