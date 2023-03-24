@@ -1,3 +1,5 @@
+import { Button, ButtonGroup } from "@chakra-ui/react";
+
 interface Props {
   onClick: () => void;
 }
@@ -16,9 +18,9 @@ function LoginForm({ onClick }: Props) {
           aria-describedby="emailHelp"
         />
       </div>
-      <button type="submit" className="btn btn-primary" onClick={onClick}>
+      <Button colorScheme="blue" onClick={onClick}>
         Login
-      </button>
+      </Button>
     </form>
   );
 }
