@@ -1,7 +1,5 @@
-import { Image } from "@chakra-ui/image";
 import { VStack, Text, Box, StackDivider, LinkBox } from "@chakra-ui/layout";
 import { Link } from "react-router-dom";
-import logo from '../assets/react.svg'
 
 function Navbar() {
     return (

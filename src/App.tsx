@@ -1,7 +1,5 @@
 import { Grid, GridItem } from "@chakra-ui/layout";
-import { Show } from "@chakra-ui/media-query";
 import { Outlet } from "react-router";
-import MainPageGrid from "./components/home/MainPageGrid";
 import Navbar from "./components/Navbar";
 
 function App() {
