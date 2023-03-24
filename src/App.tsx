@@ -1,4 +1,6 @@
-import { useState } from "react"
+import { Grid, GridItem } from "@chakra-ui/layout";
+import { Show } from "@chakra-ui/media-query";
+import { useState } from "react";
 import LoginForm from "./components/LoginForm";
 import Navbar from "./components/Navbar";
 
@@ -7,10 +9,25 @@ function App() {
   const [showLogin, setShowLogin] = useState(true);
 
   return (
-    <div>
-      {showNavbar && <Navbar />}
-      {showLogin && <LoginForm onClick={() => { setShowNavbar(true); setShowLogin(false) }}/>}
-    </div>
+    <Grid
+      templateAreas={{
+        base: `"nav" "main"`,
+        lg: `"nav nav" "aside main"`,
+      }}
+    >
+      <GridItem area="nav" bg="coral">
+        Nav
+      </GridItem>
+      <Show above='lg'>
+        <GridItem area="aside" bg="gold">
+          Aside
+        </GridItem>
+      </Show>
+
+      <GridItem area="main" bg="dodgerblue">
+        main
+      </GridItem>
+    </Grid>
   );
 }
 
