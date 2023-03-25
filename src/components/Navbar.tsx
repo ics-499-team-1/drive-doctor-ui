@@ -1,28 +1,25 @@
+import { VStack, Text, Box, StackDivider, LinkBox } from "@chakra-ui/layout";
+import { Link } from "react-router-dom";
 
 function Navbar() {
     return (
-      <ul className="nav flex-column">
-        <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#">
-            Vehicles
-          </a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">
-            Drivers
-          </a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">
-            Maintenance
-          </a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">
-            Trips
-          </a>
-        </li>
-      </ul>
+      <VStack divider={<StackDivider borderColor="black" />}>
+        <LinkBox>
+          <Link to="/home">Home</Link>
+        </LinkBox>
+        <LinkBox>
+          <Link to="/vehicles">Vehicles</Link>
+        </LinkBox>
+        <LinkBox>
+          <Link to="/drivers">Drivers</Link>
+        </LinkBox>
+        <LinkBox>
+          <Link to="/maintenance">Maintenance</Link>
+        </LinkBox>
+        <LinkBox>
+          <Link to="/trips">Trips</Link>
+        </LinkBox>
+      </VStack>
     );
 }
 
