@@ -6,6 +6,7 @@ import App from './App'
 import 'bootstrap/dist/css/bootstrap.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from './components/home/Home';
+import Maintenance from './components/maintenance/Maintenance';
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         path: "home",
         element: <Home />
+      },
+      {
+        path: "maintenance",
+        element: <Maintenance />
       }
     ]
   },
