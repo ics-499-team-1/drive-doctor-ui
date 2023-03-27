@@ -11,8 +11,8 @@ const DriverPage = () => {
       <div>
         Drivers Page
         <DriversList />
-        <DriverButton onClick={addClick}>Add</DriverButton>
         <DriverButton onClick={editClick}>Edit</DriverButton>
+        <DriverButton onClick={addClick}>Add</DriverButton>
       </div>
     </>
   );
