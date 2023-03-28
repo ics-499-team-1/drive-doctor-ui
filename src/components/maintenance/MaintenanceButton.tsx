@@ -3,7 +3,7 @@ interface Props {
   children: string;
   className?: string;
   color?: 'primary' | 'secondary' | 'danger' | 'success' | 'warning' | 'info' | 'light' | 'dark';
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const MaintenanceButton = ({ children, className, color = 'primary', onClick }: Props) => {
