@@ -12,7 +12,7 @@ interface Props {
   onClick: () => void;
 }
 
-const DriverButton = ({ children, color = "primary", onClick }: Props) => {
+const TripButton = ({ children, color = "primary", onClick }: Props) => {
   return (
     <button className={"btn btn-" + color} onClick={onClick}>
       {children}
@@ -20,4 +20,4 @@ const DriverButton = ({ children, color = "primary", onClick }: Props) => {
   );
 };
 
-export default DriverButton;
+export default TripButton;

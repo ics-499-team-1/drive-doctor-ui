@@ -6,7 +6,7 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/home/Home";
-import Driver from "./components/driver/Driver";
+import Trip from "./components/trip/Trip";
 
 const router = createBrowserRouter([
   {
@@ -18,8 +18,8 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "drivers",
-        element: <Driver />,
+        path: "trips",
+        element: <Trip />,
       },
     ],
   },

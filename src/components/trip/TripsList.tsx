@@ -1,5 +1,5 @@
-const DriversList = () => {
-  let items = ["driver1", "driver2", "driver3"];
+const TripsList = () => {
+  let items = ["Trip1", "Trip2", "Trip3"];
 
   return (
     <>
@@ -14,4 +14,4 @@ const DriversList = () => {
   );
 };
 
-export default DriversList;
+export default TripsList;

@@ -1,12 +1,12 @@
-import DriverPage from "./DriverPage";
+import TripsPage from "./TripsPage";
 
-const Driver = () => {
+const Trip = () => {
   return (
     <>
       <div className="container text-center">
         <div className="row align-items-start">
           <div className="col">
-            <DriverPage />
+            <TripsPage />
           </div>
         </div>
       </div>
@@ -14,4 +14,4 @@ const Driver = () => {
   );
 };
 
-export default Driver;
+export default Trip;
