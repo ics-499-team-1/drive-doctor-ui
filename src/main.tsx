@@ -1,11 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react";
+import ReactDOM from "react-dom/client";
 import { ChakraProvider } from "@chakra-ui/react";
 
-import App from './App'
-import 'bootstrap/dist/css/bootstrap.css'
+import App from "./App";
+import "bootstrap/dist/css/bootstrap.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from './components/home/Home';
+import Home from "./components/home/Home";
+import Trip from "./components/trip/Trip";
 
 const router = createBrowserRouter([
   {
@@ -14,16 +15,20 @@ const router = createBrowserRouter([
     children: [
       {
         path: "home",
-        element: <Home />
-      }
-    ]
+        element: <Home />,
+      },
+      {
+        path: "trips",
+        element: <Trip />,
+      },
+    ],
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ChakraProvider>
-          <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </ChakraProvider>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);
