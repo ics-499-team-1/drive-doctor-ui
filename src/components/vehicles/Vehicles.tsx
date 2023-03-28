@@ -7,11 +7,7 @@ function Vehicles(){
         <GridItem>
           <VehiclesGrid />
         </GridItem>
-        <Grid>
-          <Button>Edit</Button>
-          <Button>Add</Button>
-        </Grid>
       </Grid>
-    );
+    )
 }
 export default Vehicles

@@ -1,5 +1,6 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { Button, Container, SimpleGrid } from "@chakra-ui/react";
 import VehiclesCard from "./VehiclesCard";
+import "./VehiclesGrid.css"
 
 function VehiclesGrid() {
   return (
@@ -11,7 +12,12 @@ function VehiclesGrid() {
         <VehiclesCard information="Vehicle 4" />
         <VehiclesCard information="Vehicle 5" />
         <VehiclesCard information="Vehicle 6" />
+        <VehiclesCard information="Vehicle 7" />
       </SimpleGrid>
+      <Container className="btnContainer">
+      <Button className="editBtn">Edit</Button>
+      <Button className="addBtn">Add</Button>
+      </Container>
     </>
   );
 }

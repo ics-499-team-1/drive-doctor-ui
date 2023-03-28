@@ -5,7 +5,7 @@ interface Props{
 }
 
 function VehiclesCard({information}: Props){
-    return <Card borderRadius="10px" height = "200px">{information}</Card>;
+    return <Card borderRadius="10px" height = "200px">{information}</Card>
 }
 
 export default VehiclesCard
