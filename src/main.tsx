@@ -8,6 +8,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/home/Home";
 import Maintenance from "./components/maintenance/Maintenance";
 import AddUpcomingMaintenance from "./components/maintenance/AddUpcomingMaintenance";
+import Trip from "./components/trip/Trip";
+
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "maintenance/add",
         element: <AddUpcomingMaintenance />,
+        },
+        {
+        path: "trips",
+        element: <Trip />,
       },
     ],
   },
