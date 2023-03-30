@@ -1,28 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import UpcomingMaintenanceEntity from "./UpcomingMaintenanceEntity";
 
 interface Props {
   className?: string;
+  uMEList: UpcomingMaintenanceEntity[] | null;
 }
 
-const MaintenanceList = ({ className }: Props) => {
-  let items = ["dummy1", "dummy2", "dummy3"];
+const MaintenanceList = ({ className, uMEList }: Props) => {
+  const uMEntities: UpcomingMaintenanceEntity[] = uMEList ? uMEList : [];
 
   const [selectedIndex, setSelectedIndex] = useState(-1); // state for the highlighting of the list element
 
-  // need to use id for key when hooked up to db
   /*
   Takes each element in items and maps it to a <li> element and give it an index.
   On click, it highlights the element. If already highlighted, un-highlights.
-  */
+  COULD SET SELECTED TO ID*/
   return (
     <>
       <ul className={className + " list-group m-2"}>
-        {items.map((item, index) => (
+        {uMEntities.map((UME, index) => (
           <li
             className={
-              selectedIndex === index
+              (selectedIndex === index
                 ? "list-group-item active"
-                : "list-group-item"
+                : "list-group-item") + " d-flex justify-content-between"
             }
             key={index}
             onClick={() => {
@@ -31,8 +33,8 @@ const MaintenanceList = ({ className }: Props) => {
                 : setSelectedIndex(index);
             }}
           >
-            {item}
-          </li>
+            {UME.name} <div>{UME.mileageInterval ? UME.mileageInterval : "none"}</div>
+          </li> // Not sure why the compiler throws an error here, seems to work
         ))}
       </ul>
     </>
