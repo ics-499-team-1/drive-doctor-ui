@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import UpcomingMaintenanceEntity from "./UpcomingMaintenanceEntity";
+import UpcomingMaintenanceEntity from "./UM/UMEntity";
 
 interface Props {
   className?: string;
@@ -33,7 +33,7 @@ const MaintenanceList = ({ className, uMEList }: Props) => {
                 : setSelectedIndex(index);
             }}
           >
-            {UME.name} <div>{UME.mileageInterval ? UME.mileageInterval : "none"}</div>
+            {UME.name} <div>{UME.mileage_interval ? UME.mileage_interval : "none"}</div>
           </li> // Not sure why the compiler throws an error here, seems to work
         ))}
       </ul>

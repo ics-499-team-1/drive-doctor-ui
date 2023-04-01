@@ -1,9 +1,13 @@
 import { Grid, GridItem } from "@chakra-ui/layout";
 import { Outlet } from "react-router";
 import Navbar from "./components/Navbar";
+import {UpcomingMaintenanceProvider} from "./components/maintenance/UM/UMContext";
 
 function App() {
+
   return (
+    <>
+    <UpcomingMaintenanceProvider>
     <Grid
       templateAreas={`"header header"
                   "nav main"
@@ -27,6 +31,8 @@ function App() {
         Footer
       </GridItem>
     </Grid>
+    </UpcomingMaintenanceProvider>
+    </>
   );
 }
 

@@ -1,5 +1,5 @@
-import CompletedMaintenance from "./CompletedMaintenance";
-import UpcomingMaintenance from "./UpcomingMaintenance";
+import CompletedMaintenance from "./CM/CompletedMaintenance";
+import UpcomingMaintenance from "./UM/UpcomingMaintenance";
 
 const Maintenance = () => {
   return (

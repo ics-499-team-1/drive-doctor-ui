@@ -7,8 +7,11 @@ import "bootstrap/dist/css/bootstrap.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/home/Home";
 import Maintenance from "./components/maintenance/Maintenance";
-import AddUpcomingMaintenance from "./components/maintenance/AddUpcomingMaintenance";
+import AddUpcomingMaintenance from "./components/maintenance/UM/UMAdd";
+import Vehicles from './components/vehicles/Vehicles';
 import Trip from "./components/trip/Trip";
+import ConvertUpcoming from "./components/maintenance/ConvertUpcoming";
+import UMEdit from "./components/maintenance/UM/UMEdit";
 
 
 const router = createBrowserRouter([
@@ -28,6 +31,14 @@ const router = createBrowserRouter([
         path: "maintenance/add",
         element: <AddUpcomingMaintenance />,
         },
+        {
+        path: "maintenance/convert",
+        element: <ConvertUpcoming />,
+        },
+        {
+        path: "maintenance/edit",
+        element: <UMEdit />,
+      },
         {
         path: "trips",
         element: <Trip />,
