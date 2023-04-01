@@ -43,6 +43,8 @@ const UpcomingMaintenance = () => {
       setMaintenance(uMEList[selectedIndex]); // setting UMContext
       console.log(upcomingMaintenanceContext); //DELETE WHEN READY
       navigate("/maintenance/edit");
+    } else {
+      console.log('uMEList[selectedIndex] is null or undefined')
     }
   };
   // How do I refresh after this?
@@ -52,7 +54,7 @@ const UpcomingMaintenance = () => {
       "http://localhost:8080/drive-doctor/v1/maintenance/upcoming-maintenance/" +
         uMEList[selectedIndex].upcoming_maintenance_id
     );
-    navigate("/maintenance/"); // FIX HOW TO REFRESH ON DELETE
+    navigate("/maintenance/", { replace: true, state: { key: Math.random() } }); // FIX HOW TO REFRESH ON DELETE MAYBE A STATE VARIABLE TO FORCE RERENDER
   };
 
   const handleConvertClick = () => {

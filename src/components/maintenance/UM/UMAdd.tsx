@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { FormEvent, useRef } from "react";
 import axios from "axios";
 import MaintenanceButton from "../MaintenanceButton";
-import UpcomingMaintenanceDomain from "./UMDomain";
+import UMDomain from "./UMDomain";
 
 const AddUpcomingMaintenance = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const AddUpcomingMaintenance = () => {
     */
   const handleSubmitUpdate = (event: FormEvent) => {
     event.preventDefault(); // DELETE WHEN FINISHED - replace with acknowledgement
-    const addUMD = new UpcomingMaintenanceDomain("Required");
+    const addUMD = new UMDomain("Required");
     if (nameRef.current !== null) addUMD.name = nameRef.current.value;
     notesRef.current !== null
       ? (addUMD.notes = notesRef.current.value)

@@ -128,7 +128,7 @@ const UpcomingMaintenanceUpdateForm = () => {
         </div>
         <MaintenanceButton className={"mb-2"}>Submit</MaintenanceButton>
       </form>
-      <MaintenanceButton onClick={() =>     navigate("/maintenance/", { replace: true, state: { key: Math.random() } })}>
+      <MaintenanceButton onClick={() => navigate("/maintenance/")}>
         Back
       </MaintenanceButton>
     </>

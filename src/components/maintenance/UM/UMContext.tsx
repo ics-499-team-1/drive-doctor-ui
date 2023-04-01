@@ -8,18 +8,18 @@ type UMContextProps = {
 
 const defaultMaintenance = new UMEntity();
 
-const UpcomingMaintenanceContext = createContext<UMContextProps>({
+const UMContext = createContext<UMContextProps>({
   upcomingMaintenanceContext: defaultMaintenance,
   setMaintenance: () => {},
 });
 
-type UpcomingMaintenanceProviderProps = {
+type UMProviderProps = {
   children: React.ReactNode;
 };
 
 export const UpcomingMaintenanceProvider = ({
   children,
-}: UpcomingMaintenanceProviderProps) => {
+}: UMProviderProps) => {
   const [upcomingMaintenanceContext, setUpcomingMaintenanceContext] =
     useState<UMEntity>(defaultMaintenance);
 
@@ -28,12 +28,12 @@ export const UpcomingMaintenanceProvider = ({
   };
 
   return (
-    <UpcomingMaintenanceContext.Provider
+    <UMContext.Provider
       value={{ upcomingMaintenanceContext, setMaintenance }}
     >
       {children}
-    </UpcomingMaintenanceContext.Provider>
+    </UMContext.Provider>
   );
 };
 
-export default UpcomingMaintenanceContext;
+export default UMContext;
