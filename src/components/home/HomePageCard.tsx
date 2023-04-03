@@ -5,7 +5,11 @@ interface Props {
 }
 
 function HomePageCard({ information }: Props) {
-  return <Card borderRadius="10px" height="200px" bg="#282828" color="#777777">{information}</Card>;
+  return (
+    <Card borderRadius="10px" height="200px" bg="#282828" color="#777777">
+      {information}
+    </Card>
+  );
 }
 
 export default HomePageCard;
