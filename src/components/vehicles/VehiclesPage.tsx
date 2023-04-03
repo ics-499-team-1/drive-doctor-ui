@@ -1,21 +1,92 @@
-import { Button, Container, SimpleGrid } from "@chakra-ui/react";
-import VehiclesCard from "./VehiclesCard";
+import { Button, Card, Container, SimpleGrid } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import VehiclesList from "./VehiclesList";
+import { useState, useEffect } from "react";
+import Vehicle from "./Vehicle";
+import axios from "axios";
+
+type VehicleCardProps = {
+  vehicleData: Vehicle;
+  onDelete: () => void;
+};
+
+// Handles Vehicle Card Display on VehiclesPage
+function VehicleCard(props: VehicleCardProps) {
+  // Handles vehicle deletion
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:8080/drive-doctor/v1/vehicles/${props.vehicleData.vehicle_id}`
+      );
+      props.onDelete();
+      console.log("Vehicle deleted successfully!");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const { name, year, make, model, trim, odometer, license_plate, vin } =
+    props.vehicleData;
+
+  return (
+    <Card borderRadius="10px" height="200px" bg="#0">
+      <div>
+        <h2>
+          {name}
+          <Button className="btn" bg="#0" onClick={handleDelete}>
+            Delete
+          </Button>
+        </h2>
+
+        <SimpleGrid columns={2}>
+          <p>
+            {year} {make} {model} {trim}
+          </p>
+          <p>Mileage: {odometer}</p>
+          <p>License Plate: {license_plate}</p>
+          <p>VIN: {vin}</p>
+        </SimpleGrid>
+      </div>
+    </Card>
+  );
+}
 
 function VehiclesPage() {
+  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+
+  useEffect(() => {
+    axios
+      .get<Vehicle[]>("http://localhost:8080/drive-doctor/v1/vehicles")
+      .then((response) => setVehicles(response.data));
+  }, []);
+
+  const handleDelete = async (vehicleId: number) => {
+    try {
+      await axios.delete(
+        `http://localhost:8080/drive-doctor/v1/vehicles/${vehicleId}`
+      );
+      setVehicles((prevVehicles) =>
+        prevVehicles.filter((vehicle) => vehicle.vehicle_id !== vehicleId)
+      );
+      console.log("Vehicle deleted successfully!");
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <>
       <SimpleGrid columns={1}>
         <SimpleGrid columns={2} spacing={10} margin="10px">
-          <VehiclesList />
+          {vehicles.map((vehicle) => (
+            <VehicleCard
+              key={vehicle.vehicle_id}
+              vehicleData={vehicle}
+              onDelete={() => handleDelete(vehicle.vehicle_id)}
+            />
+          ))}
         </SimpleGrid>
-        <SimpleGrid columns={2} spacing={10} margin="10px">
-          <Button className="editBtn">Edit</Button>
-          <Button className="addBtn">
-            <Link to="/vehicles/add">Add</Link>
-          </Button>
-        </SimpleGrid>
+        <Button className="addBtn">
+          <Link to="/vehicles/add">Add</Link>
+        </Button>
       </SimpleGrid>
     </>
   );

@@ -12,3 +12,5 @@ export interface Vehicle {
     vin: string | undefined,
     deactivated: boolean
 }
+
+export default Vehicle
