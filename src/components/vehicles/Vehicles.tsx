@@ -1,13 +1,11 @@
-import { Button, Grid, GridItem } from "@chakra-ui/react";
-import VehiclesGrid from './VehiclesGrid'
+import { GridItem } from "@chakra-ui/react";
+import VehiclesGrid from "./VehiclesGrid";
 
-function Vehicles(){
-    return (
-      <Grid>
-        <GridItem>
-          <VehiclesGrid />
-        </GridItem>
-      </Grid>
-    )
+function Vehicles() {
+  return (
+    <GridItem>
+      <VehiclesGrid />
+    </GridItem>
+  );
 }
-export default Vehicles
+export default Vehicles;

@@ -15,21 +15,18 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "home",s
+        path: "home",
         element: <Home />
       },
       {
         path: "vehicles",
         element: <Vehicles />
-      }
-    ]
-        element: <Home />,
       },
       {
         path: "trips",
         element: <Trip />,
       },
-    ],
+    ]
   },
 ]);
 

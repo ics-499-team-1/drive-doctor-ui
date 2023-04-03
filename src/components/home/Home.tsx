@@ -1,14 +1,12 @@
-import { Grid, GridItem } from "@chakra-ui/layout";
-import MainPageGrid from "./MainPageGrid";
+import { GridItem } from "@chakra-ui/layout";
+import HomePageGrid from "./HomePageGrid";
 
 function Home() {
-    return (
-      <Grid>
-        <GridItem>
-          <MainPageGrid />
-        </GridItem>
-      </Grid>
-    );
+  return (
+    <GridItem>
+      <HomePageGrid />
+    </GridItem>
+  );
 }
 
-export default Home
+export default Home;
