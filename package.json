@@ -12,6 +12,7 @@
     "@chakra-ui/react": "^2.5.3",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "axios": "^1.3.4",
     "bootstrap": "^5.2.3",
     "framer-motion": "^10.8.5",
     "localforage": "^1.10.0",
@@ -19,7 +20,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
-    "sort-by": "^1.2.0"
+    "sort-by": "^0.0.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
