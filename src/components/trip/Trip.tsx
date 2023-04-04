@@ -1,16 +1,11 @@
-import TripsPage from "./TripsPage";
+import { GridItem } from "@chakra-ui/layout";
+import TripGrid from "./TripsGrid";
 
 const Trip = () => {
   return (
-    <>
-      <div className="container text-center">
-        <div className="row align-items-start">
-          <div className="col">
-            <TripsPage />
-          </div>
-        </div>
-      </div>
-    </>
+    <GridItem>
+      <TripGrid />
+    </GridItem>
   );
 };
 
