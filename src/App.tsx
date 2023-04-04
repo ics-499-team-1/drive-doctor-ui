@@ -12,22 +12,23 @@ function App() {
       templateAreas={`"header header"
                   "nav main"
                   "footer footer"`}
-      gridTemplateRows={"50px 200% 30px"}
+      gridTemplateRows={"50px 94vh 30px"}
       gridTemplateColumns={"250px 1fr"}
       gap="1"
-      color="blackAlpha.700"
+      color="#777777"
+      bg="#141414"
       fontWeight="bold"
     >
-      <GridItem pl="2" bg="orange.300" area={"header"}>
+      <GridItem pl="2" bg="#320064" area={"header"}>
         Header
       </GridItem>
-      <GridItem pl="2" bg="pink.300" area={"nav"}>
+      <GridItem pl="2" area={"nav"}>
         <Navbar />
       </GridItem>
-      <GridItem pl="2" bg="green.300" area={"main"}>
+      <GridItem pl="2" area={"main"}>
         <Outlet />
       </GridItem>
-      <GridItem pl="2" bg="blue.300" area={"footer"}>
+      <GridItem pl="2" bg="#320064" area={"footer"}>
         Footer
       </GridItem>
     </Grid>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <VStack divider={<StackDivider borderColor="black" />}>
+    <VStack divider={<StackDivider borderColor="#77" />}>
       <LinkBox>
         <Link to="/home">Home</Link>
       </LinkBox>

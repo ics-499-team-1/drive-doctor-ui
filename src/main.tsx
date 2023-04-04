@@ -1,18 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ChakraProvider } from "@chakra-ui/react";
-
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/home/Home";
 import Maintenance from "./components/maintenance/Maintenance";
 import AddUpcomingMaintenance from "./components/maintenance/UM/UMAdd";
-import Vehicles from './components/vehicles/Vehicles';
-import Trip from "./components/trip/Trip";
 import ConvertUpcoming from "./components/maintenance/ConvertUpcoming";
 import UMEdit from "./components/maintenance/UM/UMEdit";
-
+import Trip from "./components/trip/Trip";
+import AddVehicle from "./components/vehicles/AddVehiclePage";
+import VehiclesPage from "./components/vehicles/VehiclesPage";
 
 const router = createBrowserRouter([
   {
@@ -21,11 +20,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "home",
-        element: <Home />
+        element: <Home />,
       },
       {
         path: "vehicles",
-        element: <Vehicles />
+        element: <VehiclesPage />,
       },
       {
         path: "maintenance",
@@ -46,6 +45,10 @@ const router = createBrowserRouter([
         {
         path: "trips",
         element: <Trip />,
+      },
+      {
+        path: "vehicles/add",
+        element: <AddVehicle />,
       },
     ],
   },
