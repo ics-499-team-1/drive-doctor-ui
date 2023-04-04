@@ -13,7 +13,7 @@ function TripCard({ trip }: Props) {
         <Heading as='h1' size='lg' noOfLines={1}>{trip.name}</Heading>
       </CardHeader>
       <CardBody>
-        <Heading as='h1' size='1xl' noOfLines={1}>Miles: {trip.mileage}</Heading>
+        <Heading as='h1' size='1xl'>Miles: {trip.mileage}</Heading>
       </CardBody>
     </Card>
   );
