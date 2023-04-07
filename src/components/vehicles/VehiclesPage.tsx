@@ -72,6 +72,7 @@ function VehiclesPage() {
       console.error(error);
     }
   };
+
   return (
     <>
       <SimpleGrid columns={1}>
