@@ -1,16 +1,16 @@
-import { Button } from "@chakra-ui/button";
+import { Button, ButtonGroup } from "@chakra-ui/button";
 import { Input } from "@chakra-ui/input";
 import { Stack } from "@chakra-ui/layout";
-import { Select } from "@chakra-ui/select";
-import React, { useState } from "react";
-import useUserVehicles from "../../hooks/useUserVehicles";
+import { useState } from "react";
 import Trip from "../../models/trips/Trip";
-import { CreateTrip } from "../../services/TripService";
+import { CreateTrip, GetTripsByUserId } from "../../services/TripService";
 
 // todo: create effect to get vehicles for a given user id
 
+// todo: add effect to save trip
+// todo: add props
+
 const TripForm = ({ firstFieldRef, onCancel, refreshPageData }: any) => {
-  const vehicles = useUserVehicles(203);
   const [formData, setFormData] = useState<Trip>({
     name: "",
     vehicle_id: 0,
@@ -24,22 +24,9 @@ const TripForm = ({ firstFieldRef, onCancel, refreshPageData }: any) => {
     setFormData((v) => ({ ...v, [e.target.id]: e.target.value }));
   };
 
-  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e);
-    setFormData((v) => ({ ...v, [e.target.id]: e.target.value }));
-  };
-
   const onClick = () => {
     CreateTrip(formData).then(() => {
-      setFormData({
-        name: "",
-        vehicle_id: 0,
-        type: "",
-        start: "",
-        end: "",
-        mileage: 0,
-      });
-      refreshPageData();
+        refreshPageData()
     });
 
     onCancel();
@@ -50,47 +37,45 @@ const TripForm = ({ firstFieldRef, onCancel, refreshPageData }: any) => {
       <Input
         id="name"
         ref={firstFieldRef}
-        placeholder="Trip Name"
+        defaultValue="Trip Name"
         onChange={handleValueChange}
       />
-      <Select
+      <Input
         id="vehicle_id"
-        placeholder="Select Vehicle"
-        onChange={handleSelect}
-      >
-        {vehicles.map((vehicle) => (
-          <option key={vehicle.vehicle_id} value={vehicle.vehicle_id}>
-            {vehicle.name}
-          </option>
-        ))}
-      </Select>
-
+        defaultValue="Vehicle Name"
+        onChange={handleValueChange}
+      />
       <Input
         id="type"
-        placeholder="Trip Type (Business)"
+        defaultValue="Trip Type (Business)"
         onChange={handleValueChange}
       />
       <Input
         id="start"
-        placeholder="Start Location"
+        defaultValue="Start Location"
         onChange={handleValueChange}
       />
-      <Input id="end" placeholder="End Location" onChange={handleValueChange} />
+      <Input
+        id="end"
+        defaultValue="End Location"
+        onChange={handleValueChange}
+      />
       <Input
         id="mileage"
-        placeholder="Miles Driven"
-        type="number"
+        defaultValue="Miles Driven"
         onChange={handleValueChange}
       />
 
-      <Button variant="outline" onClick={onCancel}>
-        Cancel
-      </Button>
-      <Button colorScheme="teal" onClick={onClick}>
-        Save
-      </Button>
+      <ButtonGroup display="flex" justifyContent="flex-end">
+        <Button variant="outline" onClick={onCancel}>
+          Cancel
+        </Button>
+        <Button colorScheme="teal" onClick={onClick}>
+          Save
+        </Button>
+      </ButtonGroup>
     </Stack>
   );
 };
 
-export default TripForm;
+export default TripForm
