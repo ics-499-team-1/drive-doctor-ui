@@ -4,7 +4,7 @@ import MainPageCard from "./HomePageCard";
 
 function HomePageGrid() {
 
-  const userTrips = useUserTrips(203, null);
+  const userTrips = useUserTrips(203);
 
   return (
     <>

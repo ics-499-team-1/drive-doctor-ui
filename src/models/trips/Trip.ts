@@ -1,8 +1,8 @@
 export default interface Trip {
-    name: string;
+    name: String;
     vehicle_id: number;
-    type: string;
-    start: string;
-    end: string;
+    type: String;
+    start: String;
+    end: String;
     mileage: number;
 }
