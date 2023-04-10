@@ -16,12 +16,17 @@ import UMDelete from "./components/maintenance/UM/UMDelete";
 import CMDelete from "./components/maintenance/CM/CMDelete";
 import CMAdd from "./components/maintenance/CM/CMAdd";
 import CMEdit from "./components/maintenance/CM/CMEdit";
+import Login from "./components/login/Login";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
       {
         path: "home",
         element: <Home />,
