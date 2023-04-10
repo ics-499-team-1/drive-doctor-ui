@@ -4,10 +4,13 @@ import MaintenanceButton from "../MaintenanceButton";
 import { useNavigate } from "react-router-dom";
 import UMContext from "./UMContext";
 
-const UpcomingMaintenanceUpdateForm = () => {
+/**
+ * Edits the item stored in UMContext and updates the DB.
+ */
+const UMEdit = () => {
   const navigate = useNavigate();
   /** Context */
-  const { upcomingMaintenanceContext, setMaintenance } = useContext(UMContext);
+  const { uMContext } = useContext(UMContext);
   /** Refs */
   const nameRef = useRef<HTMLInputElement>(null);
   const notesRef = useRef<HTMLInputElement>(null);
@@ -18,30 +21,27 @@ const UpcomingMaintenanceUpdateForm = () => {
   replaces the property that was passed in. If it's null, the property is set to null
   Except for name, which is required
   */
-  const handleSubmit = (event: FormEvent) => {
-    if (nameRef.current !== null)
-      upcomingMaintenanceContext.name = nameRef.current.value;
+  const handleSubmit = () => {
+    if (nameRef.current !== null) uMContext.name = nameRef.current.value;
     notesRef.current !== null
-      ? (upcomingMaintenanceContext.notes = notesRef.current.value)
-      : (upcomingMaintenanceContext.notes = "");
+      ? (uMContext.notes = notesRef.current.value)
+      : (uMContext.notes = "");
     picturesRef.current !== null
-      ? (upcomingMaintenanceContext.pictures = picturesRef.current.value)
-      : (upcomingMaintenanceContext.pictures = "");
+      ? (uMContext.pictures = picturesRef.current.value)
+      : (uMContext.pictures = "");
     mileageIntervalRef.current !== null
-      ? (upcomingMaintenanceContext.mileage_interval = parseInt(
+      ? (uMContext.mileage_interval = parseInt(
           mileageIntervalRef.current.value
         ))
-      : (upcomingMaintenanceContext.mileage_interval = -1);
+      : (uMContext.mileage_interval = -1);
     timeIntervalRef.current !== null
-      ? (upcomingMaintenanceContext.time_interval =
-          timeIntervalRef.current.value)
-      : (upcomingMaintenanceContext.time_interval = "");
+      ? (uMContext.time_interval = timeIntervalRef.current.value)
+      : (uMContext.time_interval = "");
 
-    console.log(upcomingMaintenanceContext);
     axios.patch(
       "http://localhost:8080/drive-doctor/v1/maintenance/upcoming-maintenance/" +
-        upcomingMaintenanceContext.upcoming_maintenance_id,
-      upcomingMaintenanceContext
+        uMContext.upcoming_maintenance_id,
+      uMContext
     );
     navigate("/maintenance/", { replace: true, state: { key: Math.random() } });
   };
@@ -55,7 +55,7 @@ const UpcomingMaintenanceUpdateForm = () => {
           </label>
           <input
             className="form-control"
-            defaultValue={upcomingMaintenanceContext.name}
+            defaultValue={uMContext.name}
             id="name"
             ref={nameRef}
             required={true}
@@ -68,11 +68,7 @@ const UpcomingMaintenanceUpdateForm = () => {
           </label>
           <input
             className="form-control"
-            defaultValue={
-              upcomingMaintenanceContext.notes
-                ? upcomingMaintenanceContext.notes
-                : ""
-            }
+            defaultValue={uMContext.notes ? uMContext.notes : ""}
             id="notes"
             ref={notesRef}
             type="text"
@@ -84,11 +80,7 @@ const UpcomingMaintenanceUpdateForm = () => {
           </label>
           <input
             className="form-control"
-            defaultValue={
-              upcomingMaintenanceContext.pictures
-                ? upcomingMaintenanceContext.pictures
-                : ""
-            }
+            defaultValue={uMContext.pictures ? uMContext.pictures : ""}
             id="pictures"
             ref={picturesRef}
             type="text"
@@ -101,9 +93,7 @@ const UpcomingMaintenanceUpdateForm = () => {
           <input
             className="form-control"
             defaultValue={
-              upcomingMaintenanceContext.mileage_interval
-                ? upcomingMaintenanceContext.mileage_interval
-                : ""
+              uMContext.mileage_interval ? uMContext.mileage_interval : ""
             }
             id="mileage_interval"
             ref={mileageIntervalRef}
@@ -117,9 +107,7 @@ const UpcomingMaintenanceUpdateForm = () => {
           <input
             className="form-control"
             defaultValue={
-              upcomingMaintenanceContext.time_interval
-                ? upcomingMaintenanceContext.time_interval
-                : ""
+              uMContext.time_interval ? uMContext.time_interval : ""
             }
             id="time_interval"
             ref={timeIntervalRef}
@@ -128,11 +116,18 @@ const UpcomingMaintenanceUpdateForm = () => {
         </div>
         <MaintenanceButton className={"mb-2"}>Submit</MaintenanceButton>
       </form>
-      <MaintenanceButton onClick={() =>     navigate("/maintenance/", { replace: true, state: { key: Math.random() } })}>
+      <MaintenanceButton
+        onClick={() =>
+          navigate("/maintenance/", {
+            replace: true,
+            state: { key: Math.random() },
+          })
+        }
+      >
         Back
       </MaintenanceButton>
     </>
   );
 };
 
-export default UpcomingMaintenanceUpdateForm;
+export default UMEdit;

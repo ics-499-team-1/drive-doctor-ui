@@ -1,15 +1,18 @@
 import { Grid, GridItem } from "@chakra-ui/layout";
 import { Outlet } from "react-router";
 import Navbar from "./components/Navbar";
-import {UpcomingMaintenanceProvider} from "./components/maintenance/UM/UMContext";
+import { VehicleProvider } from "./components/maintenance/VehicleContext";
+import { CompletedMaintenanceProvider } from "./components/maintenance/CM/CMContext";
+import { UMProvider } from "./components/maintenance/UM/UMContext";
 
 function App() {
-
   return (
     <>
-    <UpcomingMaintenanceProvider>
-    <Grid
-      templateAreas={`"header header"
+      <VehicleProvider>
+        <UMProvider>
+        <CompletedMaintenanceProvider>
+        <Grid
+          templateAreas={`"header header"
                   "nav main"
                   "footer footer"`}
       gridTemplateRows={"50px 94vh 30px"}
@@ -31,8 +34,10 @@ function App() {
       <GridItem pl="2" bg="#320064" area={"footer"}>
         Footer
       </GridItem>
-    </Grid>
-    </UpcomingMaintenanceProvider>
+        </Grid>
+        </CompletedMaintenanceProvider>
+        </UMProvider>
+      </VehicleProvider>
     </>
   );
 }

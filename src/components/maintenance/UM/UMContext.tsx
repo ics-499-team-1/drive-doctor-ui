@@ -1,36 +1,35 @@
 import React, { createContext, useState } from "react";
 import UMEntity from "./UMEntity";
 
+/**
+ * This is the context that carries an UpcomingMaintenace entity
+ * to the various components in the maintenance tree.
+ */
 type UMContextProps = {
-  upcomingMaintenanceContext: UMEntity;
-  setMaintenance: (maintenance: UMEntity) => void;
+  uMContext: UMEntity;
+  setUMContext: (maintenance: UMEntity) => void;
 };
 
-const defaultMaintenance = new UMEntity();
+const defaultUM = new UMEntity(-1);
 
 const UMContext = createContext<UMContextProps>({
-  upcomingMaintenanceContext: defaultMaintenance,
-  setMaintenance: () => {},
+  uMContext: defaultUM,
+  setUMContext: () => {},
 });
 
 type UMProviderProps = {
   children: React.ReactNode;
 };
 
-export const UpcomingMaintenanceProvider = ({
-  children,
-}: UMProviderProps) => {
-  const [upcomingMaintenanceContext, setUpcomingMaintenanceContext] =
-    useState<UMEntity>(defaultMaintenance);
+export const UMProvider = ({ children }: UMProviderProps) => {
+  const [uMContext, setUMContext] = useState<UMEntity>(defaultUM);
 
-  const setMaintenance = (maintenance: UMEntity) => {
-    setUpcomingMaintenanceContext(maintenance);
+  const setUM = (maintenance: UMEntity) => {
+    setUMContext(maintenance);
   };
 
   return (
-    <UMContext.Provider
-      value={{ upcomingMaintenanceContext, setMaintenance }}
-    >
+    <UMContext.Provider value={{ uMContext, setUMContext: setUM }}>
       {children}
     </UMContext.Provider>
   );

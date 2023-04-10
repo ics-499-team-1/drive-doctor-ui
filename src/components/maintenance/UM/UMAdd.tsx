@@ -1,19 +1,27 @@
 import { useNavigate } from "react-router-dom";
-import { FormEvent, useRef } from "react";
+import { FormEvent, useContext, useRef } from "react";
 import axios from "axios";
 import MaintenanceButton from "../MaintenanceButton";
 import UMDomain from "./UMDomain";
+import VehicleContext from "../VehicleContext";
 
-const AddUpcomingMaintenance = () => {
+/**
+ * Adds an upcomingMaintenance item to the db.
+ * @returns
+ */
+const UMAdd = () => {
   const navigate = useNavigate();
+
   /** Context */
-  const vehicleId = 2; // FOR TESTING ONLY
+  const { vehicleContext } = useContext(VehicleContext);
+
   /* refs */
   const nameRef = useRef<HTMLInputElement>(null);
   const notesRef = useRef<HTMLInputElement>(null);
   const picturesRef = useRef<HTMLInputElement>(null);
   const mileageIntervalRef = useRef<HTMLInputElement>(null);
   const timeIntervalRef = useRef<HTMLInputElement>(null);
+
   /* On submit, if the reference to the input element is not null, then it
     replaces the property that was passed in. If it's null, the property is set to null
     Except for name, which is required
@@ -34,10 +42,10 @@ const AddUpcomingMaintenance = () => {
     timeIntervalRef.current !== null
       ? (addUMD.time_interval = timeIntervalRef.current.value)
       : (addUMD.time_interval = "");
-    console.log(addUMD); // DELETE WHEN READY
+
     axios.post(
       "http://localhost:8080/drive-doctor/v1/maintenance/upcoming-maintenance/vehicles/" +
-        vehicleId,
+        vehicleContext.vehicle_id,
       addUMD
     );
     // back to Maintenance
@@ -120,4 +128,4 @@ const AddUpcomingMaintenance = () => {
   );
 };
 
-export default AddUpcomingMaintenance;
+export default UMAdd;

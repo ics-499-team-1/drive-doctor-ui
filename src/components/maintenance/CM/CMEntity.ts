@@ -1,8 +1,9 @@
 /**
- * Used to add a CM to the DB
+ * Its a CMEntity.
  */
-class CMDomain {
-  name: string;
+class CMEntity {
+  completed_maintenance_id: number;
+  name?: string;
   notes?: string;
   pictures?: string;
   date?: string;
@@ -11,9 +12,10 @@ class CMDomain {
   mechanics?: string;
   total_cost?: number;
 
-  constructor(name: string);
+  constructor(completed_maintenance_id: number);
   constructor(
-    name: string,
+    completed_maintenance_id: number,
+    name?: string,
     notes?: string,
     pictures?: string,
     date?: string,
@@ -22,6 +24,7 @@ class CMDomain {
     mechanics?: string,
     total_cost?: number
   ) {
+    this.completed_maintenance_id = completed_maintenance_id;
     this.name = name;
     this.notes = notes;
     this.pictures = pictures;
@@ -32,5 +35,4 @@ class CMDomain {
     this.total_cost = total_cost;
   }
 }
-
-export default CMDomain;
+export default CMEntity;

@@ -1,16 +1,19 @@
-import CompletedMaintenanceDomain from "./CM/CMDomain";
+import CMEntity from "../CM/CMEntity";
 import { FormEvent, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import MaintenanceButton from "./MaintenanceButton";
-import UMContext from "./UM/UMContext";
+import MaintenanceButton from "../MaintenanceButton";
+import UMContext from "./UMContext";
 
+/**
+ * This component converts upcoming maintenance items to completed maintenance items.
+ * @returns
+ */
 const ConvertUpcoming = () => {
   const navigate = useNavigate();
 
   /** Context */
-  const { upcomingMaintenanceContext, setMaintenance } = useContext(UMContext);
-  console.log(upcomingMaintenanceContext);
+  const { uMContext } = useContext(UMContext);
 
   /**References */
   const dateRef = useRef<HTMLInputElement>(null);
@@ -26,16 +29,16 @@ const ConvertUpcoming = () => {
     replaces the property that was passed in. If it's null, the property is set to null
     Except for name, which is required
     */
-  const maintenanceId = upcomingMaintenanceContext.upcoming_maintenance_id;
+  const maintenanceId = uMContext.upcoming_maintenance_id;
   if (maintenanceId == null)
     return <p>Error Converting - null maintenanceId</p>;
 
   const handleSubmitUpdate = (event: FormEvent) => {
-    let cMD = new CompletedMaintenanceDomain(maintenanceId);
-    event.preventDefault(); // DELETE WHEN FINISHED - replace with acknowledgement
+    let cMD = new CMEntity(maintenanceId); // this is not registered with the DB, but is used to create the empty object.
+    event.preventDefault(); // DELETE WHEN FINISHED - replace with acknowledgement?
     dateRef.current !== null
       ? (cMD.date = dateRef.current.value)
-      : (cMD.date = null);
+      : (cMD.date = "");
     mechanicsRef.current !== null
       ? (cMD.mechanics = mechanicsRef.current.value)
       : (cMD.mechanics = "");
@@ -44,21 +47,18 @@ const ConvertUpcoming = () => {
       : (cMD.mileage = -1);
     nameRef.current !== null
       ? (cMD.name = nameRef.current.value)
-      : (cMD.name = null);
+      : (cMD.name = "");
     notesRef.current !== null
       ? (cMD.notes = notesRef.current.value)
-      : (cMD.notes = null);
+      : (cMD.notes = "");
     picturesRef.current !== null
       ? (cMD.pictures = picturesRef.current.value)
-      : (cMD.pictures = null);
+      : (cMD.pictures = "");
     serviceCenterRef.current !== null
       ? (cMD.service_center = serviceCenterRef.current.value)
-      : (cMD.service_center = null);
-    totalCostRef.current !== null
-      ? (cMD.total_cost = parseInt(totalCostRef.current.value))
-      : (cMD.total_cost = null);
-
-    console.log(cMD);
+      : (cMD.service_center = "");
+    if (totalCostRef.current !== null)
+      cMD.total_cost = parseInt(totalCostRef.current.value);
     axios.post(
       "http://localhost:8080/drive-doctor/v1/maintenance/upcoming-maintenance/convert/" +
         maintenanceId,
@@ -109,7 +109,7 @@ const ConvertUpcoming = () => {
           </label>
           <input
             className="form-control"
-            defaultValue={upcomingMaintenanceContext.name}
+            defaultValue={uMContext.name}
             id="name"
             ref={nameRef}
             type="text"
@@ -121,11 +121,7 @@ const ConvertUpcoming = () => {
           </label>
           <input
             className="form-control"
-            defaultValue={
-              upcomingMaintenanceContext.notes
-                ? upcomingMaintenanceContext.notes
-                : ""
-            }
+            defaultValue={uMContext.notes ? uMContext.notes : ""}
             id="notes"
             ref={notesRef}
             type="text"
@@ -137,11 +133,7 @@ const ConvertUpcoming = () => {
           </label>
           <input
             className="form-control"
-            defaultValue={
-              upcomingMaintenanceContext.pictures
-                ? upcomingMaintenanceContext.pictures
-                : ""
-            }
+            defaultValue={uMContext.pictures ? uMContext.pictures : ""}
             id="pictures"
             ref={picturesRef}
             type="text"

@@ -1,5 +1,8 @@
+/**
+ * Holds the UpcomingMaintenance Entity data imported from the DB
+ */
 class UMEntity {
-  upcoming_maintenance_id?: number | undefined;
+  upcoming_maintenance_id: number;
   mileage_interval?: number | undefined;
   mileage_reminder?: boolean | undefined;
   name?: string;
@@ -8,10 +11,9 @@ class UMEntity {
   time_interval?: string | undefined;
   time_reminder?: boolean | undefined;
 
-  constructor();
   constructor(upcoming_maintenance_id: number);
   constructor(
-    upcoming_maintenance_id?: number,
+    upcoming_maintenance_id: number,
     mileage_interval?: number,
     mileage_reminder?: boolean,
     name?: string,
