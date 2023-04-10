@@ -15,7 +15,7 @@ function App() {
           templateAreas={`"header header"
                   "nav main"
                   "footer footer"`}
-      gridTemplateRows={"50px 94vh 30px"}
+      gridTemplateRows={"50px 100vh 30px"}
       gridTemplateColumns={"250px 1fr"}
       gap="1"
       color="#777777"
@@ -31,7 +31,15 @@ function App() {
       <GridItem pl="2" area={"main"}>
         <Outlet />
       </GridItem>
-      <GridItem pl="2" bg="#320064" area={"footer"}>
+      <GridItem
+        pl="2"
+        bg="#320064"
+        position="fixed"
+        w="100%"
+        h="40px"
+        bottom="0"
+        area={"footer"}
+      >
         Footer
       </GridItem>
         </Grid>

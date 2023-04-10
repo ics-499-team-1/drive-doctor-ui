@@ -1,9 +1,9 @@
-import { Button, ButtonGroup } from "@chakra-ui/button";
+import { Button } from "@chakra-ui/button";
 import { Input } from "@chakra-ui/input";
 import { Stack } from "@chakra-ui/layout";
 import { useState } from "react";
 import Trip from "../../models/trips/Trip";
-import { CreateTrip, GetTripsByUserId } from "../../services/TripService";
+import { CreateTrip } from "../../services/TripService";
 
 // todo: create effect to get vehicles for a given user id
 
@@ -26,7 +26,15 @@ const TripForm = ({ firstFieldRef, onCancel, refreshPageData }: any) => {
 
   const onClick = () => {
     CreateTrip(formData).then(() => {
-        refreshPageData()
+      setFormData({
+        name: "",
+        vehicle_id: 0,
+        type: "",
+        start: "",
+        end: "",
+        mileage: 0,
+      });
+      refreshPageData();
     });
 
     onCancel();
@@ -66,16 +74,14 @@ const TripForm = ({ firstFieldRef, onCancel, refreshPageData }: any) => {
         onChange={handleValueChange}
       />
 
-      <ButtonGroup display="flex" justifyContent="flex-end">
-        <Button variant="outline" onClick={onCancel}>
-          Cancel
-        </Button>
-        <Button colorScheme="teal" onClick={onClick}>
-          Save
-        </Button>
-      </ButtonGroup>
+      <Button variant="outline" onClick={onCancel}>
+        Cancel
+      </Button>
+      <Button colorScheme="teal" onClick={onClick}>
+        Save
+      </Button>
     </Stack>
   );
 };
 
-export default TripForm
+export default TripForm;
