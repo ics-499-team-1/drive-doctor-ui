@@ -8,12 +8,17 @@ import Home from "./components/home/Home";
 import Trip from "./components/trip/Trip";
 import AddVehicle from "./components/vehicles/AddVehiclePage";
 import VehiclesPage from "./components/vehicles/VehiclesPage";
+import Login from "./components/login/Login";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
       {
         path: "home",
         element: <Home />,
