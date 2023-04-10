@@ -9,8 +9,22 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import axios from "axios";
+import { MouseEventHandler } from "react";
 
-export default function Login() {
+function Login() {
+  async function handleButtonClick(user_id: number) {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/drive-doctor/v1/users/${user_id}`
+      );
+      return response
+    } catch (error) {
+      console.error(error);
+      return ""
+    }
+  };
+
   return (
     <Box
       w={["full", "md"]}
@@ -26,12 +40,13 @@ export default function Login() {
           <Heading>Login</Heading>
           <Text>Enter your e-mail to login</Text>
         </VStack>
-        <FormControl>
+        <FormControl isRequired>
           <FormLabel>E-mail Address</FormLabel>
           <Input
             rounded="none"
             variant="filled"
             placeholder="john.doe@email.com"
+            type="email"
           ></Input>
         </FormControl>
         <HStack w="full" justify="space-between">
@@ -42,6 +57,7 @@ export default function Login() {
           colorScheme="purple"
           w={["full", "auto"]}
           alignSelf="end"
+          onClick={(e:any) => handleButtonClick(1)}
         >
           Login
         </Button>
@@ -49,3 +65,5 @@ export default function Login() {
     </Box>
   );
 }
+
+export default Login;
