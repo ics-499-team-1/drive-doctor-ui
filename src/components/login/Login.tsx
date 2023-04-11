@@ -18,12 +18,12 @@ function Login() {
       const response = await axios.get(
         `http://localhost:8080/drive-doctor/v1/users/${user_id}`
       );
-      return response
+      return response;
     } catch (error) {
       console.error(error);
-      return ""
+      return "";
     }
-  };
+  }
 
   return (
     <Box
@@ -43,10 +43,21 @@ function Login() {
         <FormControl isRequired>
           <FormLabel>E-mail Address</FormLabel>
           <Input
+            bg="blackAlpha.400"
             rounded="none"
             variant="filled"
             placeholder="john.doe@email.com"
             type="email"
+          ></Input>
+        </FormControl>
+        <FormControl isRequired>
+          <FormLabel>Password</FormLabel>
+          <Input
+            bg="blackAlpha.400"
+            rounded="none"
+            variant="filled"
+            placeholder="password123"
+            type="password"
           ></Input>
         </FormControl>
         <HStack w="full" justify="space-between">
@@ -57,7 +68,7 @@ function Login() {
           colorScheme="purple"
           w={["full", "auto"]}
           alignSelf="end"
-          onClick={(e:any) => handleButtonClick(1)}
+          onClick={(e: any) => handleButtonClick(1)}
         >
           Login
         </Button>
