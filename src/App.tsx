@@ -1,9 +1,12 @@
-import { Grid, GridItem } from "@chakra-ui/layout";
+import { Flex, Grid, GridItem } from "@chakra-ui/layout";
 import { Outlet } from "react-router";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import { VehicleProvider } from "./components/maintenance/VehicleContext";
 import { CMProvider } from "./components/maintenance/CM/CMContext";
 import { UMProvider } from "./components/maintenance/UM/UMContext";
+import VehiclesPage from "./components/vehicles/VehiclesPage";
 
 function App() {
   return (
@@ -23,24 +26,16 @@ function App() {
       fontWeight="bold"
     >
       <GridItem pl="2" bg="#320064" area={"header"}>
-        Header
+        <Header />
       </GridItem>
       <GridItem pl="2" area={"nav"}>
         <Navbar />
       </GridItem>
-      <GridItem pl="2" area={"main"}>
+      <GridItem pl="2" area={"main"} >
         <Outlet />
       </GridItem>
-      <GridItem
-        pl="2"
-        bg="#320064"
-        position="fixed"
-        w="100%"
-        h="40px"
-        bottom="0"
-        area={"footer"}
-      >
-        Footer
+      <GridItem pl="2" bg="#320064" area={"footer"} height={125}>
+        <Footer />
       </GridItem>
         </Grid>
         </CMProvider>
