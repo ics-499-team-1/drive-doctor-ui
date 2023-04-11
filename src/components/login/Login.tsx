@@ -47,6 +47,7 @@ function Login() {
             rounded="none"
             variant="filled"
             placeholder="john.doe@email.com"
+            _hover={{}}
             type="email"
           ></Input>
         </FormControl>
@@ -57,6 +58,7 @@ function Login() {
             rounded="none"
             variant="filled"
             placeholder="password123"
+            _hover={{}}
             type="password"
           ></Input>
         </FormControl>
