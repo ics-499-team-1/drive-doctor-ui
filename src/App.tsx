@@ -35,16 +35,8 @@ function App() {
       <GridItem pl="2" area={"main"} >
         <Outlet />
       </GridItem>
-      <GridItem
-        pl="2"
-        bg="#320064"
-        position="fixed"
-        w="100%"
-        h="40px"
-        bottom="0"
-        area={"footer"}
-      >
-        Footer
+      <GridItem pl="2" bg="#320064" area={"footer"} height={125}>
+        <Footer />
       </GridItem>
         </Grid>
         </CMProvider>
