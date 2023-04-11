@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
  * Deletes an upcoming maintenance entity from the DB.
  */
 const UMDelete = () => {
-  console.log("Im deleting in UM delete");
   const { uMContext } = useContext(UMContext);
   const navigate = useNavigate();
 

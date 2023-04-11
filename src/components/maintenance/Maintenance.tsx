@@ -4,6 +4,7 @@ import VehicleEntity from "./VehicleEntity";
 import axios from "axios";
 import CompletedMaintenance from "./CM/CompletedMaintenance";
 import VehicleContext from "./VehicleContext";
+import MaintenanceButton from "./MaintenanceButton";
 
 /**
  * Base of the maintenance tree. Calls the DB to get a list of vehicles, which the user
@@ -27,9 +28,13 @@ const Maintenance = () => {
       })
       .catch((err) => console.log(err));
   }, []); // Empty array is important to stop infinite loop (Mosh Backend vid #3 @ 3 mins)
+
+  const handleChange = () => {
+    setVehicle(new VehicleEntity(-1,[],[]))
+  }
   return (
     <>
-      {selectedIndex === -1 ? (
+      {vehicleContext.vehicle_id === -1 ? (
         <>
           <div>Please Select a Vehicle</div>
           <ul className={"list-group m-2"}>
@@ -57,6 +62,7 @@ const Maintenance = () => {
         </>
       ) : (
         <div className="container text-center row align-items-start ">
+          <MaintenanceButton onClick={handleChange}>Select a Different Vehicle</MaintenanceButton>
           <div className="col  m-2">
             <UpcomingMaintenance
               vehicleID={vehicleContext.vehicle_id}
@@ -65,7 +71,7 @@ const Maintenance = () => {
           </div>
           <div className="col m-2">
             <CompletedMaintenance
-              completedList={vehicleList[selectedIndex].completed_maintenance}
+              completedList={vehicleContext.completed_maintenance}
             />
           </div>
         </div>

@@ -14,7 +14,6 @@ const ConvertUpcoming = () => {
 
   /** Context */
   const { uMContext } = useContext(UMContext);
-
   /**References */
   const dateRef = useRef<HTMLInputElement>(null);
   const mechanicsRef = useRef<HTMLInputElement>(null);
@@ -75,11 +74,30 @@ const ConvertUpcoming = () => {
   return (
     <>
       <form onSubmit={handleSubmitUpdate}>
+      <div>
+          <label htmlFor="name" className="form-label">
+            Name
+          </label>
+          <input
+            className="form-control"
+            defaultValue={uMContext.name}
+            id="name"
+            ref={nameRef}
+            required={true}
+            type="text"
+          />
+        </div>
         <div>
           <label htmlFor="date" className="form-label">
             Date
           </label>
-          <input className="form-control" id="date" ref={dateRef} type="text" />
+          <input
+            className="form-control"
+            id="date"
+            ref={dateRef}
+            required={true}
+            type="text"
+          />
         </div>
         <div className="mb-2">
           <label htmlFor="mechanics" className="form-label">
@@ -100,19 +118,8 @@ const ConvertUpcoming = () => {
             className="form-control"
             id="mileage"
             ref={mileageRef}
+            required={true}
             type="number"
-          />
-        </div>
-        <div>
-          <label htmlFor="name" className="form-label">
-            Name
-          </label>
-          <input
-            className="form-control"
-            defaultValue={uMContext.name}
-            id="name"
-            ref={nameRef}
-            type="text"
           />
         </div>
         <div className="mb-2">

@@ -6,7 +6,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/home/Home";
 import Maintenance from "./components/maintenance/Maintenance";
-import AddUpcomingMaintenance from "./components/maintenance/UM/UMAdd";
 import AddVehicle from "./components/vehicles/AddVehiclePage";
 import VehiclesPage from "./components/vehicles/VehiclesPage";
 import UMAdd from "./components/maintenance/UM/UMAdd";

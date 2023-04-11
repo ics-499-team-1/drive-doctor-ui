@@ -53,8 +53,6 @@ const UpcomingMaintenance = ({ upcomingList, vehicleID }: Props) => {
     }
   };
 
-  console.log("vehicleID", vehicleID, "upcomingList", upcomingList);
-
   return (
     <>
       <div className="row">

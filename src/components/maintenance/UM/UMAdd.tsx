@@ -49,7 +49,7 @@ const UMAdd = () => {
       addUMD
     );
     // back to Maintenance
-    // the part in curly braces forces a rerender of maintenance so it calls GET again
+    // the part in curly braces forces a rerender of maintenance so it calls GET again. Apparently this doesnt work lol.
     navigate("/maintenance/", { replace: true, state: { key: Math.random() } });
   };
 

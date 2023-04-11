@@ -12,7 +12,6 @@ const UMDelete = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("deleting: " + cMContext.name); //DELETE WHEN FINISHED
     axios.delete(
       "http://localhost:8080/drive-doctor/v1/maintenance/completed-maintenance/" +
         cMContext.completed_maintenance_id

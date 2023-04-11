@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import UMEntity from "./UMEntity";
 import UMContext from "./UMContext";
+import { SimpleGrid } from "@chakra-ui/react";
 
 interface Props {
   upcomingList: UMEntity[];
@@ -15,9 +16,6 @@ const UMList = ({ upcomingList }: Props) => {
   const { uMContext, setUMContext } = useContext(UMContext);
 
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  console.log("from UMList: ", upcomingList);
-
-  console.log("from UMList: uMContext:", uMContext);
 
   return (
     <>
@@ -27,7 +25,7 @@ const UMList = ({ upcomingList }: Props) => {
             className={
               (selectedIndex === index
                 ? "list-group-item active"
-                : "list-group-item") + " d-flex justify-content-between"
+                : "list-group-item")
             }
             key={index}
             onClick={() => {
@@ -40,18 +38,18 @@ const UMList = ({ upcomingList }: Props) => {
               }
             }}
           >
-            <div>{UME.name} </div>
-            <div>
-              Mileage Interval:{" "}
-              {UME.mileage_interval ? UME.mileage_interval : "none"}
-            </div>
-            {index === selectedIndex && (
-              <div>
-                Notes: {UME.notes ? UME.notes : "none"}
-                Pictures: {UME.pictures ? UME.pictures : "none"} ID:{" "}
-                {UME.upcoming_maintenance_id}
-              </div>
-            )}
+              <SimpleGrid columns={2}>
+                <p>Name: {UME.name}</p> <p>Mileage Interval: {UME.mileage_interval}</p>
+                {index === selectedIndex && (
+                  <>
+                    <p>Notes: {UME.notes}</p>{" "}
+                    <p>ID: {UME.upcoming_maintenance_id}</p>
+                    <p>Time Interval: {UME.time_interval}</p>
+                    <p> Notes: {UME.notes} </p>
+                    <p> Pictures: {UME.pictures}</p>
+                  </>
+                )}
+              </SimpleGrid>
           </li>
         ))}
       </ul>

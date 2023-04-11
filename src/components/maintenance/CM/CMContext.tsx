@@ -20,7 +20,7 @@ type CMProviderProps = {
   children: React.ReactNode;
 };
 
-export const CompletedMaintenanceProvider = ({ children }: CMProviderProps) => {
+export const CMProvider = ({ children }: CMProviderProps) => {
   const [cMContext, setcompletedMaintenanceContext] =
     useState<CMEntity>(defaultMaintenance);
 

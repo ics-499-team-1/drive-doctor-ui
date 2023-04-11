@@ -2,7 +2,7 @@ import { Grid, GridItem } from "@chakra-ui/layout";
 import { Outlet } from "react-router";
 import Navbar from "./components/Navbar";
 import { VehicleProvider } from "./components/maintenance/VehicleContext";
-import { CompletedMaintenanceProvider } from "./components/maintenance/CM/CMContext";
+import { CMProvider } from "./components/maintenance/CM/CMContext";
 import { UMProvider } from "./components/maintenance/UM/UMContext";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <>
       <VehicleProvider>
         <UMProvider>
-        <CompletedMaintenanceProvider>
+        <CMProvider>
         <Grid
           templateAreas={`"header header"
                   "nav main"
@@ -35,7 +35,7 @@ function App() {
         Footer
       </GridItem>
         </Grid>
-        </CompletedMaintenanceProvider>
+        </CMProvider>
         </UMProvider>
       </VehicleProvider>
     </>
