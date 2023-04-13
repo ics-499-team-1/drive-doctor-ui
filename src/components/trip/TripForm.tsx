@@ -1,16 +1,16 @@
 import { Button } from "@chakra-ui/button";
 import { Input } from "@chakra-ui/input";
 import { Stack } from "@chakra-ui/layout";
-import { useState } from "react";
+import { Select } from "@chakra-ui/select";
+import React, { useState } from "react";
+import useUserVehicles from "../../hooks/useUserVehicles";
 import Trip from "../../models/trips/Trip";
 import { CreateTrip } from "../../services/TripService";
 
 // todo: create effect to get vehicles for a given user id
 
-// todo: add effect to save trip
-// todo: add props
-
 const TripForm = ({ firstFieldRef, onCancel, refreshPageData }: any) => {
+  const vehicles = useUserVehicles(203);
   const [formData, setFormData] = useState<Trip>({
     name: "",
     vehicle_id: 0,
@@ -21,6 +21,11 @@ const TripForm = ({ firstFieldRef, onCancel, refreshPageData }: any) => {
   });
 
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((v) => ({ ...v, [e.target.id]: e.target.value }));
+  };
+
+  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(e);
     setFormData((v) => ({ ...v, [e.target.id]: e.target.value }));
   };
 
@@ -45,32 +50,36 @@ const TripForm = ({ firstFieldRef, onCancel, refreshPageData }: any) => {
       <Input
         id="name"
         ref={firstFieldRef}
-        defaultValue="Trip Name"
+        placeholder="Trip Name"
         onChange={handleValueChange}
       />
-      <Input
+      <Select
         id="vehicle_id"
-        defaultValue="Vehicle Name"
-        onChange={handleValueChange}
-      />
+        placeholder="Select Vehicle"
+        onChange={handleSelect}
+      >
+        {vehicles.map((vehicle) => (
+          <option key={vehicle.vehicle_id} value={vehicle.vehicle_id}>
+            {vehicle.name}
+          </option>
+        ))}
+      </Select>
+
       <Input
         id="type"
-        defaultValue="Trip Type (Business)"
+        placeholder="Trip Type (Business)"
         onChange={handleValueChange}
       />
       <Input
         id="start"
-        defaultValue="Start Location"
+        placeholder="Start Location"
         onChange={handleValueChange}
       />
-      <Input
-        id="end"
-        defaultValue="End Location"
-        onChange={handleValueChange}
-      />
+      <Input id="end" placeholder="End Location" onChange={handleValueChange} />
       <Input
         id="mileage"
-        defaultValue="Miles Driven"
+        placeholder="Miles Driven"
+        type="number"
         onChange={handleValueChange}
       />
 
