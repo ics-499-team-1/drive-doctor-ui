@@ -1,9 +1,9 @@
 export interface UserTripsResponse {
   trip_id: number;
   mileage: number;
-  type: String;
-  name: String;
-  start_location: String;
-  end_location: String;
-  notes: String;
+  type: string;
+  name: string;
+  start_location: string;
+  end_location: string;
+  notes: string;
 }
