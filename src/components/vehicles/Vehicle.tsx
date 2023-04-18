@@ -1,5 +1,3 @@
-import axios from "axios"
-import {useState, useEffect} from "react"
 export interface Vehicle {
     vehicle_id: number,
     name: string,

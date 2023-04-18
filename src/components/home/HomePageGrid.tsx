@@ -4,12 +4,12 @@ import MainPageCard from "./HomePageCard";
 
 function HomePageGrid() {
 
-  const userTrips = useUserTrips();
+  const userTrips = useUserTrips(203, null);
 
   return (
     <>
       <SimpleGrid columns={3} spacing={10} margin="10px" height="100%">
-        {userTrips.map(trip => <MainPageCard trip={trip} />)}
+        {userTrips.map(trip => <MainPageCard key={trip.trip_id} trip={trip} />)}
       </SimpleGrid>
     </>
   );
