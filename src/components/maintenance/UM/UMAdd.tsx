@@ -18,7 +18,6 @@ const UMAdd = () => {
   /* refs */
   const nameRef = useRef<HTMLInputElement>(null);
   const notesRef = useRef<HTMLInputElement>(null);
-  const picturesRef = useRef<HTMLInputElement>(null);
   const mileageIntervalRef = useRef<HTMLInputElement>(null);
   const timeIntervalRef = useRef<HTMLInputElement>(null);
 
@@ -27,15 +26,12 @@ const UMAdd = () => {
     Except for name, which is required
     */
   const handleSubmitUpdate = (event: FormEvent) => {
-    event.preventDefault(); // DELETE WHEN FINISHED - replace with acknowledgement
+    event.preventDefault();
     const addUMD = new UMDomain("Required");
     if (nameRef.current !== null) addUMD.name = nameRef.current.value;
     notesRef.current !== null
       ? (addUMD.notes = notesRef.current.value)
       : (addUMD.notes = "");
-    picturesRef.current !== null
-      ? (addUMD.pictures = picturesRef.current.value)
-      : (addUMD.pictures = "");
     mileageIntervalRef.current !== null
       ? (addUMD.mileage_interval = parseInt(mileageIntervalRef.current.value))
       : (addUMD.mileage_interval = -1);
@@ -47,10 +43,10 @@ const UMAdd = () => {
       "http://localhost:8080/drive-doctor/v1/maintenance/upcoming-maintenance/vehicles/" +
         vehicleContext.vehicle_id,
       addUMD
-    );
+    ).then( () =>  navigate("/maintenance/", { replace: true, state: { key: Math.random() } }));
     // back to Maintenance
     // the part in curly braces forces a rerender of maintenance so it calls GET again. Apparently this doesnt work lol.
-    navigate("/maintenance/", { replace: true, state: { key: Math.random() } });
+
   };
 
   return (
@@ -76,17 +72,6 @@ const UMAdd = () => {
             className="form-control"
             id="notes"
             ref={notesRef}
-            type="text"
-          />
-        </div>
-        <div className="mb-2">
-          <label htmlFor="pictures" className="form-label">
-            Pictures
-          </label>
-          <input
-            className="form-control"
-            id="pictures"
-            ref={picturesRef}
             type="text"
           />
         </div>

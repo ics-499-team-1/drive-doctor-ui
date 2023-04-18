@@ -7,31 +7,47 @@ import VehicleContext from "./VehicleContext";
 import MaintenanceButton from "./MaintenanceButton";
 
 /**
- * Base of the maintenance tree. Calls the DB to get a list of vehicles, which the user
- * then selects. Would be better to check the vehicle context and have a switch for that here.
+ * Base of the maintenance tree.
  */
 const Maintenance = () => {
   /** Vehicle Context */
   const { vehicleContext, setVehicle } = useContext(VehicleContext);
   /** States */
   const [vehicleList, setVehicleList] = useState<VehicleEntity[]>([]);
-  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [selectedIndex, setSelectedIndex] = useState(-1);  // is this neccesary? Could just use the index mapping
 
-  /** Calls the API to GET Vehicles */
+  /** Conditional call to the API for GET vehicles.
+   * If the vehicleContext Entity has an ID of -1, then it is not yet set and needs to be selected
+   * by the user, thus the vehicle list is called and displayed for selection.
+   * If the vehicleContext is set, then Maintenance has been routed to by another component and
+   * needs a refresh, thus the specific vehicle is called by ID and the values are refreshed.
+  */
   useEffect(() => {
+    if (vehicleContext.vehicle_id === -1) {
     axios
       .get<VehicleEntity[]>(
-        "http://localhost:8080/drive-doctor/v1/vehicles" // TODO: NEED A GLOBAL VEHICLE CONTEXT
+        "http://localhost:8080/drive-doctor/v1/vehicles"
       )
       .then((response) => {
         setVehicleList(response.data);
       })
       .catch((err) => console.log(err));
+    } else {
+      axios
+      .get<VehicleEntity>(
+        "http://localhost:8080/drive-doctor/v1/vehicles/" + vehicleContext.vehicle_id)
+        .then( (response) => {
+          setVehicle(response.data);
+        })
+        .catch((err) => console.log(err));
+    }
   }, []); // Empty array is important to stop infinite loop (Mosh Backend vid #3 @ 3 mins)
 
+  /** Resets the vehicle entity so a new vehicle can be selected */
   const handleChange = () => {
     setVehicle(new VehicleEntity(-1,[],[]))
   }
+
   return (
     <>
       {vehicleContext.vehicle_id === -1 ? (
@@ -62,7 +78,9 @@ const Maintenance = () => {
         </>
       ) : (
         <div className="container text-center row align-items-start ">
-          <MaintenanceButton onClick={handleChange}>Select a Different Vehicle</MaintenanceButton>
+          <div>
+            Vehicle: {vehicleContext.name} {vehicleContext.make} {vehicleContext.model} {vehicleContext.trim} Odometer: {vehicleContext.odometer}
+          <MaintenanceButton onClick={handleChange}>Select a Different Vehicle</MaintenanceButton></div>
           <div className="col  m-2">
             <UpcomingMaintenance
               vehicleID={vehicleContext.vehicle_id}

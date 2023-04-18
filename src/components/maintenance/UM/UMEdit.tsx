@@ -14,7 +14,6 @@ const UMEdit = () => {
   /** Refs */
   const nameRef = useRef<HTMLInputElement>(null);
   const notesRef = useRef<HTMLInputElement>(null);
-  const picturesRef = useRef<HTMLInputElement>(null);
   const mileageIntervalRef = useRef<HTMLInputElement>(null);
   const timeIntervalRef = useRef<HTMLInputElement>(null);
   /* On submit, if the reference to the input element is not null, then it
@@ -26,9 +25,6 @@ const UMEdit = () => {
     notesRef.current !== null
       ? (uMContext.notes = notesRef.current.value)
       : (uMContext.notes = "");
-    picturesRef.current !== null
-      ? (uMContext.pictures = picturesRef.current.value)
-      : (uMContext.pictures = "");
     mileageIntervalRef.current !== null
       ? (uMContext.mileage_interval = parseInt(
           mileageIntervalRef.current.value
@@ -71,18 +67,6 @@ const UMEdit = () => {
             defaultValue={uMContext.notes ? uMContext.notes : ""}
             id="notes"
             ref={notesRef}
-            type="text"
-          />
-        </div>
-        <div className="mb-2">
-          <label htmlFor="pictures" className="form-label">
-            Pictures
-          </label>
-          <input
-            className="form-control"
-            defaultValue={uMContext.pictures ? uMContext.pictures : ""}
-            id="pictures"
-            ref={picturesRef}
             type="text"
           />
         </div>

@@ -18,7 +18,6 @@ const AddUpcomingMaintenance = () => {
   /* refs */
   const nameRef = useRef<HTMLInputElement>(null);
   const notesRef = useRef<HTMLInputElement>(null);
-  const picturesRef = useRef<HTMLInputElement>(null);
   const mileageRef = useRef<HTMLInputElement>(null);
   const dateRef = useRef<HTMLInputElement>(null);
   const serviceCenterRef = useRef<HTMLInputElement>(null);
@@ -37,9 +36,6 @@ const AddUpcomingMaintenance = () => {
     notesRef.current !== null
       ? (addCMDomain.notes = notesRef.current.value)
       : (addCMDomain.notes = "");
-    picturesRef.current !== null
-      ? (addCMDomain.pictures = picturesRef.current.value)
-      : (addCMDomain.pictures = "");
     dateRef.current !== null
       ? (addCMDomain.date = dateRef.current.value)
       : (addCMDomain.date = "");
@@ -87,17 +83,6 @@ const AddUpcomingMaintenance = () => {
             className="form-control"
             id="notes"
             ref={notesRef}
-            type="text"
-          />
-        </div>
-        <div className="mb-2">
-          <label htmlFor="pictures" className="form-label">
-            Pictures
-          </label>
-          <input
-            className="form-control"
-            id="pictures"
-            ref={picturesRef}
             type="text"
           />
         </div>

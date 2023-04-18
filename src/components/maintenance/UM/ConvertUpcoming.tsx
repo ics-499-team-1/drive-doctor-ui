@@ -20,7 +20,6 @@ const ConvertUpcoming = () => {
   const mileageRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const notesRef = useRef<HTMLInputElement>(null);
-  const picturesRef = useRef<HTMLInputElement>(null);
   const serviceCenterRef = useRef<HTMLInputElement>(null);
   const totalCostRef = useRef<HTMLInputElement>(null);
 
@@ -50,9 +49,6 @@ const ConvertUpcoming = () => {
     notesRef.current !== null
       ? (cMD.notes = notesRef.current.value)
       : (cMD.notes = "");
-    picturesRef.current !== null
-      ? (cMD.pictures = picturesRef.current.value)
-      : (cMD.pictures = "");
     serviceCenterRef.current !== null
       ? (cMD.service_center = serviceCenterRef.current.value)
       : (cMD.service_center = "");
@@ -131,18 +127,6 @@ const ConvertUpcoming = () => {
             defaultValue={uMContext.notes ? uMContext.notes : ""}
             id="notes"
             ref={notesRef}
-            type="text"
-          />
-        </div>
-        <div className="mb-2">
-          <label htmlFor="pictures" className="form-label">
-            Pictures
-          </label>
-          <input
-            className="form-control"
-            defaultValue={uMContext.pictures ? uMContext.pictures : ""}
-            id="pictures"
-            ref={picturesRef}
             type="text"
           />
         </div>

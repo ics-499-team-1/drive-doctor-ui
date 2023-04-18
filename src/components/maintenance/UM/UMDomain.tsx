@@ -4,7 +4,6 @@
 class UMDomain {
   name: string;
   notes?: string;
-  pictures?: string;
   mileage_interval?: number;
   time_interval?: string;
   mileage_reminder?: boolean;
@@ -14,7 +13,6 @@ class UMDomain {
   constructor(
     name: string,
     notes?: string,
-    pictures?: string,
     mileage_interval?: number,
     time_interval?: string,
     mileage_reminder?: boolean,
@@ -22,7 +20,6 @@ class UMDomain {
   ) {
     this.name = name;
     this.notes = notes;
-    this.pictures = pictures;
     this.mileage_interval = mileage_interval;
     this.time_interval = time_interval;
     this.mileage_reminder = mileage_reminder;

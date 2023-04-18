@@ -10,7 +10,6 @@ interface Props {
 
 /**
  * This is the list displayed under the Completed Maintenance column.
- * Currently is passed in a list, could use the global context if properly configured.
  * @param completedList - the CMEntity list passed in by maintenance
  * @returns
  */
@@ -49,7 +48,6 @@ const CMList = ({ completedList }: Props) => {
                     <p>Mechanics: {CME.mechanics}</p>
                     <p>Total Cost: {CME.total_cost}</p>
                     <p> Notes: {CME.notes} </p>
-                    <p> Pictures: {CME.pictures}</p>
                   </>
                 )}
               </SimpleGrid>

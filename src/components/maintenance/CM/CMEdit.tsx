@@ -14,7 +14,6 @@ const CMEdit = () => {
   /** Refs */
   const nameRef = useRef<HTMLInputElement>(null);
   const notesRef = useRef<HTMLInputElement>(null);
-  const picturesRef = useRef<HTMLInputElement>(null);
   const mileageRef = useRef<HTMLInputElement>(null);
   const dateRef = useRef<HTMLInputElement>(null);
   const serviceCenterRef = useRef<HTMLInputElement>(null);
@@ -29,9 +28,6 @@ const CMEdit = () => {
     notesRef.current !== null
       ? (cMContext.notes = notesRef.current.value)
       : (cMContext.notes = "");
-    picturesRef.current !== null
-      ? (cMContext.pictures = picturesRef.current.value)
-      : (cMContext.pictures = "");
     dateRef.current !== null
       ? (cMContext.date = dateRef.current.value)
       : (cMContext.date = "");
@@ -79,18 +75,6 @@ const CMEdit = () => {
             defaultValue={cMContext.notes}
             id="notes"
             ref={notesRef}
-            type="text"
-          />
-        </div>
-        <div className="mb-2">
-          <label htmlFor="pictures" className="form-label">
-            Pictures
-          </label>
-          <input
-            className="form-control"
-            defaultValue={cMContext.pictures}
-            id="pictures"
-            ref={picturesRef}
             type="text"
           />
         </div>

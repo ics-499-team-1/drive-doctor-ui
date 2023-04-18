@@ -11,7 +11,7 @@ class VehicleEntity {
   make?: string | null;
   model?: string | null;
   trim?: string | null;
-  odometer?: number | null;
+  odometer: number;
   license_plate_number?: string | null;
   vin?: string | null;
   deactivated?: boolean | null;
@@ -21,18 +21,19 @@ class VehicleEntity {
   constructor(
     vehicle_id: number,
     upcoming_maintenance: UMEntity[],
-    completed_maintenance: CMEntity[]
+    completed_maintenance: CMEntity[],
+    odometer: number,
   );
   constructor(
     vehicle_id: number,
     upcoming_maintenance: UMEntity[],
     completed_maintenance: CMEntity[],
+    odometer: number,
     name?: string,
     year?: number,
     make?: string,
     model?: string,
     trim?: string,
-    odometer?: number,
     license_plate_number?: string,
     vin?: string,
     deactivated?: boolean

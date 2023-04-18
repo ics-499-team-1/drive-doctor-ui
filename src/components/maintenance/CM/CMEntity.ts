@@ -5,7 +5,6 @@ class CMEntity {
   completed_maintenance_id: number;
   name?: string;
   notes?: string;
-  pictures?: string;
   date?: string;
   mileage?: number;
   service_center?: string;
@@ -17,7 +16,6 @@ class CMEntity {
     completed_maintenance_id: number,
     name?: string,
     notes?: string,
-    pictures?: string,
     date?: string,
     mileage?: number,
     service_center?: string,
@@ -27,7 +25,6 @@ class CMEntity {
     this.completed_maintenance_id = completed_maintenance_id;
     this.name = name;
     this.notes = notes;
-    this.pictures = pictures;
     this.date = date;
     this.mileage = mileage;
     this.service_center = service_center;

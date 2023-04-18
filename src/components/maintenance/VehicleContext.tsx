@@ -11,7 +11,7 @@ type VehicleContextProps = {
   setVehicle: (vehicle: VehicleEntity) => void;
 };
 
-const defaultVehicle = new VehicleEntity(-1, [], []);
+const defaultVehicle = new VehicleEntity(-1, [], [], -1);
 
 const VehicleContext = createContext<VehicleContextProps>({
   vehicleContext: defaultVehicle,
