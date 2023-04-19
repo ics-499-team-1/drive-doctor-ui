@@ -70,7 +70,7 @@ function Login() {
           colorScheme="purple"
           w={["full", "auto"]}
           alignSelf="end"
-          onClick={(e: any) => handleButtonClick(1)}
+          onClick={(e: any) => handleButtonClick(3)}
         >
           Login
         </Button>

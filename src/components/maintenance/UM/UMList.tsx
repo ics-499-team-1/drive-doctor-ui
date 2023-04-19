@@ -13,24 +13,55 @@ interface Props {
  * When a list item is selected, it sets the UMContext to that list item, which can then be used in other components in the maintenance tree.
  */
 const UMList = ({ upcomingList }: Props) => {
-
   const { uMContext, setUMContext } = useContext(UMContext);
   const { vehicleContext } = useContext(VehicleContext);
 
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
+  function mileServiceDisplay(odometer: number, mileageInt: number) {
+    if (mileageInt !== null) {
+      if (mileageInt > odometer) {
+        return <p>Miles to service: {mileageInt - odometer}</p>;
+      } else if (mileageInt < odometer) {
+        return (
+          <p className="text-danger"> {odometer - mileageInt} miles overdue</p>
+        );
+      }
+    }
+  }
+
+  function timeServiceDisplay(timeInt: string) {
+    if (timeInt !== null) {
+      return "Service by: " + timeInt;
+    }
+  }
+
+  function selectServiceDisplay(mileInt: number, timeInt: string) {
+    if (mileInt !== null) {
+      if (mileInt > vehicleContext.odometer) {
+        return <p>Miles to service: {mileInt - vehicleContext.odometer}</p>;
+      } else if (mileInt < vehicleContext.odometer) {
+        return (
+          <p className="text-danger">
+            {" "}
+            {vehicleContext.odometer - mileInt} miles overdue
+          </p>
+        );
+      }
+    } else if (timeInt != "none") {
+      return "Service by: " + timeInt;
+    } else {
+      return <></>
+    }
+  }
+
   return (
     <>
       <ul className={"list-group m-2"}>
         {upcomingList.map((UME, index) => {
-          let className = "list-group-item";
-          if (selectedIndex === index && vehicleContext.odometer < UME.mileage_interval) {
+          let className = "list-group-item bg-dark text-white";
+          if (selectedIndex === index) {
             className += " active";
-          }
-          else if (vehicleContext.odometer > UME.mileage_interval) {
-            className += " bg-danger";
-          } else {
-            " bg-dark";
           }
           return (
             <li
@@ -39,7 +70,7 @@ const UMList = ({ upcomingList }: Props) => {
               onClick={() => {
                 if (index === selectedIndex) {
                   setSelectedIndex(-1);
-                  setUMContext(new UMEntity(-1, -1));
+                  setUMContext(new UMEntity());
                 } else {
                   setSelectedIndex(index);
                   setUMContext(UME);
@@ -48,12 +79,10 @@ const UMList = ({ upcomingList }: Props) => {
             >
               <SimpleGrid columns={2}>
                 <p>Name: {UME.name}</p>{" "}
-                <p>Miles to Service: {UME.mileage_interval - vehicleContext.odometer}</p>
+                {selectServiceDisplay(UME.mileage_interval, UME.time_interval)}
                 {index === selectedIndex && (
                   <>
-                    <p>Notes: {UME.notes}</p>{" "}
                     <p>ID: {UME.upcoming_maintenance_id}</p>
-                    <p>Time Interval: {UME.time_interval}</p>
                     <p>Notes: {UME.notes}</p>
                   </>
                 )}

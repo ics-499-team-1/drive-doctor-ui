@@ -7,18 +7,17 @@ class UMEntity {
   mileage_reminder?: boolean | undefined;
   name?: string;
   notes?: string | undefined;
-  time_interval?: string | undefined;
+  time_interval: string;
   time_reminder?: boolean | undefined;
 
-  constructor(upcoming_maintenance_id: number,
-    mileage_interval: number);
+  constructor();
   constructor(
-    upcoming_maintenance_id: number,
-    mileage_interval: number,
+    upcoming_maintenance_id: number = -1,
+    mileage_interval: number = -1,
+    time_interval: string = "",
     mileage_reminder?: boolean,
     name?: string,
     notes?: string,
-    time_interval?: string,
     time_reminder?: boolean
   ) {
     this.upcoming_maintenance_id = upcoming_maintenance_id;

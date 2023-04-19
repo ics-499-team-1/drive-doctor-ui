@@ -45,7 +45,7 @@ const Maintenance = () => {
 
   /** Resets the vehicle entity so a new vehicle can be selected */
   const handleChange = () => {
-    setVehicle(new VehicleEntity(-1,[],[]))
+    setVehicle(new VehicleEntity(-1,[],[], -1))
   }
 
   return (
@@ -71,7 +71,7 @@ const Maintenance = () => {
                   }
                 }}
               >
-                {vehicle.make} {vehicle.model}
+              {vehicle.name} ({vehicle.make} {vehicle.model}) {vehicle.license_plate_number ? vehicle.license_plate_number : ""}
               </li>
             ))}
           </ul>

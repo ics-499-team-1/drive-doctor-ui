@@ -20,14 +20,14 @@ import TripsCard from "./TripsCard";
 function TripGrid() {
   const [userTrips, setUserTrips] = useState<UserTripsResponse[]>([]);
 
-  useUserTrips(203, setUserTrips);
+  useUserTrips(3, setUserTrips);
 
   const { onOpen, onClose, isOpen } = useDisclosure();
   const firstFieldRef = React.useRef(null);
 
   const onClick = () => {
     console.log("new vehicle added");
-    GetTripsByUserId(203).then((data: UserTripsResponse[]) => {
+    GetTripsByUserId(3).then((data: UserTripsResponse[]) => {
       setUserTrips(data);
     });
   };

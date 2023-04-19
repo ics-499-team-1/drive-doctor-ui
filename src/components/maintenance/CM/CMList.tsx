@@ -19,13 +19,13 @@ const CMList = ({ completedList }: Props) => {
 
   return (
     <>
-      <ul className={"list-group m-2"}>
+      <ul className={"list-group m-2 "}>
         {completedList.map((CME, index) => (
           <li
             className={
               selectedIndex === index
-                ? "list-group-item active"
-                : "list-group-item"
+                ? "list-group-item bg-dark text-white active"
+                : "list-group-item bg-dark text-white"
             }
             key={index}
             onClick={() => {
