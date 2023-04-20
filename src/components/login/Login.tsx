@@ -10,19 +10,26 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { MouseEventHandler } from "react";
+import { useState } from "react";
+import { AuthenticationRequest } from "../../models/auth/AuthenticationRequest"
 
 function Login() {
-  async function handleButtonClick(user_id: number) {
-    try {
-      const response = await axios.get(
-        `http://localhost:8080/drive-doctor/v1/users/${user_id}`
-      );
-      return response;
-    } catch (error) {
-      console.error(error);
-      return "";
-    }
+  const [authenticationRequest, setFormData] = useState<AuthenticationRequest>({
+    email: "",
+    password: "",
+  })
+
+  const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((v) => ({ ...v, [e.target.id]: e.target.value }));
+  };
+  
+  const onClick = () => {
+    const response = axios.post(
+      `http://localhost:8080/drive-doctor/v1/authenticate`,
+      authenticationRequest
+    )
+    console.log(response)
+    return response;
   }
 
   return (
@@ -49,6 +56,8 @@ function Login() {
             placeholder="john.doe@email.com"
             _hover={{}}
             type="email"
+            id="email"
+            onChange={handleValueChange}
           ></Input>
         </FormControl>
         <FormControl isRequired>
@@ -60,6 +69,8 @@ function Login() {
             placeholder="password123"
             _hover={{}}
             type="password"
+            id="password"
+            onChange={handleValueChange}
           ></Input>
         </FormControl>
         <HStack w="full" justify="space-between">
@@ -70,7 +81,7 @@ function Login() {
           colorScheme="purple"
           w={["full", "auto"]}
           alignSelf="end"
-          onClick={(e: any) => handleButtonClick(1)}
+          onClick={(e: any) => onClick()}
         >
           Login
         </Button>
