@@ -2,15 +2,23 @@ import { Button, Card, Container, SimpleGrid } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Vehicle from "./Vehicle";
-import axios from "axios";
+import axios, { AxiosRequestConfig} from "axios";
+import authHeader from "../../models/auth/AuthHeader";
 
 type VehicleCardProps = {
   vehicleData: Vehicle;
   onDelete: () => void;
 };
 
+  // Define header
+  const headers: AxiosRequestConfig['headers'] = {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('access_token')}`
+  }
+
 // Handles Vehicle Card Display on VehiclesPage
 function VehicleCard(props: VehicleCardProps) {
+
   // Handles vehicle deletion
   const handleDelete = async () => {
     try {
@@ -51,11 +59,17 @@ function VehicleCard(props: VehicleCardProps) {
 }
 
 function VehiclesPage() {
+  const config = {
+    headers: {
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqc0BnbWFpbC5jb20iLCJpYXQiOjE2ODIxNzE0NDIsImV4cCI6MTY4MjE3Mjg4Mn0.hVesAPnsxCgm7tkvbuIvzt6QvKpqOLuMyv6KpyzxIFU'
+    }
+  };  
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
 
   useEffect(() => {
+    console.log('authHeader: ', authHeader(localStorage.getItem('access_token')))
     axios
-      .get<Vehicle[]>("http://localhost:8080/drive-doctor/v1/vehicles")
+      .get<Vehicle[]>("http://localhost:8080/drive-doctor/v1/vehicles", authHeader(localStorage.getItem('access_token')))
       .then((response) => setVehicles(response.data));
   }, []);
 

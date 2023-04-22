@@ -9,27 +9,38 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useState } from "react";
-import { AuthenticationRequest } from "../../models/auth/AuthenticationRequest"
+import { AuthenticationRequest } from "../../models/auth/AuthenticationRequest";
+import {useNavigate} from 'react-router-dom';
 
 function Login() {
   const [authenticationRequest, setFormData] = useState<AuthenticationRequest>({
     email: "",
     password: "",
   })
-
+  const navigate = useNavigate();
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((v) => ({ ...v, [e.target.id]: e.target.value }));
   };
   
-  const onClick = () => {
-    const response = axios.post(
-      `http://localhost:8080/drive-doctor/v1/authenticate`,
+  const onClick = async () => {
+    try {
+    console.log(authenticationRequest)
+    const response = await axios.post(
+      `http://localhost:8080/drive-doctor/v1/auth/authenticate`,
       authenticationRequest
     )
-    console.log(response)
+    console.log("response from login authenticate: ", response)
+    localStorage.setItem('access_token', response.data.access_token)
+    console.log('get access_token from local storage', localStorage.getItem('access_token'))
+    if (response.status === 200) {
+    navigate('/vehicles')
+    }
     return response;
+    } catch (e: any) {
+      console.error(e.response.data)
+    }
   }
 
   return (
