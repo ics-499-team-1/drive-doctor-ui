@@ -10,38 +10,49 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import axios, { AxiosError } from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AuthenticationRequest } from "../../models/auth/AuthenticationRequest";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("user_id") != null) {
+      navigate("/home")
+    }
+  })
+
   const [authenticationRequest, setFormData] = useState<AuthenticationRequest>({
     email: "",
     password: "",
-  })
-  const navigate = useNavigate();
+  });
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((v) => ({ ...v, [e.target.id]: e.target.value }));
   };
-  
+
   const onClick = async () => {
     try {
-    console.log(authenticationRequest)
-    const response = await axios.post(
-      `http://localhost:8080/drive-doctor/v1/auth/authenticate`,
-      authenticationRequest
-    )
-    console.log("response from login authenticate: ", response)
-    localStorage.setItem('access_token', response.data.access_token)
-    console.log('get access_token from local storage', localStorage.getItem('access_token'))
-    if (response.status === 200) {
-    navigate('/vehicles')
-    }
-    return response;
+      console.log(authenticationRequest);
+      const response = await axios.post(
+        `http://localhost:8080/drive-doctor/v1/auth/authenticate`,
+        authenticationRequest
+      );
+      console.log("response from login authenticate: ", response);
+      localStorage.setItem("access_token", response.data.access_token);
+      localStorage.setItem("user_id", response.data.user_id);
+      console.log(
+        "get access_token from local storage",
+        localStorage.getItem("access_token")
+      );
+      if (response.status === 200) {
+        navigate("/vehicles");
+      }
+      return response;
     } catch (e: any) {
-      console.error(e.response.data)
+      console.error(e.response.data);
     }
-  }
+  };
 
   return (
     <Box

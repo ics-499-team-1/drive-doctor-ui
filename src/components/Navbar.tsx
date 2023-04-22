@@ -1,4 +1,4 @@
-import { VStack, Text, Box, StackDivider, LinkBox } from "@chakra-ui/layout";
+import { VStack, StackDivider, LinkBox } from "@chakra-ui/layout";
 import { Link } from "react-router-dom";
 
 function Navbar() {
@@ -12,9 +12,6 @@ function Navbar() {
       </LinkBox>
       <LinkBox>
         <Link to="/vehicles">Vehicles</Link>
-      </LinkBox>
-      <LinkBox>
-        <Link to="/drivers">Drivers</Link>
       </LinkBox>
       <LinkBox>
         <Link to="/maintenance">Maintenance</Link>

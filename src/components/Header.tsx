@@ -1,6 +1,14 @@
-import { SimpleGrid, Button } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+  const navigate = useNavigate()
+
+  const onClick = () => {
+    localStorage.clear();
+    navigate("/login")
+  };
+
   return (
     <SimpleGrid columns={2}>
       <div style={{ display: "flex" }}>
@@ -16,7 +24,11 @@ function Header() {
         />
       </div>
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <button className="btnLogOut" style={{ margin: 10, marginRight: 20 }}>
+        <button
+          className="btnLogOut"
+          onClick={onClick}
+          style={{ margin: 10, marginRight: 20 }}
+        >
           Log Out
         </button>
       </div>
