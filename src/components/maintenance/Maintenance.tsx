@@ -16,6 +16,13 @@ const Maintenance = () => {
   const [vehicleList, setVehicleList] = useState<VehicleEntity[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);  // is this neccesary? Could just use the index mapping
 
+    // CHECK THIS
+    const config = {
+      headers: {
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqc0BnbWFpbC5jb20iLCJpYXQiOjE2ODE5NTg0MTEsImV4cCI6MTY4MTk1OTg1MX0.n6pzrSJtDdN4I1AyFmfGNRQaqEDgGpsLl5eYRM2RpP0'
+      }
+    };  
+
   /** Conditional call to the API for GET vehicles.
    * If the vehicleContext Entity has an ID of -1, then it is not yet set and needs to be selected
    * by the user, thus the vehicle list is called and displayed for selection.
@@ -26,7 +33,7 @@ const Maintenance = () => {
     if (vehicleContext.vehicle_id === -1) {
     axios
       .get<VehicleEntity[]>(
-        "http://localhost:8080/drive-doctor/v1/vehicles"
+        "http://localhost:8080/drive-doctor/v1/vehicles", config
       )
       .then((response) => {
         setVehicleList(response.data);
