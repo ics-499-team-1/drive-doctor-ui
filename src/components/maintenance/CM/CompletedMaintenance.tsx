@@ -18,7 +18,6 @@ const CompletedMaintenance = ({ completedList }: Props) => {
   /** Context */
   const { cMContext } = useContext(CMContext);
 
-  const handleOilClick = () => console.log("Clicked Oil Change Button");
   const handleAddClick = () => {
     navigate("/maintenance/CM/add");
   };

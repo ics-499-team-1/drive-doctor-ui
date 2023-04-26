@@ -23,9 +23,6 @@ const UpcomingMaintenance = ({ upcomingList, vehicleID }: Props) => {
   const { uMContext } = useContext(UMContext);
 
   /* Handlers */
-  const handleOilClick = () => {
-    console.log("Clicked Oil Change Button");
-  };
   const handleAddClick = () => {
     navigate("/maintenance/add");
   };
