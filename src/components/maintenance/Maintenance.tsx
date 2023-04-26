@@ -19,7 +19,7 @@ const Maintenance = () => {
     // CHECK THIS
     const config = {
       headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqc0BnbWFpbC5jb20iLCJpYXQiOjE2ODE5NTg0MTEsImV4cCI6MTY4MTk1OTg1MX0.n6pzrSJtDdN4I1AyFmfGNRQaqEDgGpsLl5eYRM2RpP0'
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqc0BnbWFpbC5jb20iLCJpYXQiOjE2ODI0Njg5MzQsImV4cCI6MTY4MjQ3MDM3NH0.W1yTbtMNF4dgX_BOXQXZdmRIOTNPBs2r-VxX7mXZu38'
       }
     };  
 
@@ -42,7 +42,7 @@ const Maintenance = () => {
     } else {
       axios
       .get<VehicleEntity>(
-        "http://localhost:8080/drive-doctor/v1/vehicles/" + vehicleContext.vehicle_id)
+        "http://localhost:8080/drive-doctor/v1/vehicles/" + vehicleContext.vehicle_id, config)
         .then( (response) => {
           setVehicle(response.data);
         })

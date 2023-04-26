@@ -39,6 +39,13 @@ const UMAdd = () => {
       ? (addUMD.time_interval = timeIntervalRef.current.value)
       : (addUMD.time_interval = "");
 
+          // CHECK THIS
+    const config = {
+      headers: {
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqc0BnbWFpbC5jb20iLCJpYXQiOjE2ODI0Njg5MzQsImV4cCI6MTY4MjQ3MDM3NH0.W1yTbtMNF4dgX_BOXQXZdmRIOTNPBs2r-VxX7mXZu38'
+      }
+    };  
+    
     axios.post(
       "http://localhost:8080/drive-doctor/v1/maintenance/upcoming-maintenance/vehicles/" +
         vehicleContext.vehicle_id,
