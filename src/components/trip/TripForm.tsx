@@ -10,7 +10,7 @@ import { CreateTrip } from "../../services/TripService";
 // todo: create effect to get vehicles for a given user id
 
 const TripForm = ({ firstFieldRef, onCancel, refreshPageData }: any) => {
-  const vehicles = useUserVehicles(203);
+  const vehicles = useUserVehicles(localStorage.getItem("user_id"));
   const [formData, setFormData] = useState<Trip>({
     name: "",
     vehicle_id: 0,

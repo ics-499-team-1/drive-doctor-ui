@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import authHeader from "../../models/auth/AuthHeader";
+import { GetToken } from "../../services/LocalStorageService";
 
 interface FormValues {
   [key: string]: string | undefined | boolean;
@@ -35,7 +36,7 @@ function AddVehiclePage() {
     try {
       await axios.post(
         `http://localhost:8080/drive-doctor/v1/vehicles`, formValues,
-        authHeader(localStorage.getItem('access_token'))
+        authHeader(GetToken())
       );
       console.log("Vehicle added successfully!");
     } catch (error) {

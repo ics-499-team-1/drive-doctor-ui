@@ -2,30 +2,21 @@ import { Button, SimpleGrid } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Vehicle from "../../models/vehicles/Vehicle";
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 import authHeader from "../../models/auth/AuthHeader";
 import useLoggedOutReroute from "../../hooks/useLoggedOutReroute";
 import VehicleCard from "./VehicleCard";
-
-// Define header
-const headers: AxiosRequestConfig["headers"] = {
-  "Content-Type": "application/json",
-  Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-};
+import { GetToken, GetUserId } from "../../services/LocalStorageService";
 
 function VehiclesPage() {
   useLoggedOutReroute();
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
 
   useEffect(() => {
-    console.log(
-      "authHeader: ",
-      authHeader(localStorage.getItem("access_token"))
-    );
     axios
       .get<Vehicle[]>(
-        "http://localhost:8080/drive-doctor/v1/vehicles",
-        authHeader(localStorage.getItem("access_token"))
+        `http://localhost:8080/drive-doctor/v1/users/${GetUserId()}/vehicles`,
+        authHeader(GetToken())
       )
       .then((response) => setVehicles(response.data));
   }, []);
