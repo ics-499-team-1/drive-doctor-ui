@@ -41,9 +41,7 @@ const CompletedMaintenance = ({ completedList }: Props) => {
     <>
       <div className="row">
         <p>Completed Maintenance</p>
-        <MaintenanceButton className="m-auto" onClick={handleOilClick}>
-          Oil Change
-        </MaintenanceButton>
+
         <CMList completedList={completedList} />
         <div
           className="btn-group"

@@ -3,6 +3,7 @@ import axios from "axios";
 import MaintenanceButton from "../MaintenanceButton";
 import { useNavigate } from "react-router-dom";
 import CMContext from "../../Contexts/CMContext";
+import authHeader from "../../../models/auth/AuthHeader";
 
 /**
  * Edits the item stored in CMContext and updates the db.
@@ -45,7 +46,8 @@ const CMEdit = () => {
     axios.patch(
       "http://localhost:8080/drive-doctor/v1/maintenance/completed-maintenance/" +
         cMContext.completed_maintenance_id,
-      cMContext
+      cMContext,
+      authHeader(localStorage.getItem('access_token'))
     );
     navigate("/maintenance/", { replace: true, state: { key: Math.random() } });
   };

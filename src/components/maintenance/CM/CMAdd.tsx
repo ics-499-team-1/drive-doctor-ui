@@ -4,6 +4,7 @@ import axios from "axios";
 import MaintenanceButton from "../MaintenanceButton";
 import CMDomain from "../../../models/maintenance/CMDomain";
 import VehicleContext from "../../Contexts/VehicleContext";
+import authHeader from "../../../models/auth/AuthHeader";
 
 /**
  * Adds a completed maintenance item to the db.
@@ -53,7 +54,8 @@ const AddUpcomingMaintenance = () => {
     axios.post(
       "http://localhost:8080/drive-doctor/v1/maintenance/completed-maintenance/vehicles/" +
         vehicleContext.vehicle_id,
-      addCMDomain
+      addCMDomain,
+      authHeader(localStorage.getItem('access_token'))
     );
     // back to Maintenance
     // the part in curly braces forces a rerender of maintenance so it calls GET again

@@ -57,9 +57,6 @@ const UpcomingMaintenance = ({ upcomingList, vehicleID }: Props) => {
     <>
       <div className="row">
         <p>Upcoming Maintenance</p>
-        <MaintenanceButton className="m-auto" onClick={handleOilClick}>
-          Oil Change
-        </MaintenanceButton>
         <UMList upcomingList={upcomingList} />
         <div
           className="btn-group"
