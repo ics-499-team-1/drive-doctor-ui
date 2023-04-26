@@ -3,8 +3,10 @@ import UpcomingMaintenance from "./UM/UpcomingMaintenance";
 import VehicleEntity from "./VehicleEntity";
 import axios from "axios";
 import CompletedMaintenance from "./CM/CompletedMaintenance";
-import VehicleContext from "./VehicleContext";
+import VehicleContext from "../Contexts/VehicleContext";
 import MaintenanceButton from "./MaintenanceButton";
+import authHeader from "../../models/auth/AuthHeader";
+import { useNavigate } from 'react-router-dom'
 
 /**
  * Base of the maintenance tree.
@@ -14,36 +16,40 @@ const Maintenance = () => {
   const { vehicleContext, setVehicle } = useContext(VehicleContext);
   /** States */
   const [vehicleList, setVehicleList] = useState<VehicleEntity[]>([]);
-  const [selectedIndex, setSelectedIndex] = useState(-1);  // is this neccesary? Could just use the index mapping
-
-    // CHECK THIS
-    const config = {
-      headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqc0BnbWFpbC5jb20iLCJpYXQiOjE2ODI0Njg5MzQsImV4cCI6MTY4MjQ3MDM3NH0.W1yTbtMNF4dgX_BOXQXZdmRIOTNPBs2r-VxX7mXZu38'
-      }
-    };  
+  const [selectedIndex, setSelectedIndex] = useState(-1); // is this neccesary? Could just use the index mapping
+  const navigate = useNavigate();
 
   /** Conditional call to the API for GET vehicles.
    * If the vehicleContext Entity has an ID of -1, then it is not yet set and needs to be selected
    * by the user, thus the vehicle list is called and displayed for selection.
    * If the vehicleContext is set, then Maintenance has been routed to by another component and
    * needs a refresh, thus the specific vehicle is called by ID and the values are refreshed.
-  */
+   */
   useEffect(() => {
     if (vehicleContext.vehicle_id === -1) {
-    axios
-      .get<VehicleEntity[]>(
-        "http://localhost:8080/drive-doctor/v1/vehicles", config
-      )
-      .then((response) => {
-        setVehicleList(response.data);
-      })
-      .catch((err) => console.log(err));
+      console.log(
+        "get access_token from local storage in maintenance",
+        localStorage.getItem("access_token")
+      );
+      axios
+        .get<VehicleEntity[]>(
+          `http://localhost:8080/drive-doctor/v1/users/${localStorage.getItem(
+            "user_id"
+          )}/vehicles`,
+          authHeader(localStorage.getItem("access_token"))
+        )
+        .then((response) => {
+          setVehicleList(response.data);
+        })
+        .catch((err) => console.log(err));
     } else {
       axios
-      .get<VehicleEntity>(
-        "http://localhost:8080/drive-doctor/v1/vehicles/" + vehicleContext.vehicle_id, config)
-        .then( (response) => {
+        .get<VehicleEntity>(
+          "http://localhost:8080/drive-doctor/v1/vehicles/" +
+            vehicleContext.vehicle_id,
+          authHeader(localStorage.getItem("access_token"))
+        )
+        .then((response) => {
           setVehicle(response.data);
         })
         .catch((err) => console.log(err));
@@ -52,8 +58,8 @@ const Maintenance = () => {
 
   /** Resets the vehicle entity so a new vehicle can be selected */
   const handleChange = () => {
-    setVehicle(new VehicleEntity(-1,[],[], -1))
-  }
+    setVehicle(new VehicleEntity(-1, [], [], -1));
+  };
 
   return (
     <>
@@ -78,7 +84,10 @@ const Maintenance = () => {
                   }
                 }}
               >
-              {vehicle.name} ({vehicle.make} {vehicle.model}) {vehicle.license_plate_number ? vehicle.license_plate_number : ""}
+                {vehicle.name} ({vehicle.make} {vehicle.model}){" "}
+                {vehicle.license_plate_number
+                  ? vehicle.license_plate_number
+                  : ""}
               </li>
             ))}
           </ul>
@@ -86,8 +95,13 @@ const Maintenance = () => {
       ) : (
         <div className="container text-center row align-items-start ">
           <div>
-            Vehicle: {vehicleContext.name} {vehicleContext.make} {vehicleContext.model} {vehicleContext.trim} Odometer: {vehicleContext.odometer}
-          <MaintenanceButton onClick={handleChange}>Select a Different Vehicle</MaintenanceButton></div>
+            Vehicle: {vehicleContext.name} {vehicleContext.make}{" "}
+            {vehicleContext.model} {vehicleContext.trim} Odometer:{" "}
+            {vehicleContext.odometer}
+            <MaintenanceButton onClick={handleChange}>
+              Select a Different Vehicle
+            </MaintenanceButton>
+          </div>
           <div className="col  m-2">
             <UpcomingMaintenance
               vehicleID={vehicleContext.vehicle_id}

@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import CMEntity from "./CMEntity";
+import CMEntity from "../../models/maintenance/CMEntity";
 
 /**
  * Used as a global context for CMEntities in the maintenance tree.

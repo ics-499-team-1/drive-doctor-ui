@@ -1,5 +1,5 @@
-import CMEntity from "./CM/CMEntity";
-import UMEntity from "./UM/UMEntity";
+import CMEntity from "../../models/maintenance/CMEntity";
+import UMEntity from "../../models/maintenance/UMEntity";
 
 /**
  * Used to store a vehicle Entity in a global context.

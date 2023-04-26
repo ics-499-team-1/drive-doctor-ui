@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { FormEvent, useContext, useRef } from "react";
 import axios from "axios";
 import MaintenanceButton from "../MaintenanceButton";
-import CMDomain from "./CMDomain";
-import VehicleContext from "../VehicleContext";
+import CMDomain from "../../../models/maintenance/CMDomain";
+import VehicleContext from "../../Contexts/VehicleContext";
 
 /**
  * Adds a completed maintenance item to the db.

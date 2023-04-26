@@ -1,9 +1,10 @@
-import CMEntity from "../CM/CMEntity";
+import CMEntity from "../../../models/maintenance/CMEntity";
 import { FormEvent, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import MaintenanceButton from "../MaintenanceButton";
-import UMContext from "./UMContext";
+import UMContext from "../../Contexts/UMContext";
+import authHeader from "../../../models/auth/AuthHeader";
 
 /**
  * This component converts upcoming maintenance items to completed maintenance items.
@@ -57,7 +58,8 @@ const ConvertUpcoming = () => {
     axios.post(
       "http://localhost:8080/drive-doctor/v1/maintenance/upcoming-maintenance/convert/" +
         maintenanceId,
-      cMD
+      cMD,
+      authHeader(localStorage.getItem('access_token'))
     );
     navigate("/maintenance/", { replace: true, state: { key: Math.random() } });
   };

@@ -2,7 +2,8 @@ import { FormEvent, useRef, useContext } from "react";
 import axios from "axios";
 import MaintenanceButton from "../MaintenanceButton";
 import { useNavigate } from "react-router-dom";
-import UMContext from "./UMContext";
+import UMContext from "../../Contexts/UMContext";
+import authHeader from "../../../models/auth/AuthHeader";
 
 /**
  * Edits the item stored in UMContext and updates the DB.
@@ -37,7 +38,8 @@ const UMEdit = () => {
     axios.patch(
       "http://localhost:8080/drive-doctor/v1/maintenance/upcoming-maintenance/" +
         uMContext.upcoming_maintenance_id,
-      uMContext
+      uMContext,
+      authHeader(localStorage.getItem('access_token'))
     );
     navigate("/maintenance/", { replace: true, state: { key: Math.random() } });
   };

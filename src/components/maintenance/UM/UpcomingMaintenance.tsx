@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import MaintenanceButton from "../MaintenanceButton";
-import UMEntity from "./UMEntity";
+import UMEntity from "../../../models/maintenance/UMEntity";
 import UMList from "./UMList";
-import UMContext from "./UMContext";
+import UMContext from "../../Contexts/UMContext";
 
 interface Props {
   upcomingList: UMEntity[];

@@ -2,8 +2,9 @@ import { useNavigate } from "react-router-dom";
 import { FormEvent, useContext, useRef } from "react";
 import axios from "axios";
 import MaintenanceButton from "../MaintenanceButton";
-import UMDomain from "./UMDomain";
-import VehicleContext from "../VehicleContext";
+import UMDomain from "../../../models/maintenance/UMDomain";
+import VehicleContext from "../../Contexts/VehicleContext";
+import authHeader from "../../../models/auth/AuthHeader";
 
 /**
  * Adds an upcomingMaintenance item to the db.
@@ -22,8 +23,7 @@ const UMAdd = () => {
   const timeIntervalRef = useRef<HTMLInputElement>(null);
 
   /* On submit, if the reference to the input element is not null, then it
-    replaces the property that was passed in. If it's null, the property is set to null
-    Except for name, which is required
+    replaces the property that was passed in. If it's null, the property is set to an empty String or -1.
     */
   const handleSubmitUpdate = (event: FormEvent) => {
     event.preventDefault();
@@ -38,18 +38,12 @@ const UMAdd = () => {
     timeIntervalRef.current !== null
       ? (addUMD.time_interval = timeIntervalRef.current.value)
       : (addUMD.time_interval = "");
-
-          // CHECK THIS
-    const config = {
-      headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqc0BnbWFpbC5jb20iLCJpYXQiOjE2ODI0Njg5MzQsImV4cCI6MTY4MjQ3MDM3NH0.W1yTbtMNF4dgX_BOXQXZdmRIOTNPBs2r-VxX7mXZu38'
-      }
-    };  
     
     axios.post(
       "http://localhost:8080/drive-doctor/v1/maintenance/upcoming-maintenance/vehicles/" +
         vehicleContext.vehicle_id,
-      addUMD
+      addUMD, 
+      authHeader(localStorage.getItem('access_token'))
     ).then( () =>  navigate("/maintenance/", { replace: true, state: { key: Math.random() } }));
     // back to Maintenance
     // the part in curly braces forces a rerender of maintenance so it calls GET again. Apparently this doesnt work lol.

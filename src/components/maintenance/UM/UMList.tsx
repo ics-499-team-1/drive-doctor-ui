@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
-import UMEntity from "./UMEntity";
-import UMContext from "./UMContext";
+import UMEntity from "../../../models/maintenance/UMEntity";
+import UMContext from "../../Contexts/UMContext";
 import { SimpleGrid } from "@chakra-ui/react";
-import VehicleContext from "../VehicleContext";
+import VehicleContext from "../../Contexts/VehicleContext";
 
 interface Props {
   upcomingList: UMEntity[];

@@ -1,7 +1,7 @@
 import MaintenanceButton from "../MaintenanceButton";
-import CMEntity from "./CMEntity";
+import CMEntity from "../../../models/maintenance/CMEntity";
 import CMList from "./CMList";
-import CMContext from "./CMContext";
+import CMContext from "../../Contexts/CMContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 

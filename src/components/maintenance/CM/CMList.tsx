@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
-import CMContext from "./CMContext";
-import CMEntity from "./CMEntity";
+import CMContext from "../../Contexts/CMContext";
+import CMEntity from "../../../models/maintenance/CMEntity";
 import axios from "axios";
 import { SimpleGrid } from "@chakra-ui/react";
 

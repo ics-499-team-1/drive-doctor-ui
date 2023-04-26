@@ -33,7 +33,9 @@ function Login() {
     )
     console.log("response from login authenticate: ", response)
     localStorage.setItem('access_token', response.data.access_token)
+    localStorage.setItem('user_id', response.data.user_id)
     console.log('get access_token from local storage', localStorage.getItem('access_token'))
+    console.log('user_id: ', localStorage.getItem('user_id'))
     if (response.status === 200) {
     navigate('/vehicles')
     }

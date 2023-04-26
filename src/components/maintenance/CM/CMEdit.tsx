@@ -2,7 +2,7 @@ import { useRef, useContext } from "react";
 import axios from "axios";
 import MaintenanceButton from "../MaintenanceButton";
 import { useNavigate } from "react-router-dom";
-import CMContext from "./CMContext";
+import CMContext from "../../Contexts/CMContext";
 
 /**
  * Edits the item stored in CMContext and updates the db.

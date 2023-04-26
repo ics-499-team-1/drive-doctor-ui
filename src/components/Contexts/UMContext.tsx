@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import UMEntity from "./UMEntity";
+import UMEntity from "../../models/maintenance/UMEntity";
 
 /**
  * This is the context that carries an UpcomingMaintenace entity
