@@ -7,6 +7,7 @@ import VehicleContext from "../Contexts/VehicleContext";
 import MaintenanceButton from "./MaintenanceButton";
 import authHeader from "../../models/auth/AuthHeader";
 import { useNavigate } from 'react-router-dom'
+import { Button, Card, SimpleGrid } from "@chakra-ui/react";
 
 /**
  * Base of the maintenance tree.
@@ -90,14 +91,26 @@ const Maintenance = () => {
         </>
       ) : (
         <div className="container text-center row align-items-start ">
-          <div>
-            Vehicle: {vehicleContext.name} {vehicleContext.make}{" "}
-            {vehicleContext.model} {vehicleContext.trim} Odometer:{" "}
-            {vehicleContext.odometer}
-            <MaintenanceButton onClick={handleChange}>
+          <Card borderRadius="10px" height="200px" className="bg-dark text-white ">
+      <div>
+        <div>
+        <h2>
+          {vehicleContext.name}
+          <MaintenanceButton onClick={handleChange}>
               Select a Different Vehicle
             </MaintenanceButton>
-          </div>
+        </h2>
+        </div>
+        <SimpleGrid columns={2}>
+          <p>
+            {vehicleContext.year} {vehicleContext.make} {vehicleContext.model} {vehicleContext.trim}
+          </p>
+          <p>Mileage: {vehicleContext.odometer}</p>
+          <p>License Plate: {vehicleContext.license_plate_number}</p>
+          <p>VIN: {vehicleContext.vin}</p>
+        </SimpleGrid>
+      </div>
+    </Card>
           <div className="col  m-2">
             <UpcomingMaintenance
               vehicleID={vehicleContext.vehicle_id}

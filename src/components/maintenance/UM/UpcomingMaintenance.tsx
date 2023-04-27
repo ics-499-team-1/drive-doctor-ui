@@ -51,8 +51,8 @@ const UpcomingMaintenance = ({ upcomingList, vehicleID }: Props) => {
 
   return (
     <>
-      <div className="row">
-        <p>Upcoming Maintenance</p>
+      <div className="row text-white bg-dark">
+        <h2>Upcoming Maintenance</h2>
         <UMList upcomingList={upcomingList} />
         <div
           className="btn-group"

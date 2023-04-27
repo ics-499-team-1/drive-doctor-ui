@@ -7,14 +7,8 @@ import authHeader from "../../models/auth/AuthHeader";
 
 type VehicleCardProps = {
   vehicleData: Vehicle;
-  onDelete: () => void;
+ // onDelete: () => void;
 };
-
-  // Define header
-  const headers: AxiosRequestConfig['headers'] = {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${localStorage.getItem('access_token')}`
-  }
 
 // Handles Vehicle Card Display on VehiclesPage
 function VehicleCard(props: VehicleCardProps) {
@@ -23,9 +17,9 @@ function VehicleCard(props: VehicleCardProps) {
   const handleDelete = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:8080/drive-doctor/v1/vehicles/${props.vehicleData.vehicle_id}`
+        `http://localhost:8080/drive-doctor/v1/vehicles/${props.vehicleData.vehicle_id}`, authHeader(localStorage.getItem('access_token'))
       );
-      props.onDelete();
+   //   props.onDelete();
       console.log("Vehicle deleted successfully!");
     } catch (error) {
       console.error(error);
@@ -59,11 +53,7 @@ function VehicleCard(props: VehicleCardProps) {
 }
 
 function VehiclesPage() {
-  const config = {
-    headers: {
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqc0BnbWFpbC5jb20iLCJpYXQiOjE2ODIxNzE0NDIsImV4cCI6MTY4MjE3Mjg4Mn0.hVesAPnsxCgm7tkvbuIvzt6QvKpqOLuMyv6KpyzxIFU'
-    }
-  };  
+
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
 
   useEffect(() => {
@@ -73,19 +63,20 @@ function VehiclesPage() {
       .then((response) => setVehicles(response.data));
   }, []);
 
-  const handleDelete = async (vehicleId: number) => {
-    try {
-      await axios.delete(
-        `http://localhost:8080/drive-doctor/v1/vehicles/${vehicleId}`
-      );
-      setVehicles((prevVehicles) =>
-        prevVehicles.filter((vehicle) => vehicle.vehicle_id !== vehicleId)
-      );
-      console.log("Vehicle deleted successfully!");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const handleDelete = async (vehicleId: number) => {
+  //   try {
+  //     await axios.delete(
+  //       `http://localhost:8080/drive-doctor/v1/vehicles/${vehicleId}`
+  //     );
+  //     setVehicles((prevVehicles) =>
+  //       prevVehicles.filter((vehicle) => vehicle.vehicle_id !== vehicleId)
+  //     );
+  //     console.log("Vehicle deleted successfully!");
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+  ;
 
   return (
     <>
@@ -95,7 +86,7 @@ function VehiclesPage() {
             <VehicleCard
               key={vehicle.vehicle_id}
               vehicleData={vehicle}
-              onDelete={() => handleDelete(vehicle.vehicle_id)}
+//              onDelete={() => handleDelete(vehicle.vehicle_id)}
             />
           ))}
         </SimpleGrid>

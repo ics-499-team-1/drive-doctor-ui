@@ -38,8 +38,8 @@ const CompletedMaintenance = ({ completedList }: Props) => {
 
   return (
     <>
-      <div className="row">
-        <p>Completed Maintenance</p>
+      <div className="row bg-dark text-white">
+        <h2>Completed Maintenance</h2>
 
         <CMList completedList={completedList} />
         <div
