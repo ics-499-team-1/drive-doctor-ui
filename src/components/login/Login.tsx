@@ -9,19 +9,39 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import axios from "axios";
-import { MouseEventHandler } from "react";
+import axios, { AxiosError } from "axios";
+import { useState } from "react";
+import { AuthenticationRequest } from "../../models/auth/AuthenticationRequest";
+import {useNavigate} from 'react-router-dom';
 
 function Login() {
-  async function handleButtonClick(user_id: number) {
+  const [authenticationRequest, setFormData] = useState<AuthenticationRequest>({
+    email: "",
+    password: "",
+  })
+  const navigate = useNavigate();
+  const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((v) => ({ ...v, [e.target.id]: e.target.value }));
+  };
+  
+  const onClick = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:8080/drive-doctor/v1/users/${user_id}`
-      );
-      return response;
-    } catch (error) {
-      console.error(error);
-      return "";
+    console.log(authenticationRequest)
+    const response = await axios.post(
+      `http://localhost:8080/drive-doctor/v1/auth/authenticate`,
+      authenticationRequest
+    )
+    console.log("response from login authenticate: ", response)
+    localStorage.setItem('access_token', response.data.access_token)
+    localStorage.setItem('user_id', response.data.user_id)
+    console.log('get access_token from local storage', localStorage.getItem('access_token'))
+    console.log('user_id: ', localStorage.getItem('user_id'))
+    if (response.status === 200) {
+    navigate('/vehicles')
+    }
+    return response;
+    } catch (e: any) {
+      console.error(e.response.data)
     }
   }
 
@@ -49,6 +69,8 @@ function Login() {
             placeholder="john.doe@email.com"
             _hover={{}}
             type="email"
+            id="email"
+            onChange={handleValueChange}
           ></Input>
         </FormControl>
         <FormControl isRequired>
@@ -60,6 +82,8 @@ function Login() {
             placeholder="password123"
             _hover={{}}
             type="password"
+            id="password"
+            onChange={handleValueChange}
           ></Input>
         </FormControl>
         <HStack w="full" justify="space-between">
@@ -70,7 +94,7 @@ function Login() {
           colorScheme="purple"
           w={["full", "auto"]}
           alignSelf="end"
-          onClick={(e: any) => handleButtonClick(1)}
+          onClick={(e: any) => onClick()}
         >
           Login
         </Button>

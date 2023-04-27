@@ -3,12 +3,20 @@ import { Outlet } from "react-router";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
+import { VehicleProvider } from "./components/Contexts/VehicleContext";
+import { CMProvider } from "./components/Contexts/CMContext";
+import { UMProvider } from "./components/Contexts/UMContext";
 import VehiclesPage from "./components/vehicles/VehiclesPage";
 
 function App() {
+
   return (
-    <Grid
-      templateAreas={`"header header"
+    <>
+      <VehicleProvider>
+        <UMProvider>
+        <CMProvider>
+        <Grid
+          templateAreas={`"header header"
                   "nav main"
                   "footer footer"`}
       gridTemplateRows={"50px 100vh 30px"}
@@ -27,11 +35,14 @@ function App() {
       <GridItem pl="2" area={"main"} >
         <Outlet />
       </GridItem>
-
       <GridItem pl="2" bg="#320064" area={"footer"} height={125}>
         <Footer />
       </GridItem>
-    </Grid>
+        </Grid>
+        </CMProvider>
+        </UMProvider>
+      </VehicleProvider>
+    </>
   );
 }
 
