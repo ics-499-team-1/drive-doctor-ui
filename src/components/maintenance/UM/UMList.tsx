@@ -17,6 +17,7 @@ const UMList = ({ upcomingList }: Props) => {
   const { vehicleContext } = useContext(VehicleContext);
 
   const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [listBGColor, setListBGColor] = useState("dark")
 
   function mileServiceDisplay(odometer: number, mileageInt: number) {
     if (mileageInt !== null) {
@@ -75,7 +76,8 @@ const UMList = ({ upcomingList }: Props) => {
                   setSelectedIndex(index);
                   setUMContext(UME);
                 }
-              }}
+              }
+            }
             >
               <SimpleGrid columns={2}>
                 <p>Name: {UME.name}</p>{" "}

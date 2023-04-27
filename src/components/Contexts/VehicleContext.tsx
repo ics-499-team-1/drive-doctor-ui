@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import VehicleEntity from "../maintenance/VehicleEntity";
+import VehicleEntity from "../../models/vehicles/VehicleEntity";
 
 /**
  * This is the context for the currently selected Vehicle.

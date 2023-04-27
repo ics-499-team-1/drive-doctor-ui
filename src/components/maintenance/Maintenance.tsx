@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import UpcomingMaintenance from "./UM/UpcomingMaintenance";
-import VehicleEntity from "./VehicleEntity";
+import VehicleEntity from "../../models/vehicles/VehicleEntity";
 import axios from "axios";
 import CompletedMaintenance from "./CM/CompletedMaintenance";
 import VehicleContext from "../Contexts/VehicleContext";
