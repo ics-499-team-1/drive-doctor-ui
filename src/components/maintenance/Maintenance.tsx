@@ -27,10 +27,6 @@ const Maintenance = () => {
    */
   useEffect(() => {
     if (vehicleContext.vehicle_id === -1) {
-      console.log(
-        "get access_token from local storage in maintenance",
-        localStorage.getItem("access_token")
-      );
       axios
         .get<VehicleEntity[]>(
           `http://localhost:8080/drive-doctor/v1/users/${localStorage.getItem(

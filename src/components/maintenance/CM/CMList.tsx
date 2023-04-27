@@ -19,7 +19,7 @@ const CMList = ({ completedList }: Props) => {
 
   return (
     <>
-      <ul className={"list-group m-2 "}>
+            <ul style={{ maxHeight: "800px" }} className={"overflow-auto list-group m-2"}>
         {completedList.map((CME, index) => (
           <li
             className={

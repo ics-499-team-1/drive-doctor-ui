@@ -36,7 +36,6 @@ const UpcomingMaintenance = ({ upcomingList, vehicleID }: Props) => {
   const handleDeleteClick = () => {
     if (uMContext) {
       navigate("/maintenance/delete");
-      // FIX HOW TO REFRESH ON DELETE
     } else {
       console.log("upcomingMContext is null or undefined");
     }
