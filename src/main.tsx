@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/home/Home";
 import Maintenance from "./components/maintenance/Maintenance";
-import AddVehicle from "./components/vehicles/AddVehiclePage";
+import AddVehiclePage from "./components/vehicles/AddVehiclePage";
 import VehiclesPage from "./components/vehicles/VehiclesPage";
 import UMAdd from "./components/maintenance/UM/UMAdd";
 import Trip from "./components/trip/Trip";
@@ -73,7 +73,7 @@ const router = createBrowserRouter([
       },
       {
         path: "vehicles/add",
-        element: <AddVehicle />,
+        element: <AddVehiclePage />,
       },
     ],
   },

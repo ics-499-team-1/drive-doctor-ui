@@ -2,39 +2,49 @@ import { Button, Card, Container, SimpleGrid } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Vehicle from "./Vehicle";
-import axios, { AxiosRequestConfig} from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import authHeader from "../../models/auth/AuthHeader";
+import { useNavigate } from "react-router-dom";
+import MaintenanceButton from "../maintenance/MaintenanceButton";
 
 type VehicleCardProps = {
   vehicleData: Vehicle;
- // onDelete: () => void;
 };
 
 // Handles Vehicle Card Display on VehiclesPage
 function VehicleCard(props: VehicleCardProps) {
+  const [onHover, setOnHover] = useState("dark");
+  const navigate = useNavigate();
 
   // Handles vehicle deletion
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(
-        `http://localhost:8080/drive-doctor/v1/vehicles/${props.vehicleData.vehicle_id}`, authHeader(localStorage.getItem('access_token'))
-      );
-   //   props.onDelete();
+      const response = await axios
+        .delete(
+          `http://localhost:8080/drive-doctor/v1/vehicles/${props.vehicleData.vehicle_id}`,
+          authHeader(localStorage.getItem("access_token"))
+        )
+        .then(() => navigate(0));
+      //   props.onDelete();
       console.log("Vehicle deleted successfully!");
     } catch (error) {
       console.error(error);
     }
   };
-
   const { name, year, make, model, trim, odometer, license_plate, vin } =
     props.vehicleData;
 
   return (
-    <Card borderRadius="10px" height="200px" bg="#0">
+    <Card borderRadius="10px" className=" bg-dark text-white" height="200px">
       <div>
         <h2>
           {name}
-          <Button className="btn" bg="#0" onClick={handleDelete}>
+          <Button
+            className={`btn bg-${onHover} text-white`}
+            onClick={handleDelete}
+            onMouseEnter={() => setOnHover("danger")}
+            onMouseLeave={() => setOnHover("dark")}
+          >
             Delete
           </Button>
         </h2>
@@ -53,46 +63,33 @@ function VehicleCard(props: VehicleCardProps) {
 }
 
 function VehiclesPage() {
-
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('authHeader: ', authHeader(localStorage.getItem('access_token')))
     axios
-      .get<Vehicle[]>("http://localhost:8080/drive-doctor/v1/vehicles", authHeader(localStorage.getItem('access_token')))
+      .get<Vehicle[]>(
+        `http://localhost:8080/drive-doctor/v1/users/${localStorage.getItem(
+          "user_id"
+        )}/vehicles`,
+        authHeader(localStorage.getItem("access_token"))
+      )
       .then((response) => setVehicles(response.data));
   }, []);
-
-  // const handleDelete = async (vehicleId: number) => {
-  //   try {
-  //     await axios.delete(
-  //       `http://localhost:8080/drive-doctor/v1/vehicles/${vehicleId}`
-  //     );
-  //     setVehicles((prevVehicles) =>
-  //       prevVehicles.filter((vehicle) => vehicle.vehicle_id !== vehicleId)
-  //     );
-  //     console.log("Vehicle deleted successfully!");
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
-  ;
-
   return (
     <>
       <SimpleGrid columns={1}>
         <SimpleGrid columns={2} spacing={10} margin="10px">
           {vehicles.map((vehicle) => (
-            <VehicleCard
-              key={vehicle.vehicle_id}
-              vehicleData={vehicle}
-//              onDelete={() => handleDelete(vehicle.vehicle_id)}
-            />
+            <VehicleCard key={vehicle.vehicle_id} vehicleData={vehicle} />
           ))}
         </SimpleGrid>
-        <Button className="addBtn">
-          <Link to="/vehicles/add">Add</Link>
-        </Button>
+        <MaintenanceButton
+        className="bg-dark m-2"
+        onClick={() => navigate("/vehicles/add")}
+      >
+        Add Vehicle
+      </MaintenanceButton>
       </SimpleGrid>
     </>
   );
