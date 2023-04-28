@@ -61,7 +61,12 @@ const UpcomingMaintenance = ({ upcomingList, vehicleID }: Props) => {
           role="group"
           aria-label="Upcoming-Maintenance-btn-Group"
         >
-          <MaintenanceButton className="mx-1" text="primary" outline="primary" onClick={handleAddClick}>
+          <MaintenanceButton
+            className="mx-1"
+            text="primary"
+            outline="primary"
+            onClick={handleAddClick}
+          >
             Add
           </MaintenanceButton>
           <MaintenanceButton

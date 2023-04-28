@@ -10,7 +10,7 @@ interface Props {
 }
 /**
  * This component renders the list and button in the completed Maintenance column.
- * @param param0 CMEntity list passed in by maintenance.
+ * @param completedList CMEntity list passed in by maintenance.
  * @returns
  */
 const CompletedMaintenance = ({ completedList }: Props) => {
@@ -47,19 +47,24 @@ const CompletedMaintenance = ({ completedList }: Props) => {
           role="group"
           aria-label="Upcoming-Maintenance-btn-Group"
         >
-          <MaintenanceButton className="mx-1" onClick={handleAddClick}>
+          <MaintenanceButton
+            className="mx-1"
+            text="primary"
+            outline="primary"
+            onClick={handleAddClick}
+          >
             Add
           </MaintenanceButton>
           <MaintenanceButton
-            className="mx-1"
-            color="warning"
+            text="warning"
+            outline="warning"
             onClick={handleEditClick}
           >
             Edit
           </MaintenanceButton>
           <MaintenanceButton
-            className="mx-1"
-            color="danger"
+            text="danger"
+            outline="danger"
             onClick={handleDeleteClick}
           >
             Delete
