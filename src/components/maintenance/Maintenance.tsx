@@ -6,7 +6,7 @@ import CompletedMaintenance from "./CM/CompletedMaintenance";
 import VehicleContext from "../Contexts/VehicleContext";
 import MaintenanceButton from "./MaintenanceButton";
 import authHeader from "../../models/auth/AuthHeader";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import { Button, Card, SimpleGrid } from "@chakra-ui/react";
 
 /**
@@ -91,29 +91,33 @@ const Maintenance = () => {
         </>
       ) : (
         <div className="container text-center row align-items-start ">
-          <Card borderRadius="10px" height="200px" className="bg-dark text-white ">
-      <div>
-        <div>
-        <h2>
-          {vehicleContext.name}
-          <MaintenanceButton onClick={handleChange}>
-              Select a Different Vehicle
-            </MaintenanceButton>
-        </h2>
-        </div>
-        <SimpleGrid columns={2}>
-          <p>
-            {vehicleContext.year} {vehicleContext.make} {vehicleContext.model} {vehicleContext.trim}
-          </p>
-          <p>Mileage: {vehicleContext.odometer}</p>
-          <p>License Plate: {vehicleContext.license_plate_number}</p>
-          <p>VIN: {vehicleContext.vin}</p>
-        </SimpleGrid>
-      </div>
-    </Card>
+          <Card
+            borderRadius="10px"
+            height="200px"
+            className="bg-dark text-white "
+          >
+            <div>
+              <div>
+                <h2>
+                  {vehicleContext.name}
+                  <MaintenanceButton onClick={handleChange}>
+                    Select a Different Vehicle
+                  </MaintenanceButton>
+                </h2>
+              </div>
+              <SimpleGrid columns={2}>
+                <p>
+                  {vehicleContext.year} {vehicleContext.make}{" "}
+                  {vehicleContext.model} {vehicleContext.trim}
+                </p>
+                <p>Mileage: {vehicleContext.odometer}</p>
+                <p>License Plate: {vehicleContext.license_plate_number}</p>
+                <p>VIN: {vehicleContext.vin}</p>
+              </SimpleGrid>
+            </div>
+          </Card>
           <div className="col  m-2">
             <UpcomingMaintenance
-              vehicleID={vehicleContext.vehicle_id}
               upcomingList={vehicleContext.upcoming_maintenance}
             />
           </div>

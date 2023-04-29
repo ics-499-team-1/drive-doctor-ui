@@ -8,16 +8,14 @@ import { Button } from "@chakra-ui/react";
 
 interface Props {
   upcomingList: UMEntity[];
-  vehicleID: number;
 }
 /**
  * This handles the UpcomingMaintenance (UM) buttons and logic.
  * Passes a list of UMEntity to UMList
  * @param upcomingList - list of UMEntity
- * @param vehicleID - a vehicleID
  * @returns
  */
-const UpcomingMaintenance = ({ upcomingList, vehicleID }: Props) => {
+const UpcomingMaintenance = ({ upcomingList }: Props) => {
   const navigate = useNavigate();
 
   /*Context for Upcoming Maintenance*/

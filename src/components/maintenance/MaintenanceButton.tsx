@@ -4,7 +4,7 @@ interface Props {
   children: string;
   className?: string;
   outline?: string;
-  text?: string,
+  text?: string;
   color?:
     | "primary"
     | "secondary"
@@ -21,25 +21,35 @@ interface Props {
 
 /**
  * It's a button. It's used in the maintenance stuff.
+ * Note to self: The background color of the button on mouse
+ * enter is whatever the outline color is.
  */
 const MaintenanceButton = ({
   children,
   className = "mx-1",
   color = "dark",
   outline = "color",
-  text="light",
+  text = "light",
   onClick,
   onMouseEnter,
   onMouseLeave,
 }: Props) => {
-  const [buttonText, setButtonText] =useState(text);
+  const [buttonText, setButtonText] = useState(text);
 
   return (
     <button
-      className={className + " btn btn-" + color + " btn-outline-"+ outline + " text-" + buttonText}
+      className={
+        className +
+        " btn btn-" +
+        color +
+        " btn-outline-" +
+        outline +
+        " text-" +
+        buttonText
+      }
       onClick={onClick}
       onMouseEnter={() => setButtonText("white")}
-      onMouseLeave={() => setButtonText('text')}
+      onMouseLeave={() => setButtonText("text")}
     >
       {children}
     </button>
