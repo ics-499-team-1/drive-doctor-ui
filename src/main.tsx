@@ -17,6 +17,7 @@ import CMDelete from "./components/maintenance/CM/CMDelete";
 import CMAdd from "./components/maintenance/CM/CMAdd";
 import CMEdit from "./components/maintenance/CM/CMEdit";
 import Login from "./components/login/Login";
+import CreateUserPage from "./components/login/create-user/CreateUserPage";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
         path: "vehicles/add",
         element: <AddVehiclePage />,
       },
+      {
+        path: "create-user",
+        element: <CreateUserPage/>,
+      }
     ],
   },
 ]);

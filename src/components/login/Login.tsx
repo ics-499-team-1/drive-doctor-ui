@@ -13,6 +13,7 @@ import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { AuthenticationRequest } from "../../models/auth/AuthenticationRequest";
 import {useNavigate} from 'react-router-dom';
+import CreateUserButton from "./CreateUserButton";
 
 function Login() {
   const navigate = useNavigate();
@@ -50,7 +51,6 @@ function Login() {
       console.error(e.response.data)
     }
   }
-
   return (
     <Box
       w={["full", "md"]}
@@ -95,15 +95,19 @@ function Login() {
         <HStack w="full" justify="space-between">
           {/* add remember and forgot password option here */}
         </HStack>
-        <Button
-          rounded="none"
-          colorScheme="purple"
-          w={["full", "auto"]}
-          alignSelf="end"
-          onClick={(e: any) => onClick()}
-        >
-          Login
-        </Button>
+        <HStack alignSelf="end">
+          <CreateUserButton/>
+
+          <Button
+            rounded="none"
+            colorScheme="purple"
+            w={["full", "auto"]}
+            alignSelf="end"
+            onClick={(e: any) => onClick()}
+          >
+            Login
+          </Button>
+        </HStack>
       </VStack>
     </Box>
   );
