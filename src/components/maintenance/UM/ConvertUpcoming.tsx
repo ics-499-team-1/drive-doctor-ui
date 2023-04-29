@@ -5,6 +5,7 @@ import axios from "axios";
 import MaintenanceButton from "../MaintenanceButton";
 import UMContext from "../../Contexts/UMContext";
 import authHeader from "../../../models/auth/AuthHeader";
+import { GetToken } from "../../../services/LocalStorageService";
 
 /**
  * This component converts upcoming maintenance items to completed maintenance items.
@@ -59,7 +60,7 @@ const ConvertUpcoming = () => {
       "http://localhost:8080/drive-doctor/v1/maintenance/upcoming-maintenance/convert/" +
         maintenanceId,
       cMD,
-      authHeader(localStorage.getItem('access_token'))
+      authHeader(GetToken())
     );
     navigate("/maintenance/", { replace: true, state: { key: Math.random() } });
   };

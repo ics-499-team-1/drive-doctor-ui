@@ -6,6 +6,7 @@ import UMDomain from "../../../models/maintenance/UMDomain";
 import VehicleContext from "../../Contexts/VehicleContext";
 import authHeader from "../../../models/auth/AuthHeader";
 import checkLogin from "../../../hooks/checkLogin";
+import { GetToken } from "../../../services/LocalStorageService";
 
 /**
  * Adds an upcomingMaintenance item to the db.
@@ -46,7 +47,7 @@ const UMAdd = () => {
       "http://localhost:8080/drive-doctor/v1/maintenance/upcoming-maintenance/vehicles/" +
         vehicleContext.vehicle_id,
       addUMD, 
-      authHeader(localStorage.getItem('access_token'))
+      authHeader(GetToken())
     ).then( () =>  navigate("/maintenance/", { replace: true, state: { key: Math.random() } }));
     // back to Maintenance
     // the part in curly braces forces a rerender of maintenance so it calls GET again. Apparently this doesnt work lol.

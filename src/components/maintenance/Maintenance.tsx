@@ -9,6 +9,7 @@ import authHeader from "../../models/auth/AuthHeader";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, SimpleGrid } from "@chakra-ui/react";
 import checkLogin from "../../hooks/checkLogin"
+import { GetToken } from "../../services/LocalStorageService";
 
 /**
  * Base of the maintenance tree.
@@ -36,7 +37,7 @@ const Maintenance = () => {
           `http://localhost:8080/drive-doctor/v1/users/${localStorage.getItem(
             "user_id"
           )}/vehicles`,
-          authHeader(localStorage.getItem("access_token"))
+          authHeader(GetToken())
         )
         .then((response) => {
           setVehicleList(response.data);
@@ -47,7 +48,7 @@ const Maintenance = () => {
         .get<VehicleEntity>(
           "http://localhost:8080/drive-doctor/v1/vehicles/" +
             vehicleContext.vehicle_id,
-          authHeader(localStorage.getItem("access_token"))
+          authHeader(GetToken())
         )
         .then((response) => {
           setVehicle(response.data);

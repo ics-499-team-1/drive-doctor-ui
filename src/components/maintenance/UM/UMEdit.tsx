@@ -4,6 +4,7 @@ import MaintenanceButton from "../MaintenanceButton";
 import { useNavigate } from "react-router-dom";
 import UMContext from "../../Contexts/UMContext";
 import authHeader from "../../../models/auth/AuthHeader";
+import { GetToken } from "../../../services/LocalStorageService";
 
 /**
  * Edits the item stored in UMContext and updates the DB.
@@ -39,7 +40,7 @@ const UMEdit = () => {
       "http://localhost:8080/drive-doctor/v1/maintenance/upcoming-maintenance/" +
         uMContext.upcoming_maintenance_id,
       uMContext,
-      authHeader(localStorage.getItem('access_token'))
+      authHeader(GetToken())
     );
     navigate("/maintenance/", { replace: true, state: { key: Math.random() } });
   };

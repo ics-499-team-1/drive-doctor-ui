@@ -1,11 +1,5 @@
-export const GetUserId = (): string => {
-    const userId = localStorage.getItem("user_id")
-    
-    if (userId === null) {
-        return "0"
-    }
-
-    return userId
+export const GetUserId = (): string | null => {
+    return localStorage.getItem("user_id")
 }
 
 export const GetToken = (): string | null => {
