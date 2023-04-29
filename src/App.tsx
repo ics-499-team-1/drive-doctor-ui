@@ -6,8 +6,6 @@ import Navbar from "./components/Navbar";
 import { VehicleProvider } from "./components/Contexts/VehicleContext";
 import { CMProvider } from "./components/Contexts/CMContext";
 import { UMProvider } from "./components/Contexts/UMContext";
-import { useEffect, useState } from "react";
-import { GetToken } from "./services/LocalStorageService";
 
 function App() {
   return (
