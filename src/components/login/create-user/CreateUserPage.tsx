@@ -7,10 +7,10 @@ import {
   Input,
   Text,
   VStack,
+  HStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import axios from "axios";
-
 
 function CreateUserPage() {
   const [formData, setFormData] = useState({
@@ -42,7 +42,6 @@ function CreateUserPage() {
     }
   };
 
-
   return (
     <Box
       w={["full", "md"]}
@@ -58,7 +57,6 @@ function CreateUserPage() {
           <Heading>Create User</Heading>
           <Text>Enter your information to create an account</Text>
         </VStack>
-        <form onSubmit={handleSubmit}>
           <FormControl isRequired>
             <FormLabel>First Name</FormLabel>
             <Input
@@ -111,16 +109,17 @@ function CreateUserPage() {
               onChange={handleValueChange}
             ></Input>
           </FormControl>
+
           <Button
             type="submit"
             rounded="none"
             colorScheme="purple"
             w={["full", "auto"]}
             alignSelf="end"
+            onClick={handleSubmit}
           >
             Create User
           </Button>
-        </form>
       </VStack>
     </Box>
   );
