@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import authHeader from "../../models/auth/AuthHeader";
-import { GetToken } from "../../services/LocalStorageService";
+import { GetToken, GetUserId } from "../../services/LocalStorageService";
 import { useNavigate } from "react-router-dom";
 import checkLogin from "../../hooks/checkLogin";
 
@@ -30,7 +30,7 @@ function AddVehiclePage() {
     license_plate: "",
     vin: "",
     deactivated: false,
-    user_id: localStorage.getItem("user_id"),
+    user_id: GetUserId()
   });
 
   const navigate = useNavigate();
@@ -38,11 +38,6 @@ function AddVehiclePage() {
   checkLogin();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    console.log(
-      `in vehicle handle submit. user_id: ${localStorage.getItem(
-        "user_id"
-      )} form values: ${formValues}`
-    );
     event.preventDefault();
     try {
       await axios
