@@ -9,24 +9,23 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import axios, { AxiosError } from "axios";
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useState } from "react";
 import { AuthenticationRequest } from "../../models/auth/AuthenticationRequest";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (localStorage.getItem("user_id") != null) {
-      navigate("/home")
-    }
-  })
-
+  const [rerender, setRerender] = useState(false);
+  if (localStorage.getItem("logout") === "true") {
+    localStorage.setItem("logout", "false");
+    setRerender(!rerender);
+  }
   const [authenticationRequest, setFormData] = useState<AuthenticationRequest>({
     email: "",
     password: "",
   });
+
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((v) => ({ ...v, [e.target.id]: e.target.value }));
   };
@@ -45,6 +44,7 @@ function Login() {
         "get access_token from local storage",
         localStorage.getItem("access_token")
       );
+      console.log("user_id: ", localStorage.getItem("user_id"));
       if (response.status === 200) {
         navigate("/vehicles");
       }

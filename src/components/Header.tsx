@@ -1,12 +1,17 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-function Header() {
-  const navigate = useNavigate()
+type Props = {
+  onNavChange: (setNav: boolean) => void;
+};
+
+function Header(props: Props) {
+  const navigate = useNavigate();
 
   const onClick = () => {
     localStorage.clear();
-    navigate("/login")
+    props.onNavChange(false);
+    navigate("/login");
   };
 
   return (

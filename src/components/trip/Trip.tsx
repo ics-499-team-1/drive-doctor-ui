@@ -1,10 +1,11 @@
 import { GridItem } from "@chakra-ui/layout";
-import useLoggedOutReroute from "../../hooks/useLoggedOutReroute";
+import checkLogin from "../../hooks/checkLogin";
 import TripGrid from "./TripsGrid";
 
 const Trip = () => {
-  useLoggedOutReroute()
 
+  checkLogin();
+  
   return (
     <GridItem>
       <TripGrid />

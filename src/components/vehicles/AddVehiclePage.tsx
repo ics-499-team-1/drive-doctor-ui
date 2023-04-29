@@ -2,9 +2,11 @@ import axios from "axios";
 import { useState } from "react";
 import authHeader from "../../models/auth/AuthHeader";
 import { GetToken } from "../../services/LocalStorageService";
+import { useNavigate } from "react-router-dom";
+import checkLogin from "../../hooks/checkLogin";
 
 interface FormValues {
-  [key: string]: string | undefined | boolean;
+  [key: string]: string | undefined | boolean | null;
   name: string;
   year: string;
   make: string;
@@ -14,7 +16,7 @@ interface FormValues {
   license_plate?: string;
   vin?: string;
   deactivated: boolean;
-  user_id: string;
+  user_id: string | null;
 }
 
 function AddVehiclePage() {
@@ -25,20 +27,32 @@ function AddVehiclePage() {
     model: "",
     trim: "",
     odometer: "",
-    license_plate: undefined,
-    vin: undefined,
+    license_plate: "",
+    vin: "",
     deactivated: false,
-    user_id: "",
+    user_id: localStorage.getItem("user_id"),
   });
 
+  const navigate = useNavigate();
+  // check login
+  checkLogin();
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    console.log(
+      `in vehicle handle submit. user_id: ${localStorage.getItem(
+        "user_id"
+      )} form values: ${formValues}`
+    );
     event.preventDefault();
     try {
-      await axios.post(
-        `http://localhost:8080/drive-doctor/v1/vehicles`, formValues,
-        authHeader(GetToken())
-      );
-      console.log("Vehicle added successfully!");
+      await axios
+        .post(
+          `http://localhost:8080/drive-doctor/v1/vehicles`,
+          formValues,
+          authHeader(GetToken())
+        )
+        .then(() => console.log("Vehicle added successfully!"))
+        .then(() => navigate("/vehicles"));
     } catch (error) {
       console.error(error);
     }
@@ -62,7 +76,6 @@ function AddVehiclePage() {
       type: "text",
     },
     { placeholder: "VIN # (Optional)", id: "vin", type: "text" },
-    { placeholder: "User ID #", id: "user_id", type: "number" },
   ];
 
   return (
