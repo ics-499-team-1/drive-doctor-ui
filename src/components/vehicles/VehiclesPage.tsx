@@ -19,8 +19,6 @@ function VehicleCard(props: VehicleCardProps) {
   const [onHover, setOnHover] = useState("dark");
   // used for navigation
   const navigate = useNavigate();
-  // check if logged in
-  checkLogin();
 
   // Handles vehicle deletion
   const handleDelete = async () => {
@@ -72,6 +70,9 @@ function VehiclesPage() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const navigate = useNavigate();
 
+   // check if logged in
+   checkLogin();
+   
   useEffect(() => {
     axios
       .get<Vehicle[]>(

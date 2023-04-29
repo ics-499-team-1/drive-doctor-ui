@@ -1,6 +1,5 @@
 import { VStack, Text, Box, StackDivider, LinkBox } from "@chakra-ui/layout";
 import { Link } from "react-router-dom";
-
 function Navbar() {
   return (
     <VStack divider={<StackDivider borderColor="#77" />}>

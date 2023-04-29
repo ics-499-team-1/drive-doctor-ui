@@ -11,22 +11,28 @@ import { useEffect, useState } from "react";
 function App() {
   const [showNav, setShowNav] = useState(false);
   const navigate = useNavigate();
+  console.log(localStorage.getItem("access_token"));
 
   useEffect(() => {
-    // This code runs only once, when the component mounts
-    localStorage.setItem("access_token", "");
+    // This code runs when the App component mounts.
+    // We check to see if it was null, which means nothing was loaded
+    // in local storage. If null, we set it to ""
+    if(localStorage.getItem("access_token") === null) {
+      localStorage.setItem("access_token", ""); }
   }, []);
 
   // access token needs to be set to "" on logout.
   useEffect(() => {
-    console.log(localStorage.getItem("access_token") === "");
     localStorage.getItem("access_token") === ""
       ? () => {
           setShowNav(false);
-          navigate("/login");
         }
       : setShowNav(true);
   });
+
+  const handleNavChange = (setNav: boolean) => {
+    setShowNav(setNav);
+  }
 
   return (
     <>
@@ -45,7 +51,7 @@ function App() {
               fontWeight="bold"
             >
               <GridItem pl="2" bg="#320064" area={"header"}>
-                <Header />
+                <Header onNavChange={handleNavChange}></Header>
               </GridItem>
               {showNav && (
                 <GridItem pl="2" area={"nav"}>
