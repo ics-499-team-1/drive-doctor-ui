@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { GetToken } from '../services/LocalStorageService';
 
 function checkLogin() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (localStorage.getItem("access_token") === "") {
+        if (GetToken() === null) {
             navigate("/login")
         }
     })

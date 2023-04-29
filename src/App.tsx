@@ -7,23 +7,13 @@ import { VehicleProvider } from "./components/Contexts/VehicleContext";
 import { CMProvider } from "./components/Contexts/CMContext";
 import { UMProvider } from "./components/Contexts/UMContext";
 import { useEffect, useState } from "react";
+import { GetToken } from "./services/LocalStorageService";
 
 function App() {
   const [showNav, setShowNav] = useState(false);
-  const navigate = useNavigate();
-  console.log(localStorage.getItem("access_token"));
 
   useEffect(() => {
-    // This code runs when the App component mounts.
-    // We check to see if it was null, which means nothing was loaded
-    // in local storage. If null, we set it to ""
-    if(localStorage.getItem("access_token") === null) {
-      localStorage.setItem("access_token", ""); }
-  }, []);
-
-  // access token needs to be set to "" on logout.
-  useEffect(() => {
-    localStorage.getItem("access_token") === ""
+    GetToken() === null
       ? () => {
           setShowNav(false);
         }
@@ -32,7 +22,7 @@ function App() {
 
   const handleNavChange = (setNav: boolean) => {
     setShowNav(setNav);
-  }
+  };
 
   return (
     <>

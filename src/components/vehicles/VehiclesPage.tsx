@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Vehicle from "../../models/vehicles/Vehicle";
 import axios from "axios";
 import authHeader from "../../models/auth/AuthHeader";
-import useLoggedOutReroute from "../../hooks/useLoggedOutReroute";
+import useLoggedOutReroute from "../../hooks/useLoggedInReroute";
 import { GetToken, GetUserId } from "../../services/LocalStorageService";
 import { useNavigate } from "react-router-dom";
 import MaintenanceButton from "../maintenance/MaintenanceButton";

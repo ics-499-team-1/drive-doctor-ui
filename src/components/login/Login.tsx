@@ -13,17 +13,22 @@ import axios from "axios";
 import { useState } from "react";
 import { AuthenticationRequest } from "../../models/auth/AuthenticationRequest";
 import { useNavigate } from "react-router-dom";
+import useLoggedInReroute from "../../hooks/useLoggedInReroute";
 
 function Login() {
   const navigate = useNavigate();
   const [rerender, setRerender] = useState(false);
+
   if (localStorage.getItem("logout") === "true") {
     localStorage.setItem("logout", "false");
     setRerender(!rerender);
   }
+
+  useLoggedInReroute()
+
   const [authenticationRequest, setFormData] = useState<AuthenticationRequest>({
     email: "",
-    password: "",
+    password: ""
   });
 
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -8,12 +8,6 @@ export const GetUserId = (): string => {
     return userId
 }
 
-export const GetToken = (): string => {
-    const token = localStorage.getItem("access_token")
-    
-    if (token === null) {
-        return ""
-    }
-
-    return token
+export const GetToken = (): string | null => {
+    return localStorage.getItem("access_token")
 }
