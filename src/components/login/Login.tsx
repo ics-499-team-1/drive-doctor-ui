@@ -15,11 +15,17 @@ import { AuthenticationRequest } from "../../models/auth/AuthenticationRequest";
 import {useNavigate} from 'react-router-dom';
 
 function Login() {
+  const navigate = useNavigate();
+  const [rerender, setRerender] = useState(false);
+  if (localStorage.getItem("logout") === "true") {
+    localStorage.setItem("logout", "false");
+    setRerender(!rerender)
+  }
   const [authenticationRequest, setFormData] = useState<AuthenticationRequest>({
     email: "",
     password: "",
   })
-  const navigate = useNavigate();
+
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((v) => ({ ...v, [e.target.id]: e.target.value }));
   };

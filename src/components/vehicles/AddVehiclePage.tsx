@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import authHeader from "../../models/auth/AuthHeader";
 import { useNavigate } from 'react-router-dom';
+import checkLogin from "../../hooks/checkLogin";
 
 interface FormValues {
   [key: string]: string | undefined | boolean | null;
@@ -32,6 +33,8 @@ function AddVehiclePage() {
   });
 
   const navigate = useNavigate();
+  // check login
+  checkLogin();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     console.log(`in vehicle handle submit. user_id: ${localStorage.getItem("user_id")} form values: ${formValues}`)

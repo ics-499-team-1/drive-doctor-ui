@@ -5,6 +5,7 @@ import MaintenanceButton from "../MaintenanceButton";
 import CMDomain from "../../../models/maintenance/CMDomain";
 import VehicleContext from "../../Contexts/VehicleContext";
 import authHeader from "../../../models/auth/AuthHeader";
+import checkLogin from "../../../hooks/checkLogin";
 
 /**
  * Adds a completed maintenance item to the db.
@@ -13,6 +14,8 @@ import authHeader from "../../../models/auth/AuthHeader";
 const AddUpcomingMaintenance = () => {
   const navigate = useNavigate();
 
+  checkLogin();
+  
   /** Context */
   const { vehicleContext } = useContext(VehicleContext);
 

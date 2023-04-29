@@ -6,8 +6,9 @@ import CompletedMaintenance from "./CM/CompletedMaintenance";
 import VehicleContext from "../Contexts/VehicleContext";
 import MaintenanceButton from "./MaintenanceButton";
 import authHeader from "../../models/auth/AuthHeader";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import { Button, Card, SimpleGrid } from "@chakra-ui/react";
+import checkLogin from "../../hooks/checkLogin"
 
 /**
  * Base of the maintenance tree.
@@ -19,6 +20,8 @@ const Maintenance = () => {
   const [vehicleList, setVehicleList] = useState<VehicleEntity[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(-1); // is this neccesary? Could just use the index mapping
   const navigate = useNavigate();
+
+  checkLogin();
 
   /** Conditional call to the API for GET vehicles.
    * If the vehicleContext Entity has an ID of -1, then it is not yet set and needs to be selected
@@ -91,29 +94,33 @@ const Maintenance = () => {
         </>
       ) : (
         <div className="container text-center row align-items-start ">
-          <Card borderRadius="10px" height="200px" className="bg-dark text-white ">
-      <div>
-        <div>
-        <h2>
-          {vehicleContext.name}
-          <MaintenanceButton onClick={handleChange}>
-              Select a Different Vehicle
-            </MaintenanceButton>
-        </h2>
-        </div>
-        <SimpleGrid columns={2}>
-          <p>
-            {vehicleContext.year} {vehicleContext.make} {vehicleContext.model} {vehicleContext.trim}
-          </p>
-          <p>Mileage: {vehicleContext.odometer}</p>
-          <p>License Plate: {vehicleContext.license_plate_number}</p>
-          <p>VIN: {vehicleContext.vin}</p>
-        </SimpleGrid>
-      </div>
-    </Card>
+          <Card
+            borderRadius="10px"
+            height="200px"
+            className="bg-dark text-white "
+          >
+            <div>
+              <div>
+                <h2>
+                  {vehicleContext.name}
+                  <MaintenanceButton onClick={handleChange}>
+                    Select a Different Vehicle
+                  </MaintenanceButton>
+                </h2>
+              </div>
+              <SimpleGrid columns={2}>
+                <p>
+                  {vehicleContext.year} {vehicleContext.make}{" "}
+                  {vehicleContext.model} {vehicleContext.trim}
+                </p>
+                <p>Mileage: {vehicleContext.odometer}</p>
+                <p>License Plate: {vehicleContext.license_plate_number}</p>
+                <p>VIN: {vehicleContext.vin}</p>
+              </SimpleGrid>
+            </div>
+          </Card>
           <div className="col  m-2">
             <UpcomingMaintenance
-              vehicleID={vehicleContext.vehicle_id}
               upcomingList={vehicleContext.upcoming_maintenance}
             />
           </div>
