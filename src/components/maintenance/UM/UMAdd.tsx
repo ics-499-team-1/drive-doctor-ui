@@ -5,6 +5,7 @@ import MaintenanceButton from "../MaintenanceButton";
 import UMDomain from "../../../models/maintenance/UMDomain";
 import VehicleContext from "../../Contexts/VehicleContext";
 import authHeader from "../../../models/auth/AuthHeader";
+import checkLogin from "../../../hooks/checkLogin";
 
 /**
  * Adds an upcomingMaintenance item to the db.
@@ -12,6 +13,8 @@ import authHeader from "../../../models/auth/AuthHeader";
  */
 const UMAdd = () => {
   const navigate = useNavigate();
+
+  checkLogin();
 
   /** Context */
   const { vehicleContext } = useContext(VehicleContext);

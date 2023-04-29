@@ -6,6 +6,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import authHeader from "../../models/auth/AuthHeader";
 import { useNavigate } from "react-router-dom";
 import MaintenanceButton from "../maintenance/MaintenanceButton";
+import checkLogin from "../../hooks/checkLogin";
 
 type VehicleCardProps = {
   vehicleData: Vehicle;
@@ -13,8 +14,13 @@ type VehicleCardProps = {
 
 // Handles Vehicle Card Display on VehiclesPage
 function VehicleCard(props: VehicleCardProps) {
+
+  // for button hover bg color
   const [onHover, setOnHover] = useState("dark");
+  // used for navigation
   const navigate = useNavigate();
+  // check if logged in
+  checkLogin();
 
   // Handles vehicle deletion
   const handleDelete = async () => {

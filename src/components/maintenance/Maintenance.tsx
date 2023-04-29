@@ -8,6 +8,7 @@ import MaintenanceButton from "./MaintenanceButton";
 import authHeader from "../../models/auth/AuthHeader";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, SimpleGrid } from "@chakra-ui/react";
+import checkLogin from "../../hooks/checkLogin"
 
 /**
  * Base of the maintenance tree.
@@ -19,6 +20,8 @@ const Maintenance = () => {
   const [vehicleList, setVehicleList] = useState<VehicleEntity[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(-1); // is this neccesary? Could just use the index mapping
   const navigate = useNavigate();
+
+  checkLogin();
 
   /** Conditional call to the API for GET vehicles.
    * If the vehicleContext Entity has an ID of -1, then it is not yet set and needs to be selected
