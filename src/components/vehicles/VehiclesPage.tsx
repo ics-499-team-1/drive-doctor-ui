@@ -1,9 +1,10 @@
-import { Button, Card, Container, SimpleGrid } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Button, Card, SimpleGrid } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-import Vehicle from "./Vehicle";
-import axios, { AxiosRequestConfig } from "axios";
+import Vehicle from "../../models/vehicles/Vehicle";
+import axios from "axios";
 import authHeader from "../../models/auth/AuthHeader";
+import useLoggedOutReroute from "../../hooks/useLoggedOutReroute";
+import { GetToken, GetUserId } from "../../services/LocalStorageService";
 import { useNavigate } from "react-router-dom";
 import MaintenanceButton from "../maintenance/MaintenanceButton";
 import checkLogin from "../../hooks/checkLogin";
@@ -14,7 +15,6 @@ type VehicleCardProps = {
 
 // Handles Vehicle Card Display on VehiclesPage
 function VehicleCard(props: VehicleCardProps) {
-
   // for button hover bg color
   const [onHover, setOnHover] = useState("dark");
   // used for navigation
@@ -67,19 +67,18 @@ function VehicleCard(props: VehicleCardProps) {
 }
 
 function VehiclesPage() {
+  useLoggedOutReroute();
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const navigate = useNavigate();
 
-   // check if logged in
-   checkLogin();
-   
+  // check if logged in
+  checkLogin();
+
   useEffect(() => {
     axios
       .get<Vehicle[]>(
-        `http://localhost:8080/drive-doctor/v1/users/${localStorage.getItem(
-          "user_id"
-        )}/vehicles`,
-        authHeader(localStorage.getItem("access_token"))
+        `http://localhost:8080/drive-doctor/v1/users/${GetUserId()}/vehicles`,
+        authHeader(GetToken())
       )
       .then((response) => setVehicles(response.data));
   }, []);
@@ -92,11 +91,11 @@ function VehiclesPage() {
           ))}
         </SimpleGrid>
         <MaintenanceButton
-        className="bg-dark m-2"
-        onClick={() => navigate("/vehicles/add")}
-      >
-        Add Vehicle
-      </MaintenanceButton>
+          className="bg-dark m-2"
+          onClick={() => navigate("/vehicles/add")}
+        >
+          Add Vehicle
+        </MaintenanceButton>
       </SimpleGrid>
     </>
   );

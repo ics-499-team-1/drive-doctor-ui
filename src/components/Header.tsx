@@ -1,14 +1,18 @@
-import { SimpleGrid, Button } from "@chakra-ui/react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { SimpleGrid } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
-  onNavChange: (setNav: boolean) => void
-}
+  onNavChange: (setNav: boolean) => void;
+};
 
 function Header(props: Props) {
-
   const navigate = useNavigate();
+
+  const onClick = () => {
+    localStorage.clear();
+    props.onNavChange(false);
+    navigate("/login");
+  };
 
   return (
     <SimpleGrid columns={2}>
@@ -27,12 +31,8 @@ function Header(props: Props) {
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <button
           className="btnLogOut"
+          onClick={onClick}
           style={{ margin: 10, marginRight: 20 }}
-          onClick={() => {localStorage.setItem("user_id", "");
-          localStorage.setItem("access_token", "");
-          props.onNavChange(false);
-          navigate("/login")}
-      }
         >
           Log Out
         </button>
