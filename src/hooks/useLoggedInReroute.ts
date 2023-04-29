@@ -7,7 +7,7 @@ const useLoggedInReroute = () => {
 
   return useEffect(() => {
     if (GetUserId() !== null) {
-      navigate("/home");
+      navigate("/");
     }
   });
 }

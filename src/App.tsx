@@ -10,20 +10,6 @@ import { useEffect, useState } from "react";
 import { GetToken } from "./services/LocalStorageService";
 
 function App() {
-  const [showNav, setShowNav] = useState(false);
-
-  useEffect(() => {
-    GetToken() === null
-      ? () => {
-          setShowNav(false);
-        }
-      : setShowNav(true);
-  });
-
-  const handleNavChange = (setNav: boolean) => {
-    setShowNav(setNav);
-  };
-
   return (
     <>
       <VehicleProvider>
@@ -41,13 +27,11 @@ function App() {
               fontWeight="bold"
             >
               <GridItem pl="2" bg="#320064" area={"header"}>
-                <Header onNavChange={handleNavChange}></Header>
+                <Header></Header>
               </GridItem>
-              {showNav && (
-                <GridItem pl="2" area={"nav"}>
-                  <Navbar />
-                </GridItem>
-              )}
+              <GridItem pl="2" area={"nav"}>
+                <Navbar />
+              </GridItem>
               <GridItem pl="2" area={"main"}>
                 <Outlet />
               </GridItem>

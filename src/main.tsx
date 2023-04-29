@@ -20,15 +20,15 @@ import Login from "./components/login/Login";
 
 const router = createBrowserRouter([
   {
+    path: "/login",
+    element: <Login />
+  },
+  {
     path: "/",
     element: <App />,
     children: [
       {
-        path: "login",
-        element: <Login />,
-      },
-      {
-        path: "home",
+        path: "/",
         element: <Home />,
       },
       {

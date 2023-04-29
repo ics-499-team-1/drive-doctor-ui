@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <VStack divider={<StackDivider borderColor="#77" />}>
       <LinkBox>
-        <Link to="/home">Home</Link>
+        <Link to="/">Home</Link>
       </LinkBox>
       <LinkBox>
         <Link to="/vehicles">Vehicles</Link>
