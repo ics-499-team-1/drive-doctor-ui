@@ -1,4 +1,3 @@
-import { Button, ButtonGroup } from "@chakra-ui/button";
 import { FocusLock } from "@chakra-ui/focus-lock";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { Box, SimpleGrid } from "@chakra-ui/layout";
@@ -9,9 +8,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@chakra-ui/popover";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useUserTrips from "../../hooks/useUserTrips";
 import { UserTripsResponse } from "../../models/user/UserTrips";
+import { GetUserId } from "../../services/LocalStorageService";
 import { GetTripsByUserId } from "../../services/TripService";
 import NewItemCard from "../NewItemCard";
 import TripForm from "./TripForm";
@@ -20,14 +20,14 @@ import TripsCard from "./TripsCard";
 function TripGrid() {
   const [userTrips, setUserTrips] = useState<UserTripsResponse[]>([]);
 
-  useUserTrips(203, setUserTrips);
+  useUserTrips(GetUserId(), setUserTrips);
 
   const { onOpen, onClose, isOpen } = useDisclosure();
   const firstFieldRef = React.useRef(null);
 
   const onClick = () => {
     console.log("new vehicle added");
-    GetTripsByUserId(203).then((data: UserTripsResponse[]) => {
+    GetTripsByUserId(GetUserId()).then((data: UserTripsResponse[]) => {
       setUserTrips(data);
     });
   };

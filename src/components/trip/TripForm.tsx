@@ -5,12 +5,13 @@ import { Select } from "@chakra-ui/select";
 import React, { useState } from "react";
 import useUserVehicles from "../../hooks/useUserVehicles";
 import Trip from "../../models/trips/Trip";
+import { GetUserId } from "../../services/LocalStorageService";
 import { CreateTrip } from "../../services/TripService";
 
 // todo: create effect to get vehicles for a given user id
 
 const TripForm = ({ firstFieldRef, onCancel, refreshPageData }: any) => {
-  const vehicles = useUserVehicles(203);
+  const vehicles = useUserVehicles(GetUserId());
   const [formData, setFormData] = useState<Trip>({
     name: "",
     vehicle_id: 0,
