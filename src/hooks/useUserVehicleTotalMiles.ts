@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import driveDoctorClient from '../clients/drive-doctor-client';
 import authHeader from '../models/auth/AuthHeader';
+import MilesByVehicle from '../models/trips/MilesByVehicle';
 import { UserVehiclesResponse } from '../models/user/UserVehicles';
-import { GetToken, GetUserId } from '../services/LocalStorageService';
+import { GetToken } from '../services/LocalStorageService';
 
-const useUserVehicles = (userId: string | null) => {
-    const [userVehicles, setUserVehicles] = useState<UserVehiclesResponse[]>([]);
+const useUserVehicleTotalMiles = (userId: string | null, setMiles: any) => {
+    const [milesByVehicle, setMilesByVehicle] = useState<MilesByVehicle[]>([]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -15,8 +16,10 @@ const useUserVehicles = (userId: string | null) => {
     }
 
     driveDoctorClient
-      .get<UserVehiclesResponse[]>(`/users/${userId}/vehicles`, authHeader(GetToken()))
-      .then((res) => setUserVehicles(res.data))
+      .get<UserVehiclesResponse[]>(`/trips/mileage/${userId}`, authHeader(GetToken()))
+      .then((res) => {
+        setMiles(res.data)
+      })
       .catch((err) => {
         if (err.name !== "CanceledError") {
           console.log(err.name)
@@ -26,7 +29,7 @@ const useUserVehicles = (userId: string | null) => {
       return () => controller.abort();
   }, []);
 
-  return userVehicles;
+  return milesByVehicle;
 }
 
-export default useUserVehicles;
+export default useUserVehicleTotalMiles;

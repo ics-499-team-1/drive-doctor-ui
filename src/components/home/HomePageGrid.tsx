@@ -1,16 +1,24 @@
 import { SimpleGrid } from "@chakra-ui/layout";
-import useUserTrips from "../../hooks/useUserTrips";
+import { useState } from "react";
+import useUserVehicleTotalMiles from "../../hooks/useUserVehicleTotalMiles";
+import MilesByVehicle from "../../models/trips/MilesByVehicle";
 import { GetUserId } from "../../services/LocalStorageService";
-import MainPageCard from "./HomePageCard";
+import HomePageCard from "./HomePageCard";
 
 function HomePageGrid() {
+  const [vehicleMiles, setVehicleMiles] = useState<MilesByVehicle[]>([]);
 
-  const userTrips = useUserTrips(GetUserId(), null);
+  useUserVehicleTotalMiles(GetUserId(), setVehicleMiles);
 
   return (
     <>
       <SimpleGrid columns={3} spacing={10} margin="10px" height="100%">
-        {userTrips.map(trip => <MainPageCard key={trip.trip_id} trip={trip} />)}
+        {vehicleMiles.map((vehicleMiles) => (
+          <HomePageCard
+            key={vehicleMiles.total_miles}
+            mileageByVehicle={vehicleMiles}
+          />
+        ))}
       </SimpleGrid>
     </>
   );
