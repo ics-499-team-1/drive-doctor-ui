@@ -6,34 +6,8 @@ import Navbar from "./components/Navbar";
 import { VehicleProvider } from "./components/Contexts/VehicleContext";
 import { CMProvider } from "./components/Contexts/CMContext";
 import { UMProvider } from "./components/Contexts/UMContext";
-import { useEffect, useState } from "react";
 
 function App() {
-  const [showNav, setShowNav] = useState(false);
-  const navigate = useNavigate();
-  console.log(localStorage.getItem("access_token"));
-
-  useEffect(() => {
-    // This code runs when the App component mounts.
-    // We check to see if it was null, which means nothing was loaded
-    // in local storage. If null, we set it to ""
-    if(localStorage.getItem("access_token") === null) {
-      localStorage.setItem("access_token", ""); }
-  }, []);
-
-  // access token needs to be set to "" on logout.
-  useEffect(() => {
-    localStorage.getItem("access_token") === ""
-      ? () => {
-          setShowNav(false);
-        }
-      : setShowNav(true);
-  });
-
-  const handleNavChange = (setNav: boolean) => {
-    setShowNav(setNav);
-  }
-
   return (
     <>
       <VehicleProvider>
@@ -51,13 +25,11 @@ function App() {
               fontWeight="bold"
             >
               <GridItem pl="2" bg="#320064" area={"header"}>
-                <Header onNavChange={handleNavChange}></Header>
+                <Header></Header>
               </GridItem>
-              {showNav && (
-                <GridItem pl="2" area={"nav"}>
-                  <Navbar />
-                </GridItem>
-              )}
+              <GridItem pl="2" area={"nav"}>
+                <Navbar />
+              </GridItem>
               <GridItem pl="2" area={"main"}>
                 <Outlet />
               </GridItem>

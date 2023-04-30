@@ -4,6 +4,7 @@ import MaintenanceButton from "../MaintenanceButton";
 import { useNavigate } from "react-router-dom";
 import CMContext from "../../Contexts/CMContext";
 import authHeader from "../../../models/auth/AuthHeader";
+import { GetToken } from "../../../services/LocalStorageService";
 
 /**
  * Edits the item stored in CMContext and updates the db.
@@ -47,7 +48,7 @@ const CMEdit = () => {
       "http://localhost:8080/drive-doctor/v1/maintenance/completed-maintenance/" +
         cMContext.completed_maintenance_id,
       cMContext,
-      authHeader(localStorage.getItem('access_token'))
+      authHeader(GetToken())
     );
     navigate("/maintenance/", { replace: true, state: { key: Math.random() } });
   };
