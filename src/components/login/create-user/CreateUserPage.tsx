@@ -57,6 +57,7 @@ function CreateUserPage() {
       p={[8, 10]}
       mt={[20, "10vh"]}
       mx="auto"
+      color="#777777"
       border={["none", "1px"]}
       borderColor={["", "gray.300"]}
       borderRadius={10}
