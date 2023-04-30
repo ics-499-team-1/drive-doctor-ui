@@ -4,8 +4,12 @@ import authHeader from '../models/auth/AuthHeader';
 import { UserTripsResponse } from '../models/user/UserTrips';
 import { GetToken } from '../services/LocalStorageService';
 
-const useUserTrips = (userId: string, setTrips: any) => {
-    const [userTrips, setUserTrips] = useState<UserTripsResponse[]>([]);
+const useUserTrips = (userId: string | null, setTrips: any) => {
+  const [userTrips, setUserTrips] = useState<UserTripsResponse[]>([]);
+
+  if (userId === null) {
+    return userTrips;
+  }
 
   useEffect(() => {
     const controller = new AbortController();

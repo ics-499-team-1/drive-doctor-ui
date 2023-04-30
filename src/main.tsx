@@ -1,12 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/home/Home";
 import Maintenance from "./components/maintenance/Maintenance";
-import AddVehiclePage from "./components/vehicles/AddVehiclePage";
 import VehiclesPage from "./components/vehicles/VehiclesPage";
 import UMAdd from "./components/maintenance/UM/UMAdd";
 import Trip from "./components/trip/Trip";
@@ -17,18 +16,19 @@ import CMDelete from "./components/maintenance/CM/CMDelete";
 import CMAdd from "./components/maintenance/CM/CMAdd";
 import CMEdit from "./components/maintenance/CM/CMEdit";
 import Login from "./components/login/Login";
+import AddVehiclePage from "./components/vehicles/AddVehiclePage";
 
 const router = createBrowserRouter([
+  {
+    path: "/login",
+    element: <Login />,
+  },
   {
     path: "/",
     element: <App />,
     children: [
       {
-        path: "login",
-        element: <Login />,
-      },
-      {
-        path: "home",
+        path: "/",
         element: <Home />,
       },
       {
@@ -64,9 +64,9 @@ const router = createBrowserRouter([
         element: <CMAdd />,
       },
       {
-      path: "maintenance/CM/edit",
-      element: <CMEdit />,
-    },
+        path: "maintenance/CM/edit",
+        element: <CMEdit />,
+      },
       {
         path: "trips",
         element: <Trip />,
@@ -78,6 +78,7 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

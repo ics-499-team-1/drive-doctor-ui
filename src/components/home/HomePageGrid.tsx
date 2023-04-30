@@ -1,10 +1,11 @@
 import { SimpleGrid } from "@chakra-ui/layout";
 import useUserTrips from "../../hooks/useUserTrips";
+import { GetUserId } from "../../services/LocalStorageService";
 import MainPageCard from "./HomePageCard";
 
 function HomePageGrid() {
 
-  const userTrips = useUserTrips(203, null);
+  const userTrips = useUserTrips(GetUserId(), null);
 
   return (
     <>
