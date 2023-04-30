@@ -1,6 +1,5 @@
 import driveDoctorClient from '../clients/drive-doctor-client';
 import authHeader from '../models/auth/AuthHeader';
-import MilesByVehicle from '../models/trips/MilesByVehicle';
 import Trip from '../models/trips/Trip';
 import { UserTripsResponse } from '../models/user/UserTrips';
 import { GetToken } from './LocalStorageService';
