@@ -8,8 +8,6 @@ import Trip from "../../models/trips/Trip";
 import { GetUserId } from "../../services/LocalStorageService";
 import { CreateTrip } from "../../services/TripService";
 
-// todo: create effect to get vehicles for a given user id
-
 const TripForm = ({ firstFieldRef, onCancel, refreshPageData }: any) => {
   const vehicles = useUserVehicles(GetUserId());
   const [formData, setFormData] = useState<Trip>({
