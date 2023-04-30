@@ -20,21 +20,6 @@ export const GetTripsByUserId = async (userId: string): Promise<UserTripsRespons
     return []
 }
 
-export const GetMilesByVehicle = async (vehicleId: string): Promise<MilesByVehicle | null> => {
-    try {
-        const res = await driveDoctorClient
-            .get<MilesByVehicle>(
-                `/trips/${vehicleId}/mileage`,
-                authHeader(GetToken())
-                );
-        return res.data;
-    } catch (err) {
-        console.log(err.response);
-    }
-
-    return null
-}
-
 export const CreateTrip = async (newTrip: Trip) => {
     try {
         const res = await driveDoctorClient
