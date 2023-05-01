@@ -58,7 +58,7 @@ const UMList = ({ upcomingList }: Props) => {
 
   function mileageDisplaySelect(mileInt: number) {
     if (mileInt !== null) {
-      if (mileInt > vehicleContext.odometer) {
+      if (mileInt >= vehicleContext.odometer) {
         return <p>Miles to service: {mileInt - vehicleContext.odometer}</p>;
       } else if (mileInt < vehicleContext.odometer) {
         return (
@@ -67,7 +67,7 @@ const UMList = ({ upcomingList }: Props) => {
             {vehicleContext.odometer - mileInt} miles overdue
           </p>
         );
-      }
+      } 
     }
   }
 
