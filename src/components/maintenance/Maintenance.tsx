@@ -22,7 +22,6 @@ const Maintenance = () => {
   const [selectedIndex, setSelectedIndex] = useState(-1); // is this neccesary? Could just use the index mapping
   const navigate = useNavigate();
 
-  checkLogin();
 
   /** Conditional call to the API for GET vehicles.
    * If the vehicleContext Entity has an ID of -1, then it is not yet set and needs to be selected
@@ -31,7 +30,6 @@ const Maintenance = () => {
    * needs a refresh, thus the specific vehicle is called by ID and the values are refreshed.
    */
   useEffect(() => {
-    if (vehicleContext.vehicle_id === -1) {
       axios
         .get<VehicleEntity[]>(
           `http://localhost:8080/drive-doctor/v1/users/${GetUserId()}/vehicles`,
@@ -41,7 +39,8 @@ const Maintenance = () => {
           setVehicleList(response.data);
         })
         .catch((err) => console.log(err));
-    } else {
+
+    if (vehicleContext.vehicle_id !== -1) {
       axios
         .get<VehicleEntity>(
           "http://localhost:8080/drive-doctor/v1/vehicles/" +
