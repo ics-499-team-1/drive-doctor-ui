@@ -4,6 +4,7 @@ import authHeader from "../../models/auth/AuthHeader";
 import { GetToken, GetUserId } from "../../services/LocalStorageService";
 import { useNavigate } from "react-router-dom";
 import checkLogin from "../../hooks/checkLogin";
+import { Button } from "@chakra-ui/react";
 
 interface FormValues {
   [key: string]: string | undefined | boolean | null;
@@ -88,9 +89,14 @@ function AddVehiclePage() {
           />
         </div>
       ))}
-      <button className="btnSubmit" type="submit">
+      <Button 
+        className="btnSubmit" 
+        type="submit"
+        colorScheme="purple"
+        w={["full", "auto"]}
+        alignSelf="end">
         Submit
-      </button>
+      </Button>
     </form>
   );
 }

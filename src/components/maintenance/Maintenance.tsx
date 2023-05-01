@@ -57,6 +57,7 @@ const Maintenance = () => {
 
   /** Resets the vehicle entity so a new vehicle can be selected */
   const handleChange = () => {
+    setSelectedIndex(-1);
     setVehicle(new VehicleEntity(-1, [], [], -1));
   };
 

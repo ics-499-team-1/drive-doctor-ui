@@ -98,7 +98,6 @@ function Login() {
           <CreateUserButton/>
 
           <Button
-            rounded="none"
             colorScheme="purple"
             w={["full", "auto"]}
             alignSelf="end"
