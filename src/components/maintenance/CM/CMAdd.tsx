@@ -16,8 +16,6 @@ import { FormControl, Input } from "@chakra-ui/react";
 const AddUpcomingMaintenance = () => {
   const navigate = useNavigate();
 
-  checkLogin();
-  
   /** Context */
   const { vehicleContext } = useContext(VehicleContext);
 
@@ -36,7 +34,7 @@ const AddUpcomingMaintenance = () => {
     Except for name, which is required
     */
   const handleSubmitUpdate = (event: FormEvent) => {
-    event.preventDefault(); // DELETE WHEN FINISHED - replace with acknowledgement
+    event.preventDefault;
     const addCMDomain = new CMDomain("Required");
     if (nameRef.current !== null) addCMDomain.name = nameRef.current.value;
     notesRef.current !== null
@@ -63,13 +61,12 @@ const AddUpcomingMaintenance = () => {
       authHeader(GetToken())
     );
     // back to Maintenance
-    // the part in curly braces forces a rerender of maintenance so it calls GET again
     navigate("/maintenance/", { replace: true, state: { key: Math.random() } });
   };
 
   return (
     <>
-      <FormControl onSubmit={handleSubmitUpdate}>
+      <form style={{ maxWidth: "500px" }} onSubmit={handleSubmitUpdate}>
         <div>
           <label htmlFor="name" className="form-label">
             Name
@@ -157,7 +154,7 @@ const AddUpcomingMaintenance = () => {
         <MaintenanceButton className={"mx-2"} color="success">
           Confirm
         </MaintenanceButton>
-      </FormControl>
+      </form>
       <div>
         <MaintenanceButton
           className={"mx-2 my-2"}

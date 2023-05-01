@@ -13,29 +13,11 @@ interface Props {
  * When a list item is selected, it sets the UMContext to that list item, which can then be used in other components in the maintenance tree.
  */
 const UMList = ({ upcomingList }: Props) => {
-  const { uMContext, setUMContext } = useContext(UMContext);
+  // Contexts
+  const { setUMContext } = useContext(UMContext);
   const { vehicleContext } = useContext(VehicleContext);
 
-  const [selectedIndex, setSelectedIndex] = useState(-1);
-  const [listBGColor, setListBGColor] = useState("dark")
-
-  function mileServiceDisplay(odometer: number, mileageInt: number) {
-    if (mileageInt !== null) {
-      if (mileageInt > odometer) {
-        return <p>Miles to service: {mileageInt - odometer}</p>;
-      } else if (mileageInt < odometer) {
-        return (
-          <p className="text-danger"> {odometer - mileageInt} miles overdue</p>
-        );
-      }
-    }
-  }
-
-  function timeServiceDisplay(timeInt: string) {
-    if (timeInt !== null) {
-      return "Service by: " + timeInt;
-    }
-  }
+  const [selectedIndex, setSelectedIndex] = useState(-1); // sets highlights
 
   function selectServiceDisplay(mileInt: number, timeInt: string) {
     if (mileInt !== null) {
@@ -52,13 +34,39 @@ const UMList = ({ upcomingList }: Props) => {
     } else if (timeInt != "none") {
       return "Service by: " + timeInt;
     } else {
-      return <></>
+      return <></>;
+    }
+  }
+
+  function mileageDisplaySelect(mileInt: number) {
+    if (mileInt !== null) {
+      if (mileInt > vehicleContext.odometer) {
+        return <p>Miles to service: {mileInt - vehicleContext.odometer}</p>;
+      } else if (mileInt < vehicleContext.odometer) {
+        return (
+          <p className="text-danger">
+            {" "}
+            {vehicleContext.odometer - mileInt} miles overdue
+          </p>
+        );
+      }
+    }
+  }
+
+  function dateDisplaySelect(timeInterval: string) {
+    if (timeInterval === "") {
+      return <></>;
+    } else {
+      return "Service Date: " + timeInterval;
     }
   }
 
   return (
     <>
-      <ul style={{ maxHeight: "800px" }} className={"overflow-auto list-group m-2"}>
+      <ul
+        style={{ maxHeight: "400px" }}
+        className={"overflow-auto list-group m-2"}
+      >
         {upcomingList.map((UME, index) => {
           let className = "list-group-item bg-dark text-white";
           if (selectedIndex === index) {
@@ -76,16 +84,22 @@ const UMList = ({ upcomingList }: Props) => {
                   setSelectedIndex(index);
                   setUMContext(UME);
                 }
-              }
-            }
+              }}
             >
               <SimpleGrid columns={2}>
                 <p>Name: {UME.name}</p>{" "}
-                {selectServiceDisplay(UME.mileage_interval, UME.time_interval)}
+                {UME.mileage_interval
+                  ? mileageDisplaySelect(UME.mileage_interval)
+                  : dateDisplaySelect(UME.time_interval)}
                 {index === selectedIndex && (
                   <>
-                    <p>ID: {UME.upcoming_maintenance_id}</p>
+                    {UME.mileage_interval ? (
+                      <p>{dateDisplaySelect(UME.time_interval)}</p>
+                    ) : (
+                      <></>
+                    )}
                     <p>Notes: {UME.notes}</p>
+                    <p>ID: {UME.upcoming_maintenance_id}</p>
                   </>
                 )}
               </SimpleGrid>

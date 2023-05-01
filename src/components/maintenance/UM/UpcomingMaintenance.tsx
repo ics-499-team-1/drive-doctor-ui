@@ -27,24 +27,26 @@ const UpcomingMaintenance = ({ upcomingList }: Props) => {
   };
 
   const handleEditClick = () => {
-    if (uMContext) {
+    if (uMContext.upcoming_maintenance_id !== -1) {
       navigate("/maintenance/edit");
+    } else {
+      console.log("uMContext is not set");
     }
   };
 
   const handleDeleteClick = () => {
-    if (uMContext) {
+    if (uMContext.upcoming_maintenance_id !== -1) {
       navigate("/maintenance/delete");
     } else {
-      console.log("upcomingMContext is null or undefined");
+      console.log("uMContext is not set");
     }
   };
 
   const handleConvertClick = () => {
-    if (uMContext) {
+    if (uMContext.upcoming_maintenance_id !== -1) {
       navigate("/maintenance/convert");
     } else {
-      console.log("upcomingmaintenanceContext is null");
+      console.log("uMContext is not set");
     }
   };
 

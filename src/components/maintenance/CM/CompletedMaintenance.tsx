@@ -23,16 +23,18 @@ const CompletedMaintenance = ({ completedList }: Props) => {
   };
 
   const handleEditClick = () => {
-    if (cMContext) {
+    if (cMContext.completed_maintenance_id !== -1) {
       navigate("/maintenance/CM/edit");
+    } else {
+      console.log("cMContext is not set");
     }
   };
 
   const handleDeleteClick = () => {
-    if (cMContext) {
+    if (cMContext.completed_maintenance_id !== -1) {
       navigate("/maintenance/CM/delete");
     } else {
-      console.log("upcomingmaintenanceContext is null or undefined");
+      console.log("cMContext is not set");
     }
   };
 

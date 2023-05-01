@@ -12,8 +12,10 @@ import { FormControl, Input } from "@chakra-ui/react";
  */
 const CMEdit = () => {
   const navigate = useNavigate();
+
   /** Context */
   const { cMContext } = useContext(CMContext);
+
   /** Refs */
   const nameRef = useRef<HTMLInputElement>(null);
   const notesRef = useRef<HTMLInputElement>(null);
@@ -22,6 +24,7 @@ const CMEdit = () => {
   const serviceCenterRef = useRef<HTMLInputElement>(null);
   const mechanicsRef = useRef<HTMLInputElement>(null);
   const totalCostRef = useRef<HTMLInputElement>(null);
+
   /* On submit, if the reference to the input element is not null, then it
   replaces the property that was passed in. If it's null, the property is set to null
   Except for name, which is required
@@ -56,7 +59,7 @@ const CMEdit = () => {
 
   return (
     <>
-      <FormControl onSubmit={handleSubmitEdit}>
+      <form style={{maxWidth: "500px"}} onSubmit={handleSubmitEdit}>
         <div>
           <label htmlFor="name" className="form-label">
             Name
@@ -151,7 +154,7 @@ const CMEdit = () => {
         <MaintenanceButton className={"mx-2"} color="success">
           Confirm
         </MaintenanceButton>
-      </FormControl>
+      </form>
       <MaintenanceButton
         onClick={() =>
           navigate("/maintenance/", {

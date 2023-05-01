@@ -14,12 +14,12 @@ interface Props {
  * @returns
  */
 const CMList = ({ completedList }: Props) => {
-  const { cMContext, setCMContext } = useContext(CMContext);
+  const { setCMContext } = useContext(CMContext);
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   return (
     <>
-            <ul style={{ maxHeight: "800px" }} className={"overflow-auto list-group m-2"}>
+            <ul style={{ maxHeight: "400px" }} className={"overflow-auto list-group m-2"}>
         {completedList.map((CME, index) => (
           <li
             className={
