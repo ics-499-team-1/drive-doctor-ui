@@ -9,7 +9,7 @@ import { GetUserId } from "../../services/LocalStorageService";
 import { CreateTrip } from "../../services/TripService";
 
 const TripForm = ({ firstFieldRef, onCancel, refreshPageData }: any) => {
-  const vehicles = useUserVehicles(GetUserId());
+  const vehicles = useUserVehicles(GetUserId(), null);
   const [formData, setFormData] = useState<Trip>({
     name: "",
     vehicle_id: 0,

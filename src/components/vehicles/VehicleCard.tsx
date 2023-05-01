@@ -3,37 +3,37 @@ import { Card } from "@chakra-ui/card";
 import { SimpleGrid } from "@chakra-ui/layout";
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import authHeader from "../../models/auth/AuthHeader";
-import Vehicle from "../../models/vehicles/Vehicle";
+import { UserVehiclesResponse } from "../../models/user/UserVehicles";
 import { GetToken } from "../../services/LocalStorageService";
 
 type VehicleCardProps = {
-  vehicleData: Vehicle;
+  vehicleData: UserVehiclesResponse;
+  refreshVehicles: any
 };
 
 // Handles Vehicle Card Display on VehiclesPage
 function VehicleCard(props: VehicleCardProps) {
   // for button hover bg color
   const [onHover, setOnHover] = useState("dark");
-  // used for navigation
-  const navigate = useNavigate();
 
   // Handles vehicle deletion
   const handleDelete = async () => {
     try {
-      const response = await axios
+      await axios
         .delete(
           `http://localhost:8080/drive-doctor/v1/vehicles/${props.vehicleData.vehicle_id}`,
           authHeader(GetToken())
         )
-        .then(() => navigate(0));
-      console.log("Vehicle deleted successfully!");
+        .then(() => {
+          props.refreshVehicles()
+          console.log("Vehicle deleted successfully!")
+        });
     } catch (error) {
       console.error(error);
     }
   };
-  const { name, year, make, model, trim, odometer, license_plate, vin } =
+  const { name, year, make, model, trim, odometer, license_plate_number, vin } =
     props.vehicleData;
 
   return (
@@ -56,7 +56,7 @@ function VehicleCard(props: VehicleCardProps) {
             {year} {make} {model} {trim}
           </p>
           <p>Mileage: {odometer}</p>
-          <p>License Plate: {license_plate}</p>
+          <p>License Plate: {license_plate_number}</p>
           <p>VIN: {vin}</p>
         </SimpleGrid>
       </div>
