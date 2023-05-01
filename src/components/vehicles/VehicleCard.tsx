@@ -42,7 +42,7 @@ function VehicleCard(props: VehicleCardProps) {
     props.vehicleData;
 
   return (
-    <Card bg="#333333" textColor="white" maxWidth="650px">
+    <Card bg="#333333" textColor="white">
       <CardBody paddingBottom="5px">
         <Text fontSize='2xl'>{year} {make} {model} {trim}</Text>
           <SimpleGrid columns={2} spacingX={10}>
