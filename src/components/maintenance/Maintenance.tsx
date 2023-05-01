@@ -40,7 +40,7 @@ const Maintenance = () => {
       .catch((err) => console.log(err));
       // check if the vehicle was deleted
       if (!vehicleList.includes(vehicleContext)) {
-        setVehicle(new VehicleEntity(-1))
+        setVehicle(new VehicleEntity(-1, [], [], -1))
       }
       // refresh for a new list of maintenance items
     if (vehicleContext.vehicle_id !== -1) {
