@@ -28,7 +28,7 @@ function AddVehiclePage() {
     model: "",
     trim: "",
     odometer: "",
-    license_plate: "",
+    license_plate_number: "",
     vin: "",
     deactivated: false,
     user_id: GetUserId(),
@@ -70,7 +70,7 @@ function AddVehiclePage() {
     { placeholder: "Mileage", id: "odometer", type: "number" },
     {
       placeholder: "License Plate (Optional)",
-      id: "license_plate",
+      id: "license_plate_number",
       type: "text",
     },
     { placeholder: "VIN # (Optional)", id: "vin", type: "text" },
