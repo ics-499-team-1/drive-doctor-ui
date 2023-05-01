@@ -37,6 +37,7 @@ const UMEdit = () => {
       ? (uMContext.time_interval = timeIntervalRef.current.value)
       : (uMContext.time_interval = "");
 
+      // Calling the API
     axios.patch(
       "http://localhost:8080/drive-doctor/v1/maintenance/upcoming-maintenance/" +
         uMContext.upcoming_maintenance_id,
@@ -48,7 +49,7 @@ const UMEdit = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form style={{maxWidth: "500px"}} onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name" className="form-label">
             Name
