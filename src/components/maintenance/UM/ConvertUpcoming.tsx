@@ -34,9 +34,8 @@ const ConvertUpcoming = () => {
   if (maintenanceId == null)
     return <p>Error Converting - null maintenanceId</p>;
 
-  const handleSubmitUpdate = (event: FormEvent) => {
-    let cMD = new CMEntity(maintenanceId); // this is not registered with the DB, but is used to create the empty object.
-    event.preventDefault(); // DELETE WHEN FINISHED - replace with acknowledgement?
+  const handleSubmitUpdate = () => {
+    let cMD = new CMEntity(maintenanceId); // this is not registered with the DB, but is used to create the empty object. 
     dateRef.current !== null
       ? (cMD.date = dateRef.current.value)
       : (cMD.date = "");
@@ -66,15 +65,14 @@ const ConvertUpcoming = () => {
     navigate("/maintenance/", { replace: true, state: { key: Math.random() } });
   };
   // back to Maintenance
-  // the part in curly braces forces a rerender of maintenance so it calls get again. Not sure if neccesary, was part of old implementation
   const handleBackClick = () => {
     navigate("/maintenance/", { replace: true, state: { key: Math.random() } });
   };
 
   return (
     <>
-      <form onSubmit={handleSubmitUpdate}>
-      <div>
+      <form style={{maxWidth: "500px"}} onSubmit={handleSubmitUpdate}>
+      <div >
           <label htmlFor="name" className="form-label">
             Name
           </label>
