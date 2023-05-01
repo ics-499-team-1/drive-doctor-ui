@@ -33,13 +33,14 @@ function AddVehiclePage() {
     deactivated: false,
     user_id: GetUserId(),
   });
+  const [loading, setLoading] = useState<boolean>(false)
 
   const navigate = useNavigate();
   // check login
   checkLogin();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
+    setLoading(true)
     if (formValues.name !== "" && formValues.model !== "") {
       try {
         await axios
@@ -76,7 +77,7 @@ function AddVehiclePage() {
   ];
 
   return (
-    <form onClick={handleSubmit}>
+    <form>
       {formElements.map((element) => (
         <div className="mb-3" key={element.id}>
           <input
@@ -89,12 +90,14 @@ function AddVehiclePage() {
           />
         </div>
       ))}
-      <Button 
+      <Button
+        onClick={handleSubmit}
         className="btnSubmit" 
         type="submit"
         colorScheme="purple"
         w={["full", "auto"]}
-        alignSelf="end">
+        alignSelf="end"
+        isLoading={loading}>
         Submit
       </Button>
     </form>
