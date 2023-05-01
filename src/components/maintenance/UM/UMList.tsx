@@ -13,12 +13,19 @@ interface Props {
  * When a list item is selected, it sets the UMContext to that list item, which can then be used in other components in the maintenance tree.
  */
 const UMList = ({ upcomingList }: Props) => {
-  // Contexts
-  const { setUMContext } = useContext(UMContext);
+
+  /**Contexts */
+  const { uMContext, setUMContext } = useContext(UMContext);
   const { vehicleContext } = useContext(VehicleContext);
 
-  const [selectedIndex, setSelectedIndex] = useState(-1); // sets highlights
+  const [selectedIndex, setSelectedIndex] = useState(-1); // index highlights
 
+  /**
+   * 
+   * @param mileInt mileage Interval service it due
+   * @param timeInt Time interval service is due
+   * @returns miles overdue, service by <date>, or a blank fragment if there is nothing to display
+   */
   function selectServiceDisplay(mileInt: number, timeInt: string) {
     if (mileInt !== null) {
       if (mileInt > vehicleContext.odometer) {
