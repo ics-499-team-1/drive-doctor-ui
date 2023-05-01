@@ -102,13 +102,14 @@ const ConvertUpcoming = () => {
           />
         </div>
         <div className="mb-2">
-          <label htmlFor="mechanics" className="form-label">
-            Mechanics
+          <label htmlFor="notes" className="form-label">
+            Notes
           </label>
           <input
             className="form-control"
-            id="mechanics"
-            ref={mechanicsRef}
+            defaultValue={uMContext.notes ? uMContext.notes : ""}
+            id="notes"
+            ref={notesRef}
             type="text"
           />
         </div>
@@ -125,18 +126,6 @@ const ConvertUpcoming = () => {
           />
         </div>
         <div className="mb-2">
-          <label htmlFor="notes" className="form-label">
-            Notes
-          </label>
-          <input
-            className="form-control"
-            defaultValue={uMContext.notes ? uMContext.notes : ""}
-            id="notes"
-            ref={notesRef}
-            type="text"
-          />
-        </div>
-        <div className="mb-2">
           <label htmlFor="serviceCenter" className="form-label">
             Service Center
           </label>
@@ -144,6 +133,17 @@ const ConvertUpcoming = () => {
             className="form-control"
             id="serviceCenter"
             ref={serviceCenterRef}
+            type="text"
+          />
+        </div>
+        <div className="mb-2">
+          <label htmlFor="mechanics" className="form-label">
+            Mechanics
+          </label>
+          <input
+            className="form-control"
+            id="mechanics"
+            ref={mechanicsRef}
             type="text"
           />
         </div>

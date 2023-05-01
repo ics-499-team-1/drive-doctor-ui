@@ -33,7 +33,8 @@ const AddUpcomingMaintenance = () => {
     depending on type.
     Except for name, which is required
     */
-  const handleSubmitUpdate = () => {
+  const handleSubmitUpdate = (event: FormEvent) => {
+    event.preventDefault;
     const addCMDomain = new CMDomain("Required");
     if (nameRef.current !== null) addCMDomain.name = nameRef.current.value;
     notesRef.current !== null
@@ -65,7 +66,7 @@ const AddUpcomingMaintenance = () => {
 
   return (
     <>
-      <FormControl style={{ maxWidth: "500px" }} onSubmit={handleSubmitUpdate}>
+      <form style={{ maxWidth: "500px" }} onSubmit={handleSubmitUpdate}>
         <div>
           <label htmlFor="name" className="form-label">
             Name
@@ -153,7 +154,7 @@ const AddUpcomingMaintenance = () => {
         <MaintenanceButton className={"mx-2"} color="success">
           Confirm
         </MaintenanceButton>
-      </FormControl>
+      </form>
       <div>
         <MaintenanceButton
           className={"mx-2 my-2"}

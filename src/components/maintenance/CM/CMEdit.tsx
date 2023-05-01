@@ -59,7 +59,7 @@ const CMEdit = () => {
 
   return (
     <>
-      <FormControl style={{maxWidth: "500px"}} onSubmit={handleSubmitEdit}>
+      <form style={{maxWidth: "500px"}} onSubmit={handleSubmitEdit}>
         <div>
           <label htmlFor="name" className="form-label">
             Name
@@ -154,7 +154,7 @@ const CMEdit = () => {
         <MaintenanceButton className={"mx-2"} color="success">
           Confirm
         </MaintenanceButton>
-      </FormControl>
+      </form>
       <MaintenanceButton
         onClick={() =>
           navigate("/maintenance/", {

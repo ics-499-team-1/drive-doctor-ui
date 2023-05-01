@@ -55,7 +55,7 @@ const UMAdd = () => {
 
   return (
     <>
-      <FormControl style={{maxWidth: "500px"}} onSubmit={handleSubmitUpdate}>
+      <form style={{maxWidth: "500px"}} onSubmit={handleSubmitUpdate}>
         <div>
           <label htmlFor="name" className="form-label">
             Name
@@ -108,7 +108,7 @@ const UMAdd = () => {
         <MaintenanceButton className={"mx-2"} color="success">
           Confirm
         </MaintenanceButton>
-      </FormControl>
+      </form>
       <div>
         <MaintenanceButton
           className={"mx-2 my-2"}
