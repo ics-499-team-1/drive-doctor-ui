@@ -7,6 +7,7 @@ import VehicleContext from "../../Contexts/VehicleContext";
 import authHeader from "../../../models/auth/AuthHeader";
 import checkLogin from "../../../hooks/checkLogin";
 import { GetToken } from "../../../services/LocalStorageService";
+import { FormControl, Input } from "@chakra-ui/react";
 
 /**
  * Adds a completed maintenance item to the db.
@@ -68,7 +69,7 @@ const AddUpcomingMaintenance = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmitUpdate}>
+      <FormControl onSubmit={handleSubmitUpdate}>
         <div>
           <label htmlFor="name" className="form-label">
             Name
@@ -96,12 +97,16 @@ const AddUpcomingMaintenance = () => {
           <label htmlFor="date" className="form-label">
             Date
           </label>
-          <input
+          <Input
             className="form-control"
             id="date"
             ref={dateRef}
             required={true}
-            type="text"
+            _hover={{}}
+            bg="white"
+            placeholder="Select Date"
+            size="md"
+            type="date"
           />
         </div>
         <div className="mb-2">
@@ -152,7 +157,7 @@ const AddUpcomingMaintenance = () => {
         <MaintenanceButton className={"mx-2"} color="success">
           Confirm
         </MaintenanceButton>
-      </form>
+      </FormControl>
       <div>
         <MaintenanceButton
           className={"mx-2 my-2"}
