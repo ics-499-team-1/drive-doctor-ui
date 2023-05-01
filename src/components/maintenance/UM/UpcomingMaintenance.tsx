@@ -52,7 +52,7 @@ const UpcomingMaintenance = ({ upcomingList }: Props) => {
 
   return (
     <>
-      <div className="row text-white bg-dark">
+      <div className="row text-white bg-dark" style={{maxHeight:"50%"}}>
         <h2>Upcoming Maintenance</h2>
         <UMList upcomingList={upcomingList} />
         <div

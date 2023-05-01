@@ -82,8 +82,8 @@ const UMList = ({ upcomingList }: Props) => {
   return (
     <>
       <ul
-        style={{ maxHeight: "400px" }}
-        className={"overflow-auto list-group m-2"}
+        style={{ maxHeight: "50vh" }}
+        className={"container-fluid overflow-auto list-group m-2"}
       >
         {upcomingList.map((UME, index) => {
           let className = "list-group-item bg-dark text-white";

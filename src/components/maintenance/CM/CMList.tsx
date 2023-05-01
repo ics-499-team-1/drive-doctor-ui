@@ -19,7 +19,10 @@ const CMList = ({ completedList }: Props) => {
 
   return (
     <>
-            <ul style={{ maxHeight: "400px" }} className={"overflow-auto list-group m-2"}>
+      <ul
+        style={{ maxHeight: "50vh" }}
+        className={"overflow-auto list-group m-2"}
+      >
         {completedList.map((CME, index) => (
           <li
             className={
@@ -38,19 +41,19 @@ const CMList = ({ completedList }: Props) => {
               }
             }}
           >
-              <SimpleGrid columns={2}>
-                <p>Name: {CME.name}</p> <p>Date Completed: {CME.date}</p>
-                {index === selectedIndex && (
-                  <>
-                    <p>Mileage: {CME.mileage}</p>{" "}
-                    <p>ID: {CME.completed_maintenance_id}</p>
-                    <p>Service Center: {CME.service_center}</p>
-                    <p>Mechanics: {CME.mechanics}</p>
-                    <p>Total Cost: {CME.total_cost}</p>
-                    <p> Notes: {CME.notes} </p>
-                  </>
-                )}
-              </SimpleGrid>
+            <SimpleGrid columns={2}>
+              <p>Name: {CME.name}</p> <p>Date Completed: {CME.date}</p>
+              {index === selectedIndex && (
+                <>
+                  <p>Mileage: {CME.mileage}</p>{" "}
+                  <p>ID: {CME.completed_maintenance_id}</p>
+                  <p>Service Center: {CME.service_center}</p>
+                  <p>Mechanics: {CME.mechanics}</p>
+                  <p>Total Cost: {CME.total_cost}</p>
+                  <p> Notes: {CME.notes} </p>
+                </>
+              )}
+            </SimpleGrid>
           </li>
         ))}
       </ul>

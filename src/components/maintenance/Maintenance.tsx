@@ -7,8 +7,8 @@ import VehicleContext from "../Contexts/VehicleContext";
 import MaintenanceButton from "./MaintenanceButton";
 import authHeader from "../../models/auth/AuthHeader";
 import { useNavigate } from "react-router-dom";
-import { Button, Card, SimpleGrid } from "@chakra-ui/react";
-import checkLogin from "../../hooks/checkLogin"
+import { Center, Card, SimpleGrid, HStack } from "@chakra-ui/react";
+import checkLogin from "../../hooks/checkLogin";
 import { GetToken, GetUserId } from "../../services/LocalStorageService";
 
 /**
@@ -22,7 +22,6 @@ const Maintenance = () => {
   const [selectedIndex, setSelectedIndex] = useState(-1); // is this neccesary? Could just use the index mapping
   const navigate = useNavigate();
 
-
   /** Conditional call to the API for GET vehicles.
    * If the vehicleContext Entity has an ID of -1, then it is not yet set and needs to be selected
    * by the user, thus the vehicle list is called and displayed for selection.
@@ -30,15 +29,15 @@ const Maintenance = () => {
    * needs a refresh, thus the specific vehicle is called by ID and the values are refreshed.
    */
   useEffect(() => {
-      axios
-        .get<VehicleEntity[]>(
-          `http://localhost:8080/drive-doctor/v1/users/${GetUserId()}/vehicles`,
-          authHeader(GetToken())
-        )
-        .then((response) => {
-          setVehicleList(response.data);
-        })
-        .catch((err) => console.log(err));
+    axios
+      .get<VehicleEntity[]>(
+        `http://localhost:8080/drive-doctor/v1/users/${GetUserId()}/vehicles`,
+        authHeader(GetToken())
+      )
+      .then((response) => {
+        setVehicleList(response.data);
+      })
+      .catch((err) => console.log(err));
 
     if (vehicleContext.vehicle_id !== -1) {
       axios
@@ -64,38 +63,44 @@ const Maintenance = () => {
     <>
       {vehicleContext.vehicle_id === -1 ? (
         <>
-          <div>Please Select a Vehicle</div>
-          <ul className={"list-group m-2"}>
-            {vehicleList.map((vehicle, index) => (
-              <li
-                className={
-                  selectedIndex === index
-                    ? "list-group-item active"
-                    : "list-group-item"
-                }
-                key={index}
-                onClick={() => {
-                  if (index === selectedIndex) {
-                    setSelectedIndex(-1);
-                  } else {
-                    setSelectedIndex(index);
-                    setVehicle(vehicleList[index]);
+          <Center>
+            <h2>Please Select a Vehicle</h2>
+          </Center>
+          <Center >
+            <ul className={"list-group m-2"} style={{minWidth: "50%"}}>
+              {vehicleList.map((vehicle, index) => (
+                <li
+                  className={
+                    selectedIndex === index
+                      ? "list-group-item active"
+                      : "list-group-item"
                   }
-                }}
-              >
-                {vehicle.name} ({vehicle.make} {vehicle.model}){" "}
-                {vehicle.license_plate_number
-                  ? vehicle.license_plate_number
-                  : ""}
-              </li>
-            ))}
-          </ul>
+                  key={index}
+                  onClick={() => {
+                    if (index === selectedIndex) {
+                      setSelectedIndex(-1);
+                    } else {
+                      setSelectedIndex(index);
+                      setVehicle(vehicleList[index]);
+                    }
+                  }}
+                >
+                  {vehicle.name} ({vehicle.make} {vehicle.model}){" "}
+                  {vehicle.license_plate_number
+                    ? vehicle.license_plate_number
+                    : ""}
+                </li>
+              ))}
+            </ul>
+          </Center>
         </>
       ) : (
+        <>
+        <Center>
         <div className="container text-center row align-items-start ">
           <Card
             borderRadius="10px"
-            height="200px"
+            height="25%"
             className="bg-dark text-white "
           >
             <div>
@@ -129,6 +134,8 @@ const Maintenance = () => {
             />
           </div>
         </div>
+        </Center>
+        </>
       )}
     </>
   );
