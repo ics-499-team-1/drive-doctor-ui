@@ -1,8 +1,7 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { Button, Center, SimpleGrid, Stack, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { GetUserId } from "../../services/LocalStorageService";
 import { useNavigate } from "react-router-dom";
-import MaintenanceButton from "../maintenance/MaintenanceButton";
 import checkLogin from "../../hooks/checkLogin";
 import VehicleCard from "./VehicleCard";
 import useUserVehicles from "../../hooks/useUserVehicles";
@@ -19,27 +18,28 @@ function VehiclesPage() {
   useUserVehicles(GetUserId(), setVehicles)
 
     const refreshVehicles = () => {
-      GetVehiclesByUser(GetUserId()).then((data: UserVehiclesResponse[]) => {
+      GetVehiclesByUser(`${GetUserId()}`).then((data: UserVehiclesResponse[]) => {
         setVehicles(data);
       });
     };
 
   return (
-    <>
-      <SimpleGrid columns={1}>
-        <SimpleGrid columns={2} spacing={10} margin="10px">
+    <Center>
+      <VStack spacing='20px' width="full">
+        <SimpleGrid width="full" minChildWidth="400px" spacing='20px'>
           {vehicles.map((vehicle) => (
             <VehicleCard key={vehicle.vehicle_id} vehicleData={vehicle} refreshVehicles={refreshVehicles}/>
           ))}
         </SimpleGrid>
-        <MaintenanceButton
-          className="bg-dark m-2"
+        <Button
+          colorScheme="purple"
+          w={["full", "auto"]}
           onClick={() => navigate("/vehicles/add")}
         >
           Add Vehicle
-        </MaintenanceButton>
-      </SimpleGrid>
-    </>
+        </Button>
+      </VStack>
+    </Center>
   );
 }
 
