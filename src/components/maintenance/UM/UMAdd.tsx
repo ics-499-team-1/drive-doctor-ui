@@ -16,8 +16,6 @@ import { FormControl, Input } from "@chakra-ui/react";
 const UMAdd = () => {
   const navigate = useNavigate();
 
-  checkLogin();
-
   /** Context */
   const { vehicleContext } = useContext(VehicleContext);
 
@@ -57,7 +55,7 @@ const UMAdd = () => {
 
   return (
     <>
-      <FormControl onSubmit={handleSubmitUpdate}>
+      <FormControl style={{maxWidth: "500px"}} onSubmit={handleSubmitUpdate}>
         <div>
           <label htmlFor="name" className="form-label">
             Name
