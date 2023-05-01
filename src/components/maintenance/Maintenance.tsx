@@ -65,7 +65,7 @@ const Maintenance = () => {
       {vehicleContext.vehicle_id === -1 ? (
         <>
           <div>Please Select a Vehicle</div>
-          <ul className={"list-group m-2"}>
+          <ul className={"list-group m-2"} style={{maxWidth: "500px"}}>
             {vehicleList.map((vehicle, index) => (
               <li
                 className={
