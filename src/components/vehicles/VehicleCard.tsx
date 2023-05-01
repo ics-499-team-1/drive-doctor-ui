@@ -17,9 +17,11 @@ type VehicleCardProps = {
 function VehicleCard(props: VehicleCardProps) {
   // for button hover bg color
   const [onHover, setOnHover] = useState("dark");
+  const [loading, setLoading] = useState<boolean>(false)
 
   // Handles vehicle deletion
   const handleDelete = async () => {
+    setLoading(true)
     try {
       await axios
         .delete(
@@ -27,7 +29,9 @@ function VehicleCard(props: VehicleCardProps) {
           authHeader(GetToken())
         )
         .then(() => {
-          props.refreshVehicles();
+          props.refreshVehicles().then(() => {
+            setLoading(false)
+          });
           console.log("Vehicle deleted successfully!");
         });
     } catch (error) {
@@ -38,27 +42,28 @@ function VehicleCard(props: VehicleCardProps) {
     props.vehicleData;
 
   return (
-    <Card bg="#333333" textColor="white">
-      <CardBody>
-        <Heading>{name}</Heading>
+    <Card bg="#333333" textColor="white" maxWidth="650px">
+      <CardBody paddingBottom="5px">
+        <Text fontSize='2xl'>{year} {make} {model} {trim}</Text>
           <SimpleGrid columns={2} spacingX={10}>
-            <Text fontSize='lg'>
-              {year} {make} {model} {trim}
-            </Text>
+            <Text fontSize='lg'>Name: {name}</Text>
             <Text fontSize='lg'>Mileage: {odometer}</Text>
             <Text fontSize='lg'>License Plate: {license_plate_number}</Text>
             <Text fontSize='lg'>VIN: {vin}</Text>
           </SimpleGrid>
-          <Button
+      </CardBody>
+      <CardFooter paddingTop="0">
+        <Button
             size="md"
             colorScheme="red"
             onClick={handleDelete}
+            isLoading={loading}
             onMouseEnter={() => setOnHover("danger")}
             onMouseLeave={() => setOnHover("dark")}
           >
           Delete
         </Button>
-      </CardBody>
+      </CardFooter>
     </Card>
   );
 }

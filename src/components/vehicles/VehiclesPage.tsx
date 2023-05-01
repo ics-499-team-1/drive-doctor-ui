@@ -2,7 +2,6 @@ import { Button, Center, SimpleGrid, Stack, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { GetUserId } from "../../services/LocalStorageService";
 import { useNavigate } from "react-router-dom";
-import MaintenanceButton from "../maintenance/MaintenanceButton";
 import checkLogin from "../../hooks/checkLogin";
 import VehicleCard from "./VehicleCard";
 import useUserVehicles from "../../hooks/useUserVehicles";
@@ -19,7 +18,7 @@ function VehiclesPage() {
   useUserVehicles(GetUserId(), setVehicles)
 
     const refreshVehicles = () => {
-      GetVehiclesByUser(GetUserId()).then((data: UserVehiclesResponse[]) => {
+      GetVehiclesByUser(`${GetUserId()}`).then((data: UserVehiclesResponse[]) => {
         setVehicles(data);
       });
     };
