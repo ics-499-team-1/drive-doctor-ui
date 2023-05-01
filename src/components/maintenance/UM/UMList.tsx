@@ -13,29 +13,11 @@ interface Props {
  * When a list item is selected, it sets the UMContext to that list item, which can then be used in other components in the maintenance tree.
  */
 const UMList = ({ upcomingList }: Props) => {
-  const { uMContext, setUMContext } = useContext(UMContext);
+  // Contexts
+  const {setUMContext } = useContext(UMContext);
   const { vehicleContext } = useContext(VehicleContext);
 
-  const [selectedIndex, setSelectedIndex] = useState(-1);
-  const [listBGColor, setListBGColor] = useState("dark")
-
-  function mileServiceDisplay(odometer: number, mileageInt: number) {
-    if (mileageInt !== null) {
-      if (mileageInt > odometer) {
-        return <p>Miles to service: {mileageInt - odometer}</p>;
-      } else if (mileageInt < odometer) {
-        return (
-          <p className="text-danger"> {odometer - mileageInt} miles overdue</p>
-        );
-      }
-    }
-  }
-
-  function timeServiceDisplay(timeInt: string) {
-    if (timeInt !== null) {
-      return "Service by: " + timeInt;
-    }
-  }
+  const [selectedIndex, setSelectedIndex] = useState(-1); // sets highlights
 
   function selectServiceDisplay(mileInt: number, timeInt: string) {
     if (mileInt !== null) {
@@ -58,7 +40,7 @@ const UMList = ({ upcomingList }: Props) => {
 
   return (
     <>
-      <ul style={{ maxHeight: "250px" }} className={"overflow-auto list-group m-2"}>
+      <ul style={{ maxHeight: "400px" }} className={"overflow-auto list-group m-2"}>
         {upcomingList.map((UME, index) => {
           let className = "list-group-item bg-dark text-white";
           if (selectedIndex === index) {
