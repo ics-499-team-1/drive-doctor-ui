@@ -122,7 +122,6 @@ function CreateUserPage() {
         <HStack alignSelf="end">
           <Button
             type="submit"
-            rounded="none"
             colorScheme="purple"
             w={["full", "auto"]}
             alignSelf="end"
@@ -132,7 +131,6 @@ function CreateUserPage() {
           </Button>
           <Button
             type="submit"
-            rounded="none"
             colorScheme="purple"
             w={["full", "auto"]}
             alignSelf="end"

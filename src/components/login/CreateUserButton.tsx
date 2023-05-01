@@ -7,7 +7,6 @@ function CreateUserButton() {
 
   return (
     <Button
-      rounded="none"
       colorScheme="purple"
       w={["full", "auto"]}
       alignSelf="end"
