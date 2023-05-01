@@ -7,6 +7,7 @@ import VehicleContext from "../../Contexts/VehicleContext";
 import authHeader from "../../../models/auth/AuthHeader";
 import checkLogin from "../../../hooks/checkLogin";
 import { GetToken } from "../../../services/LocalStorageService";
+import { FormControl, Input } from "@chakra-ui/react";
 
 /**
  * Adds an upcomingMaintenance item to the db.
@@ -56,7 +57,7 @@ const UMAdd = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmitUpdate}>
+      <FormControl onSubmit={handleSubmitUpdate}>
         <div>
           <label htmlFor="name" className="form-label">
             Name
@@ -95,17 +96,21 @@ const UMAdd = () => {
           <label htmlFor="timeInterval" className="form-label">
             Time Interval
           </label>
-          <input
+          <Input
             className="form-control"
             id="timeInterval"
             ref={timeIntervalRef}
-            type="text"
+            _hover={{}}
+            placeholder="Select Date"
+            bg="white"
+            size="md"
+            type="date"
           />
         </div>
         <MaintenanceButton className={"mx-2"} color="success">
           Confirm
         </MaintenanceButton>
-      </form>
+      </FormControl>
       <div>
         <MaintenanceButton
           className={"mx-2 my-2"}

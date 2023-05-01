@@ -6,6 +6,7 @@ import MaintenanceButton from "../MaintenanceButton";
 import UMContext from "../../Contexts/UMContext";
 import authHeader from "../../../models/auth/AuthHeader";
 import { GetToken } from "../../../services/LocalStorageService";
+import { Input } from "@chakra-ui/react";
 
 /**
  * This component converts upcoming maintenance items to completed maintenance items.
@@ -90,12 +91,16 @@ const ConvertUpcoming = () => {
           <label htmlFor="date" className="form-label">
             Date
           </label>
-          <input
+          <Input
             className="form-control"
             id="date"
             ref={dateRef}
             required={true}
-            type="text"
+            _hover={{}}
+            bg="white"
+            placeholder="Select Date"
+            size="md"
+            type="date"
           />
         </div>
         <div className="mb-2">

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import CMContext from "../../Contexts/CMContext";
 import authHeader from "../../../models/auth/AuthHeader";
 import { GetToken } from "../../../services/LocalStorageService";
+import { FormControl, Input } from "@chakra-ui/react";
 
 /**
  * Edits the item stored in CMContext and updates the db.
@@ -55,7 +56,7 @@ const CMEdit = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmitEdit}>
+      <FormControl onSubmit={handleSubmitEdit}>
         <div>
           <label htmlFor="name" className="form-label">
             Name
@@ -85,13 +86,17 @@ const CMEdit = () => {
           <label htmlFor="date" className="form-label">
             Date
           </label>
-          <input
+          <Input
             className="form-control"
             defaultValue={cMContext.date}
             id="date"
             ref={dateRef}
             required={true}
-            type="text"
+            _hover={{}}
+            bg="white"
+            placeholder="Select Date"
+            size="md"
+            type="date"
           />
         </div>
         <div className="mb-2">
@@ -146,7 +151,7 @@ const CMEdit = () => {
         <MaintenanceButton className={"mx-2"} color="success">
           Confirm
         </MaintenanceButton>
-      </form>
+      </FormControl>
       <MaintenanceButton
         onClick={() =>
           navigate("/maintenance/", {

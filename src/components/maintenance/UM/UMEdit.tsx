@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import UMContext from "../../Contexts/UMContext";
 import authHeader from "../../../models/auth/AuthHeader";
 import { GetToken } from "../../../services/LocalStorageService";
+import { Input } from "@chakra-ui/react";
 
 /**
  * Edits the item stored in UMContext and updates the DB.
@@ -91,14 +92,18 @@ const UMEdit = () => {
           <label htmlFor="time_interval" className="form-label">
             Time Interval
           </label>
-          <input
+          <Input
             className="form-control"
             defaultValue={
               uMContext.time_interval ? uMContext.time_interval : ""
             }
             id="time_interval"
             ref={timeIntervalRef}
-            type="text"
+            _hover={{}}
+            bg="white"
+            placeholder="Select Date"
+            size="md"
+            type="date"
           />
         </div>
         <MaintenanceButton className={"mb-2"}>Submit</MaintenanceButton>
