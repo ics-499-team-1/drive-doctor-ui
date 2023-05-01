@@ -13,48 +13,10 @@ interface Props {
  * When a list item is selected, it sets the UMContext to that list item, which can then be used in other components in the maintenance tree.
  */
 const UMList = ({ upcomingList }: Props) => {
-  const { uMContext, setUMContext } = useContext(UMContext);
+  const { setUMContext } = useContext(UMContext);
   const { vehicleContext } = useContext(VehicleContext);
 
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const [listBGColor, setListBGColor] = useState("dark")
-
-  function mileServiceDisplay(odometer: number, mileageInt: number) {
-    if (mileageInt !== null) {
-      if (mileageInt > odometer) {
-        return <p>Miles to service: {mileageInt - odometer}</p>;
-      } else if (mileageInt < odometer) {
-        return (
-          <p className="text-danger"> {odometer - mileageInt} miles overdue</p>
-        );
-      }
-    }
-  }
-
-  function timeServiceDisplay(timeInt: string) {
-    if (timeInt !== null) {
-      return "Service by: " + timeInt;
-    }
-  }
-
-  function selectServiceDisplay(mileInt: number, timeInt: string) {
-    if (mileInt !== null) {
-      if (mileInt > vehicleContext.odometer) {
-        return <p>Miles to service: {mileInt - vehicleContext.odometer}</p>;
-      } else if (mileInt < vehicleContext.odometer) {
-        return (
-          <p className="text-danger">
-            {" "}
-            {vehicleContext.odometer - mileInt} miles overdue
-          </p>
-        );
-      }
-    } else if (timeInt != "none") {
-      return "Service by: " + timeInt;
-    } else {
-      return <></>;
-    }
-  }
 
   function mileageDisplaySelect(mileInt: number) {
     if (mileInt !== null) {

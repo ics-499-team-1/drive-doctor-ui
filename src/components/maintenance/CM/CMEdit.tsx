@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import CMContext from "../../Contexts/CMContext";
 import authHeader from "../../../models/auth/AuthHeader";
 import { GetToken } from "../../../services/LocalStorageService";
-import { FormControl, Input } from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
 
 /**
  * Edits the item stored in CMContext and updates the db.

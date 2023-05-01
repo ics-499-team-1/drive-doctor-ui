@@ -5,9 +5,8 @@ import MaintenanceButton from "../MaintenanceButton";
 import UMDomain from "../../../models/maintenance/UMDomain";
 import VehicleContext from "../../Contexts/VehicleContext";
 import authHeader from "../../../models/auth/AuthHeader";
-import checkLogin from "../../../hooks/checkLogin";
 import { GetToken } from "../../../services/LocalStorageService";
-import { FormControl, Input } from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
 
 /**
  * Adds an upcomingMaintenance item to the db.
