@@ -30,7 +30,7 @@ function AddVehiclePage() {
     license_plate: "",
     vin: "",
     deactivated: false,
-    user_id: GetUserId()
+    user_id: GetUserId(),
   });
 
   const navigate = useNavigate();
@@ -39,17 +39,18 @@ function AddVehiclePage() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    try {
-      await axios
-        .post(
-          `http://localhost:8080/drive-doctor/v1/vehicles`,
-          formValues,
-          authHeader(GetToken())
-        )
-        .then(() => console.log("Vehicle added successfully!"))
-        .then(() => navigate("/vehicles"));
-    } catch (error) {
-      console.error(error);
+    if (formValues.name !== "" && formValues.model !== "") {
+      try {
+        await axios
+          .post(
+            `http://localhost:8080/drive-doctor/v1/vehicles`,
+            formValues,
+            authHeader(GetToken())
+          )
+          .then(() => navigate("/vehicles"));
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -74,7 +75,7 @@ function AddVehiclePage() {
   ];
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onClick={handleSubmit}>
       {formElements.map((element) => (
         <div className="mb-3" key={element.id}>
           <input
